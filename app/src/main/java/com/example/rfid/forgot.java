@@ -37,14 +37,14 @@ public class forgot extends AppCompatActivity {
             }
         });
 
-        btn_another = findViewById(R.id.btn_another);
-        btn_another.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(forgot.this, forgot_number.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        btn_another = findViewById(R.id.btn_another);
+//        btn_another.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(forgot.this, forgot_number.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
     }
 }
