@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">RFID</string>
+    <string name="email">Email</string>
+    <string name="num">Contact Number</string>
+    <string name="pass">Password</string>
+    <string name="forgot"><font color="blue">Forgot Password?</font></string>
+    <string name="signin1"><font color="white">Enter your Email and password to login</font></string>
+    <string name="signin">
+        <font size="25">
+            <font color="white">
+                Sign in to your
+            </font>
+        </font>
+    </string>
+    <string name="Acc">
+        <font size="25">
+            <font color="white">
+                Account
+            </font>
+        </font>
+    </string>
+    <string name="login">
+        <font size="25">
+            <font color="black">
+                Login
+            </font>
+        </font>
+    </string>
+    <string name="forgot_page">
+        <font size="25">
+            <font color="white">
+                Forgot your password?
+            </font>
+        </font>
+    </string>
+    <string name="rfid"><font color="white">RFID Application</font></string>
+    <string name="entrmail"><font color="white">Enter your email address</font></string>
+    <string name="entrnum"><font color="white">Enter your Contact Number</font></string>
+    <string name="send"><font color="white">Send ➔</font></string>
+    <string name="try_anther"><font color="white">try another way</font></string>
+    <string name="Login_text">Login</string>
+    <string name="Verify_text">Verify your email address.</string>
+    <string name="Email">(sample@gmail.com)</string>
+</resources>
