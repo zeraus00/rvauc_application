@@ -26,18 +26,26 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="409dp"
-        android:layout_height="221dp"
+        android:layout_height="300dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="553dp"
+        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButton"
-        tools:ignore="MissingConstraints"
-        android:gravity="center">
+        app:layout_constraintVertical_bias="0.012"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/email_icon" />
 
         <TextView
             android:id="@+id/textView12"
@@ -101,10 +109,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:paddingStart="-80dp"
                 android:text="RFID Application"
-                android:textSize="15sp"
                 android:textColor="@color/white"
-                android:paddingStart="-80dp"/>
+                android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -121,7 +129,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.833">
+        app:layout_constraintVertical_bias="0.0">
 
 
         <LinearLayout
