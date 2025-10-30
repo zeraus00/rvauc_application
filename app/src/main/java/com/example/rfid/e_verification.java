@@ -71,7 +71,7 @@ public class e_verification extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                textCountdown.setText("Time’s up!");
+                textCountdown.setText("00:00");
             }
         };
         countDownTimer.start();
