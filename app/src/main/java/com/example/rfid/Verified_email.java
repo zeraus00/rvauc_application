@@ -1,6 +1,8 @@
 package com.example.rfid;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +23,11 @@ public class Verified_email extends AppCompatActivity {
             return insets;
         });
 
+        Button btn_to_login = findViewById(R.id.verifying_btn);
 
+        btn_to_login.setOnClickListener(v -> {
+            startActivity(new Intent(Verified_email.this, MainActivity.class));
+            finish();
+        });
     }
 }

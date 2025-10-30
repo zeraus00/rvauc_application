@@ -5,8 +5,9 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -15,7 +16,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class e_verification extends AppCompatActivity {
 
-    private TextView textCountdown; // 'Private' should be lowercase
+    private TextView textCountdown;
+    private TextView resendText;
+    private CountDownTimer countDownTimer;
+    private Button loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,18 +34,35 @@ public class e_verification extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize countdown text
         textCountdown = findViewById(R.id.textCountdown);
+        resendText = findViewById(R.id.textView18); // your “Resend” text
         ImageButton backBtn = findViewById(R.id.backButton);
+        loginBtn = findViewById(R.id.verifying_btn1);
 
         backBtn.setOnClickListener(v -> {
-            Intent backbtn = new Intent(e_verification.this, MainActivity.class);
-            startActivity(backbtn);
+            startActivity(new Intent(e_verification.this, MainActivity.class));
             finish();
         });
 
-        // 1-minute countdown (60,000 ms)
-        new CountDownTimer(60000, 1000) {
+        startCountdown(); // Start the initial 60s timer
+
+        // Reset timer when "Resend" text is tapped
+        resendText.setOnClickListener(v -> {
+            if (countDownTimer != null) {
+                countDownTimer.cancel(); // stop current timer
+            }
+            startCountdown(); // start a new 60s timer
+            Toast.makeText(this, "Verification code resent!", Toast.LENGTH_SHORT).show();
+        });
+
+        loginBtn.setOnClickListener(v -> {
+            startActivity(new Intent(e_verification.this, Verified_email.class));
+            finish();
+        });
+    }
+
+    private void startCountdown() {
+        countDownTimer = new CountDownTimer(60000, 1000) { // 60 seconds
             @Override
             public void onTick(long millisUntilFinished) {
                 int seconds = (int) (millisUntilFinished / 1000);
@@ -52,7 +73,7 @@ public class e_verification extends AppCompatActivity {
             public void onFinish() {
                 textCountdown.setText("Time’s up!");
             }
-        }.start();
-
+        };
+        countDownTimer.start();
     }
 }
