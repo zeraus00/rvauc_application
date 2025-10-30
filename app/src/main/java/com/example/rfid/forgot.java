@@ -37,14 +37,13 @@ public class forgot extends AppCompatActivity {
             }
         });
 
-//        btn_another = findViewById(R.id.btn_another);
-//        btn_another.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(forgot.this, forgot_number.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+        Button verifying_btn = findViewById(R.id.button3);
+
+        verifying_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(forgot.this, Frgt_email_verification.class);
+            startActivity(intent);
+            finish();
+        });
+//
     }
 }
