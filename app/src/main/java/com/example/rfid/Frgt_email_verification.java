@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,8 @@ import androidx.core.view.WindowInsetsCompat;
 public class Frgt_email_verification extends AppCompatActivity {
 
     private TextView textCountdown1;
+    private TextView resendText;
+    private CountDownTimer countDownTimer;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -30,8 +33,8 @@ public class Frgt_email_verification extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize countdown text
         textCountdown1 = findViewById(R.id.textCountdown1);
+        resendText = findViewById(R.id.textView18); // "Resend" TextView
         ImageButton backBtn = findViewById(R.id.backButton);
 
         // Back button listener
@@ -41,8 +44,20 @@ public class Frgt_email_verification extends AppCompatActivity {
             finish();
         });
 
-        // 1-minute countdown (60,000 ms)
-        new CountDownTimer(60000, 1000) {
+        startCountdown(); // Start timer on load
+
+        // Handle “Resend” tap to restart the timer
+        resendText.setOnClickListener(v -> {
+            if (countDownTimer != null) {
+                countDownTimer.cancel(); // Stop current timer
+            }
+            startCountdown(); // Restart timer
+            Toast.makeText(this, "Verification code resent!", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void startCountdown() {
+        countDownTimer = new CountDownTimer(60000, 1000) { // 60 seconds
             @Override
             public void onTick(long millisUntilFinished) {
                 int seconds = (int) (millisUntilFinished / 1000);
@@ -51,8 +66,9 @@ public class Frgt_email_verification extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                textCountdown1.setText("Time’s up!");
+                textCountdown1.setText("00:00");
             }
-        }.start();
+        };
+        countDownTimer.start();
     }
 }
