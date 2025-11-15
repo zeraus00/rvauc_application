@@ -33,6 +33,13 @@
             </font>
         </font>
     </string>
+    <string name="reset">
+        <font size="25">
+            <font color="white">
+                Reset Password
+            </font>
+        </font>
+    </string>
     <string name="rfid"><font color="white">RFID Application</font></string>
     <string name="entrmail"><font color="white">Enter your email address</font></string>
     <string name="entrnum"><font color="white">Enter your Contact Number</font></string>
@@ -41,4 +48,5 @@
     <string name="Login_text">Login</string>
     <string name="Verify_text">Verify your email address.</string>
     <string name="Email">(sample@gmail.com)</string>
+    <string name="rst">Password must contain at least one number or\nspecial character.</string>
 </resources>

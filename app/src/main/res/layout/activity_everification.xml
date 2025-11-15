@@ -12,34 +12,26 @@
         android:id="@+id/backButton"
         android:layout_width="50dp"
         android:layout_height="39dp"
-        android:tint="@android:color/white"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="44dp"
         android:background="@drawable/backbtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
+        android:tint="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.09"
         app:srcCompat="?attr/homeAsUpIndicator"
         tools:ignore="UseAppTint" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="300dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="553dp"
+        android:layout_marginTop="132dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButton"
-        app:layout_constraintVertical_bias="0.012"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView4"
@@ -89,133 +81,91 @@
             android:textSize="15sp"
             tools:ignore="SmallSp" />
 
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="63dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingStart="20dp">
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/signin_logo" />
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:paddingStart="-80dp"
-                android:text="RFID Application"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-        </LinearLayout>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="380dp"
-        android:layout_height="350dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="150dp"
+        android:id="@+id/codeBoxContainer"
+        android:layout_width="365dp"
+        android:layout_height="336dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="92dp"
         android:background="@drawable/edit_textbg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0">
-
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
         <LinearLayout
             android:id="@+id/linearLayout3"
-            android:layout_width="354dp"
-            android:layout_height="79dp"
-            android:layout_marginStart="6dp"
+            android:layout_width="318dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="9dp"
-            android:layout_marginBottom="310dp"
+            android:layout_marginEnd="50dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.237">
+            app:layout_constraintTop_toTopOf="parent">
 
             <EditText
                 android:id="@+id/editTextNumber2"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/num_box_bg"
-                android:ems="10"
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/editTextNumber3"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/num_box_bg"
-                android:ems="10"
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1" />
 
             <EditText
                 android:id="@+id/editTextNumber4"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/num_box_bg"
-                android:ems="10"
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1" />
 
             <EditText
                 android:id="@+id/editTextNumber7"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/num_box_bg"
-                android:ems="10"
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1" />
 
             <EditText
                 android:id="@+id/editTextNumber5"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/num_box_bg"
-                android:ems="10"
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1" />
 
             <EditText
                 android:id="@+id/editTextNumber6"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/num_box_bg"
-                android:ems="10"
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1" />
@@ -224,11 +174,11 @@
 
         <LinearLayout
             android:id="@+id/linearLayout4"
-            android:layout_width="354dp"
+            android:layout_width="313dp"
             android:layout_height="40dp"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="14dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="30dp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -255,10 +205,10 @@
 
         <LinearLayout
             android:id="@+id/linearLayout5"
-            android:layout_width="357dp"
+            android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
             android:gravity="center"
             android:orientation="horizontal"
@@ -285,18 +235,54 @@
 
         <Button
             android:id="@+id/verifying_btn1"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="12dp"
+            android:layout_marginBottom="39dp"
             android:background="@drawable/button_style"
             android:text="Submit"
+            android:textAllCaps="false"
             android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+            app:layout_constraintTop_toBottomOf="@id/linearLayout5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="300dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="74dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/signin_logo" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingStart="-80dp"
+            android:text="RFID Application"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

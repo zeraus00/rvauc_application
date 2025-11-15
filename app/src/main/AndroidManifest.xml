@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RFID">
         <activity
+            android:name=".home"
+            android:exported="false" />
+        <activity
+            android:name=".passupdt"
+            android:exported="false" />
+        <activity
+            android:name=".resetpass"
+            android:exported="false" />
+        <activity
             android:name=".Frgt_email_verification"
             android:exported="false" />
         <activity

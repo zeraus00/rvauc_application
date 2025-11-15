@@ -8,38 +8,35 @@
     android:background="@drawable/gradient_background"
     tools:context=".Frgt_email_verification">
 
+    <!-- Back Button -->
+
+    <!-- TOP SECTION -->
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="50dp"
         android:layout_height="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
         android:background="@drawable/backbtn"
         android:tint="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.09"
         app:srcCompat="?attr/homeAsUpIndicator"
         tools:ignore="ContentDescription,UseAppTint,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
+    <!-- CODE INPUT FORM -->
+
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="300dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="553dp"
+        android:layout_marginTop="100dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButton"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="ExtraText,MissingConstraints,TextSizeCheck">>
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView5"
@@ -120,130 +117,101 @@
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="380dp"
-        android:layout_height="350dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="150dp"
-        android:background="@drawable/edit_textbg"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="358dp"
+        android:layout_height="331dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/form"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:padding="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2"
+        app:layout_constraintVertical_bias="0.163">
 
-
+        <!-- OTP DIGIT FIELDS -->
         <LinearLayout
             android:id="@+id/linearLayout3"
-            android:layout_width="354dp"
-            android:layout_height="79dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="9dp"
-            android:layout_marginBottom="310dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.237">
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/editTextNumber2"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/num_box_bg"
-                android:ems="10"
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1"
-                android:textSize="20sp"
-                tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/editTextNumber3"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/num_box_bg"
-                android:ems="10"
                 android:gravity="center"
                 android:inputType="number"
-                android:maxLength="1"
-                tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck" />
+                android:maxLength="1" />
 
             <EditText
                 android:id="@+id/editTextNumber4"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/num_box_bg"
-                android:ems="10"
                 android:gravity="center"
                 android:inputType="number"
-                android:maxLength="1"
-                tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck" />
+                android:maxLength="1" />
 
             <EditText
                 android:id="@+id/editTextNumber7"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/num_box_bg"
-                android:ems="10"
                 android:gravity="center"
                 android:inputType="number"
-                android:maxLength="1"
-                tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck" />
+                android:maxLength="1" />
 
             <EditText
                 android:id="@+id/editTextNumber5"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/num_box_bg"
-                android:ems="10"
                 android:gravity="center"
                 android:inputType="number"
-                android:maxLength="1"
-                tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck" />
+                android:maxLength="1" />
 
             <EditText
                 android:id="@+id/editTextNumber6"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/num_box_bg"
-                android:ems="10"
                 android:gravity="center"
                 android:inputType="number"
-                android:maxLength="1"
-                tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck" />
+                android:maxLength="1" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout4"
-            android:layout_width="354dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="14dp"
+            android:layout_marginTop="42dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView17"
@@ -251,8 +219,7 @@
                 android:layout_height="wrap_content"
                 android:text="Didn't get the code?"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                tools:ignore="HardcodedText" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView18"
@@ -261,22 +228,16 @@
                 android:layout_marginStart="5dp"
                 android:text="Resend"
                 android:textColor="@color/blue"
-                android:textStyle="bold"
-                tools:ignore="HardcodedText" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout5"
-            android:layout_width="357dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView19"
@@ -284,8 +245,7 @@
                 android:layout_height="wrap_content"
                 android:text="Expires in: "
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                tools:ignore="HardcodedText" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textCountdown1"
@@ -293,32 +253,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:text="01:00"
-                android:textColor="@color/black"
-                tools:ignore="HardcodedText" />
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <Button
             android:id="@+id/verifying_button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/button_style"
-            android:text="Submit"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
-            tools:ignore="HardcodedText" />
+            android:text="Sumbit"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

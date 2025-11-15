@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ public class Frgt_email_verification extends AppCompatActivity {
     private TextView textCountdown1;
     private TextView resendText;
     private CountDownTimer countDownTimer;
+    private Button verifying_button1;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -70,5 +73,15 @@ public class Frgt_email_verification extends AppCompatActivity {
             }
         };
         countDownTimer.start();
+
+        verifying_button1=findViewById(R.id.verifying_button1);
+        verifying_button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Frgt_email_verification.this, resetpass.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }
