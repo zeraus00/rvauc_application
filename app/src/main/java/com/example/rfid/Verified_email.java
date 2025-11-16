@@ -26,7 +26,7 @@ public class Verified_email extends AppCompatActivity {
         Button btn_to_login = findViewById(R.id.verifying_btn);
 
         btn_to_login.setOnClickListener(v -> {
-            startActivity(new Intent(Verified_email.this, MainActivity.class));
+            startActivity(new Intent(Verified_email.this, home.class));
             finish();
         });
     }
