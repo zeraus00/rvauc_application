@@ -33,12 +33,6 @@
             android:name=".e_verification"
             android:exported="false" />
         <activity
-            android:name=".email_verification"
-            android:exported="false" />
-        <activity
-            android:name=".Email_verification"
-            android:exported="false" />
-        <activity
             android:name=".forgot_number"
             android:exported="false" />
         <activity
