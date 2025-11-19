@@ -14,13 +14,13 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.rfid.R;
 import com.example.rfid.home;
 
-public class Verified_email extends AppCompatActivity {
+public class EmailVerifiedSuccessful extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_verified_email);
+        setContentView(R.layout.activity_email_verified_successful);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -30,14 +30,14 @@ public class Verified_email extends AppCompatActivity {
         Button btn_to_login = findViewById(R.id.verifying_btn);
 
         btn_to_login.setOnClickListener(v -> {
-            startActivity(new Intent(Verified_email.this, home.class));
+            startActivity(new Intent(EmailVerifiedSuccessful.this, home.class));
             finish();
         });
 
         ImageButton backBtn = findViewById(R.id.imageButton);
 
         backBtn.setOnClickListener(v -> {
-            startActivity(new Intent(Verified_email.this, LoginActivity.class));
+            startActivity(new Intent(EmailVerifiedSuccessful.this, LoginActivity.class));
             finish();
         });
     }

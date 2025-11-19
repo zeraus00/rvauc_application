@@ -16,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.rfid.R;
 
-public class email_verification extends AppCompatActivity {
+public class LoginEmailVerification extends AppCompatActivity {
 
     private TextView textCountdown;
     private TextView resendText;
@@ -27,7 +27,7 @@ public class email_verification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_everification);
+        setContentView(R.layout.activity_e_verification);
 
         // Handle system bar insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -42,7 +42,7 @@ public class email_verification extends AppCompatActivity {
         loginBtn = findViewById(R.id.verifying_btn1);
 
         backBtn.setOnClickListener(v -> {
-            startActivity(new Intent(email_verification.this, LoginActivity.class));
+            startActivity(new Intent(LoginEmailVerification.this, LoginActivity.class));
             finish();
         });
 
@@ -58,7 +58,7 @@ public class email_verification extends AppCompatActivity {
         });
 
         loginBtn.setOnClickListener(v -> {
-            startActivity(new Intent(email_verification.this, Verified_email.class));
+            startActivity(new Intent(LoginEmailVerification.this, EmailVerifiedSuccessful.class));
             finish();
         });
     }

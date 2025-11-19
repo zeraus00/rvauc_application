@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         Button login_btn = findViewById(R.id.button);
 
         login_btn.setOnClickListener(v -> {
-                Intent intent = new Intent(LoginActivity.this, email_verification.class);
+                Intent intent = new Intent(LoginActivity.this, LoginEmailVerification.class);
                 startActivity(intent);
                 finish();
         });
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(LoginActivity.this, forgot.class);
+                Intent intent=new Intent(LoginActivity.this, FrgtPassword.class);
                 startActivity(intent);
                 finish();
             }

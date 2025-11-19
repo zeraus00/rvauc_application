@@ -18,7 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.rfid.R;
 
-public class Frgt_email_verification extends AppCompatActivity {
+public class FrgtPassEmailVerification extends AppCompatActivity {
 
     private TextView textCountdown1;
     private TextView resendText;
@@ -44,7 +44,7 @@ public class Frgt_email_verification extends AppCompatActivity {
 
         // Back button listener
         backBtn.setOnClickListener(v -> {
-            Intent backIntent = new Intent(Frgt_email_verification.this, LoginActivity.class);
+            Intent backIntent = new Intent(FrgtPassEmailVerification.this, LoginActivity.class);
             startActivity(backIntent);
             finish();
         });
@@ -80,7 +80,7 @@ public class Frgt_email_verification extends AppCompatActivity {
         verifying_button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Frgt_email_verification.this, resetpass.class);
+                Intent intent=new Intent(FrgtPassEmailVerification.this, ResetPass.class);
                 startActivity(intent);
                 finish();
             }

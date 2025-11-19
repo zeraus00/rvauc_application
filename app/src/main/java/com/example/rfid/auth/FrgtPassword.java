@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.rfid.R;
 
-public class forgot extends AppCompatActivity {
+public class FrgtPassword extends AppCompatActivity {
     private ImageButton backButton;
     private Button btn_another;
 
@@ -22,7 +22,7 @@ public class forgot extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_forgot);
+        setContentView(R.layout.activity_forgot_password);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -33,7 +33,7 @@ public class forgot extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(forgot.this, LoginActivity.class);
+                Intent intent = new Intent(FrgtPassword.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -42,7 +42,7 @@ public class forgot extends AppCompatActivity {
         Button verifying_btn = findViewById(R.id.button3);
 
         verifying_btn.setOnClickListener(v -> {
-            Intent intent = new Intent(forgot.this, Frgt_email_verification.class);
+            Intent intent = new Intent(FrgtPassword.this, FrgtPassEmailVerification.class);
             startActivity(intent);
             finish();
         });
