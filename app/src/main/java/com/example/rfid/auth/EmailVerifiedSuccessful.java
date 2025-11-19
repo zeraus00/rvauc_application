@@ -12,7 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.rfid.R;
-import com.example.rfid.main_app.homeHostFragments;
+import com.example.rfid.main_app.homePage;
 
 public class EmailVerifiedSuccessful extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class EmailVerifiedSuccessful extends AppCompatActivity {
         Button btn_to_login = findViewById(R.id.verifying_btn);
 
         btn_to_login.setOnClickListener(v -> {
-            startActivity(new Intent(EmailVerifiedSuccessful.this, homeHostFragments.class));
+            startActivity(new Intent(EmailVerifiedSuccessful.this, homePage.class));
             finish();
         });
 

@@ -12,7 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.rfid.R;
-import com.example.rfid.main_app.homeHostFragments;
+import com.example.rfid.main_app.homePage;
 
 public class PassUpdate extends AppCompatActivity {
 
@@ -35,7 +35,7 @@ public class PassUpdate extends AppCompatActivity {
 
         Button loginBtn = findViewById(R.id.LoginBtn);
         loginBtn.setOnClickListener(v -> {
-            startActivity(new Intent(PassUpdate.this, homeHostFragments.class));
+            startActivity(new Intent(PassUpdate.this, homePage.class));
             finish();
         });
     }

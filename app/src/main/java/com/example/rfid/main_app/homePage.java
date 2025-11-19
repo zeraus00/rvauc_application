@@ -11,20 +11,16 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.rfid.ClassFragment;
-import com.example.rfid.NotificationFragment;
-import com.example.rfid.PolicyFragment;
 import com.example.rfid.R;
-import com.example.rfid.StatusFragment;
 
-public class homeHostFragments extends AppCompatActivity {
+public class homePage extends AppCompatActivity {
     ImageButton statsBtn, classBtn, homeBtn, notifBtn, policyBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home_host_fragment);
+        setContentView(R.layout.activity_home_page);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -53,6 +49,9 @@ public class homeHostFragments extends AppCompatActivity {
     }
 
     public void clearFragment() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Fragment()).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new Fragment())
+                .commit();
     }
 }
