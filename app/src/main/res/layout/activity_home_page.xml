@@ -120,7 +120,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.998">
 
-        <!-- Status -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -142,7 +141,6 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <!-- Class -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -164,7 +162,6 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <!-- Home -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -186,7 +183,6 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <!-- Notifications -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -208,7 +204,6 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <!-- Policy -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"

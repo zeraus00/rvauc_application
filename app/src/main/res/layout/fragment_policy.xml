@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,19 +8,193 @@
     tools:context=".main_app.PolicyFragment">
 
     <TextView
-        android:id="@+id/textView8"
-        android:layout_width="159dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="144dp"
-        android:layout_marginEnd="112dp"
-        android:layout_marginBottom="704dp"
-        android:text="Policy Fragment"
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginBottom="681dp"
+        android:text="Uniform Policy"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout10"
+        android:layout_width="338dp"
+        android:layout_height="450dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/rounded_white_bg"
+        android:orientation="vertical"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView30"
+        app:layout_constraintVertical_bias="0.073"
+        tools:ignore="MissingConstraints">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@color/green"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Daily Uniform Schedule"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/TypeASched"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="8dp"
+                        android:textStyle="bold"
+                        android:textColor="#333"
+                        android:gravity="center"
+                        android:text="Mon, Tues, Thurs, Sat, Sun:"/>
+                    <TextView
+                        android:id="@+id/TypeUnifA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/TypeASched"
+                        android:paddingVertical="8dp"
+                        android:textStyle="bold"
+                        android:textColor="#333"
+                        android:text="Type A Uniform"/>
+
+                    <ImageView
+                        android:id="@+id/typeAuniform"
+                        android:padding="0dp"
+                        android:layout_below="@+id/TypeUnifA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="300dp"
+                        android:src="@drawable/type_a" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/BuffaloSched"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="8dp"
+                        android:textStyle="bold"
+                        android:textColor="#333"
+                        android:gravity="center"
+                        android:text="Wednesday"/>
+                    <TextView
+                        android:id="@+id/BuffaloUnif"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/BuffaloSched"
+                        android:paddingVertical="8dp"
+                        android:textStyle="bold"
+                        android:textColor="#333"
+                        android:text="Buffalo Uniform"/>
+
+                    <ImageView
+                        android:id="@+id/buffaloUniform"
+                        android:padding="0dp"
+                        android:layout_below="@+id/BuffaloUnif"
+                        android:layout_width="wrap_content"
+                        android:layout_height="300dp"
+                        android:src="@drawable/buffalo" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/DeptSched"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="8dp"
+                        android:textStyle="bold"
+                        android:textColor="#333"
+                        android:gravity="center"
+                        android:text="Friday"/>
+                    <TextView
+                        android:id="@+id/DeptUnif"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/DeptSched"
+                        android:paddingVertical="8dp"
+                        android:textStyle="bold"
+                        android:textColor="#333"
+                        android:text="Department Shirt"/>
+
+                    <ImageView
+                        android:id="@+id/DeptUniform"
+                        android:padding="0dp"
+                        android:layout_below="@+id/DeptUnif"
+                        android:layout_width="wrap_content"
+                        android:layout_height="300dp"
+                        android:src="@drawable/department_shirt" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/PESched"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="8dp"
+                        android:textStyle="bold"
+                        android:textColor="#333"
+                        android:gravity="center"
+                        android:text="Scheduled PE Class"/>
+                    <TextView
+                        android:id="@+id/PEUnif"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/PESched"
+                        android:paddingVertical="8dp"
+                        android:textStyle="bold"
+                        android:textColor="#333"
+                        android:text="PE Uniform"/>
+
+                    <ImageView
+                        android:id="@+id/PEUniform"
+                        android:padding="0dp"
+                        android:layout_below="@+id/PEUnif"
+                        android:layout_width="wrap_content"
+                        android:layout_height="300dp"
+                        android:src="@drawable/pe_uniform" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
