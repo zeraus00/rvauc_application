@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".main_app.home">
+    tools:context=".main_app.homeHostFragments">
 
 
     <LinearLayout
@@ -96,6 +96,14 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <LinearLayout
         android:id="@+id/bottom_nav"
         android:layout_width="427dp"
@@ -143,6 +151,7 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/btn_class"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_class" />
@@ -164,6 +173,7 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/btn_home"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_home" />
@@ -185,6 +195,7 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/btn_notif"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_notifications" />
@@ -199,13 +210,14 @@
 
         <!-- Policy -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="                              0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/btn_policy"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_policy" />
@@ -237,7 +249,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/imagebtn_logout"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="28dp"

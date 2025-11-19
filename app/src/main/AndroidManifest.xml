@@ -15,7 +15,7 @@
             android:name=".main_app.status"
             android:exported="false" />
         <activity
-            android:name=".main_app.home"
+            android:name=".main_app.homeHostFragments"
             android:exported="false" />
         <activity
             android:name=".auth.PassUpdate"
