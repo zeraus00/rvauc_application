@@ -12,7 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.rfid.R;
-import com.example.rfid.home;
+import com.example.rfid.main_app.home;
 
 public class EmailVerifiedSuccessful extends AppCompatActivity {
 

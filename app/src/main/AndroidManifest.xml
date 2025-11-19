@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RFID">
         <activity
-            android:name=".status"
+            android:name=".main_app.status"
             android:exported="false" />
         <activity
-            android:name=".home"
+            android:name=".main_app.home"
             android:exported="false" />
         <activity
             android:name=".auth.PassUpdate"
