@@ -1,4 +1,4 @@
-package com.example.rfid;
+package com.example.rfid.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.rfid.R;
+import com.example.rfid.home;
 
 public class Verified_email extends AppCompatActivity {
 

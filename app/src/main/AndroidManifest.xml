@@ -18,25 +18,25 @@
             android:name=".home"
             android:exported="false" />
         <activity
-            android:name=".passupdt"
+            android:name=".auth.passupdt"
             android:exported="false" />
         <activity
-            android:name=".resetpass"
+            android:name=".auth.resetpass"
             android:exported="false" />
         <activity
-            android:name=".Frgt_email_verification"
+            android:name=".auth.Frgt_email_verification"
             android:exported="false" />
         <activity
-            android:name=".Verified_email"
+            android:name=".auth.Verified_email"
             android:exported="false" />
         <activity
-            android:name=".e_verification"
+            android:name=".auth.email_verification"
             android:exported="false" />
         <activity
             android:name=".forgot_number"
             android:exported="false" />
         <activity
-            android:name=".forgot"
+            android:name=".auth.forgot"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
