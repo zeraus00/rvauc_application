@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:background="@drawable/button_style"
-            android:text="Sumbit"
+            android:text="@string/submitBtn"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
