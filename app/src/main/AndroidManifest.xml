@@ -33,9 +33,6 @@
             android:name=".auth.email_verification"
             android:exported="false" />
         <activity
-            android:name=".forgot_number"
-            android:exported="false" />
-        <activity
             android:name=".auth.forgot"
             android:exported="false" />
         <activity

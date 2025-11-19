@@ -9,7 +9,7 @@
     tools:context=".auth.resetpass">
 
     <ImageButton
-        android:id="@+id/backButton"
+        android:id="@+id/imageButton"
         android:layout_width="50dp"
         android:layout_height="39dp"
         app:tint="@color/white"
@@ -156,7 +156,7 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/submitBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -166,7 +166,7 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/cancelBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

@@ -3,6 +3,7 @@ package com.example.rfid.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,13 @@ public class Verified_email extends AppCompatActivity {
 
         btn_to_login.setOnClickListener(v -> {
             startActivity(new Intent(Verified_email.this, home.class));
+            finish();
+        });
+
+        ImageButton backBtn = findViewById(R.id.imageButton);
+
+        backBtn.setOnClickListener(v -> {
+            startActivity(new Intent(Verified_email.this, LoginActivity.class));
             finish();
         });
     }
