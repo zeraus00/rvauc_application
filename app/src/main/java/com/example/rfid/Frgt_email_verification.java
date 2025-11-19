@@ -42,7 +42,7 @@ public class Frgt_email_verification extends AppCompatActivity {
 
         // Back button listener
         backBtn.setOnClickListener(v -> {
-            Intent backIntent = new Intent(Frgt_email_verification.this, MainActivity.class);
+            Intent backIntent = new Intent(Frgt_email_verification.this, LoginActivity.class);
             startActivity(backIntent);
             finish();
         });

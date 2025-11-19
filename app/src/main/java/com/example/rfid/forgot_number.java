@@ -35,7 +35,7 @@ public class forgot_number extends AppCompatActivity {
 
         // Back button → go to MainActivity
         backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(forgot_number.this, MainActivity.class);
+            Intent intent = new Intent(forgot_number.this, LoginActivity.class);
             startActivity(intent);
             finish();
         });

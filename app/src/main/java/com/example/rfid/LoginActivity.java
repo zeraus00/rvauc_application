@@ -14,13 +14,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private TextView forgot;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Button login_btn = findViewById(R.id.button);
 
         login_btn.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, e_verification.class);
+                Intent intent = new Intent(LoginActivity.this, e_verification.class);
                 startActivity(intent);
                 finish();
         });
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, forgot.class);
+                Intent intent=new Intent(LoginActivity.this, forgot.class);
                 startActivity(intent);
                 finish();
             }

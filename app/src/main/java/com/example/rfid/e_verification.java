@@ -40,7 +40,7 @@ public class e_verification extends AppCompatActivity {
         loginBtn = findViewById(R.id.verifying_btn1);
 
         backBtn.setOnClickListener(v -> {
-            startActivity(new Intent(e_verification.this, MainActivity.class));
+            startActivity(new Intent(e_verification.this, LoginActivity.class));
             finish();
         });
 
