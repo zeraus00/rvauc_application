@@ -1,6 +1,9 @@
 package com.example.rfid.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.rfid.R;
+import com.example.rfid.home;
 
 public class passupdt extends AppCompatActivity {
 
@@ -21,6 +25,18 @@ public class passupdt extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        ImageButton backBtn = findViewById(R.id.imageBtn);
+        backBtn.setOnClickListener(v -> {
+            startActivity(new Intent(passupdt.this, LoginActivity.class));
+            finish();
+        });
+
+        Button loginBtn = findViewById(R.id.LoginBtn);
+        loginBtn.setOnClickListener(v -> {
+            startActivity(new Intent(passupdt.this, home.class));
+            finish();
         });
     }
 }
