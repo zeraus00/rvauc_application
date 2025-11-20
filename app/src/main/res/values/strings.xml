@@ -49,6 +49,7 @@
     <string name="Verify_text">Verify your email address.</string>
     <string name="Email">(sample@gmail.com)</string>
     <string name="rst">Password must contain at least one number or\nspecial character.</string>
+    <string name="rmnabs">Remaining \nAbsence</string>
     <string name="submitBtn">
         <font size="15">
             <font color="white">
