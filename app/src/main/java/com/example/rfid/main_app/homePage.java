@@ -1,5 +1,6 @@
 package com.example.rfid.main_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.rfid.R;
+import com.example.rfid.auth.LoginActivity;
 
 public class homePage extends AppCompatActivity {
     ImageButton statsBtn, classBtn, homeBtn, notifBtn, policyBtn;
@@ -25,6 +27,13 @@ public class homePage extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        ImageButton logoutBtn = findViewById(R.id.imagebtn_logout);
+
+        logoutBtn.setOnClickListener(v -> {
+            startActivity(new Intent(homePage.this, LoginActivity.class));
+            finish();
         });
 
         statsBtn = findViewById(R.id.stats);
