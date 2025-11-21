@@ -21,7 +21,7 @@ public class ClassAttendanceFragment extends Fragment {
 
     private LinearLayout tableContainer;
 
-    private ConstraintLayout presentFilter, absentFilter, excusedFilter, remainingFilter;
+    private ConstraintLayout presentFilter, absentFilter, excusedFilter;
 
     private List<AttendanceRecord> records = new ArrayList<>();
 
@@ -37,7 +37,6 @@ public class ClassAttendanceFragment extends Fragment {
         presentFilter = view.findViewById(R.id.btnPresent);
         absentFilter = view.findViewById(R.id.btnAbsent);
         excusedFilter = view.findViewById(R.id.btnExcused);
-        remainingFilter = view.findViewById(R.id.btnRemaining);
 
         tableContainer = view.findViewById(R.id.tableContent);
 
@@ -46,7 +45,6 @@ public class ClassAttendanceFragment extends Fragment {
         presentFilter.setOnClickListener(v -> filterTable("Present"));
         absentFilter.setOnClickListener(v -> filterTable("Absent"));
         excusedFilter.setOnClickListener(v -> filterTable("Excused"));
-        remainingFilter.setOnClickListener(v -> filterTable("Remaining"));
 
         displayAllRows();
 
@@ -60,7 +58,6 @@ public class ClassAttendanceFragment extends Fragment {
         records.add(new AttendanceRecord("11/21/25", "Tue", "9:00 - 10:00", "Absent"));
         records.add(new AttendanceRecord("11/22/25", "Wed", "9:00 - 10:00", "Present"));
         records.add(new AttendanceRecord("11/23/25", "Thu", "9:00 - 10:00", "Excused"));
-        records.add(new AttendanceRecord("11/24/25", "Fri", "9:00 - 10:00", "Remaining"));
         records.add(new AttendanceRecord("11/25/25", "Sat", "9:00 - 10:00", "Present"));
     }
 
