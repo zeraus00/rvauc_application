@@ -38,7 +38,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView30">
 
-        <!-- GREEN TABLE HEADER -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -71,7 +70,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- TABLE CONTENT -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -83,7 +81,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- SAMPLE TEMPLATE ROW (WILL BE REMOVED BY CODE) -->
                 <LinearLayout
                     android:id="@+id/sample_row"
                     android:layout_width="match_parent"

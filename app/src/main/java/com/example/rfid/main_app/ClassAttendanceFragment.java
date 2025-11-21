@@ -39,7 +39,6 @@ public class ClassAttendanceFragment extends Fragment {
         excusedFilter = view.findViewById(R.id.btnExcused);
         remainingFilter = view.findViewById(R.id.btnRemaining);
 
-        // Table container inside ScrollView
         tableContainer = view.findViewById(R.id.tableContent);
 
         loadSampleRecords();

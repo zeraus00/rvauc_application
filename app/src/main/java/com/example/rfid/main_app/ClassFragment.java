@@ -51,15 +51,11 @@ public class ClassFragment extends Fragment {
         classList.add(new ClassModel("Prof. Cruz", "Web Development", "WEB202"));
     }
 
-    // -----------------------------------------------------------------
-    // Create each row programmatically (NO NEED XML ROW TEMPLATE)
-    // -----------------------------------------------------------------
     private void generateTableRows() {
         classListContainer.removeAllViews();
 
         for (ClassModel item : classList) {
 
-            // Parent row
             LinearLayout row = new LinearLayout(getContext());
             row.setOrientation(LinearLayout.HORIZONTAL);
             row.setPadding(10, 20, 10, 20);
@@ -69,34 +65,28 @@ public class ClassFragment extends Fragment {
                     new LinearLayout.LayoutParams(0,
                             LinearLayout.LayoutParams.WRAP_CONTENT, 1);
 
-            // --- Professor Cell ---
             TextView prof = new TextView(getContext());
             prof.setText(item.professor);
             prof.setTextColor(Color.parseColor("#333333"));
             prof.setLayoutParams(cellParams);
 
-            // --- Class Name Cell ---
             TextView className = new TextView(getContext());
             className.setText(item.className);
             className.setTextColor(Color.parseColor("#333333"));
             className.setLayoutParams(cellParams);
 
-            // --- Class Code Cell ---
             TextView classCode = new TextView(getContext());
             classCode.setText(item.classCode);
             classCode.setTextColor(Color.parseColor("#333333"));
             classCode.setGravity(Gravity.END);
             classCode.setLayoutParams(cellParams);
 
-            // Add views to row
             row.addView(prof);
             row.addView(className);
             row.addView(classCode);
 
-            // Click → open attendance fragment
             row.setOnClickListener(v -> openClassAttendance(item));
 
-            // Add row to container
             classListContainer.addView(row);
 
             // Divider
