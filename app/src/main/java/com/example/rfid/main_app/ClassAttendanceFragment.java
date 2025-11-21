@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.rfid.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,13 @@ public class ClassAttendanceFragment extends Fragment {
     private LinearLayout tableContainer;
 
     private ConstraintLayout presentFilter, absentFilter, excusedFilter;
+
+    private int presentCount = 0;
+    private int absentCount = 0;
+    private int excusedCount = 0;
+    private int remainingCount = 5;
+
+    private TextView presentCounter, absentCounter, excusedCounter, remainingCounter;
 
     private List<AttendanceRecord> records = new ArrayList<>();
 
@@ -40,10 +49,18 @@ public class ClassAttendanceFragment extends Fragment {
 
         tableContainer = view.findViewById(R.id.tableContent);
 
+        presentCounter = view.findViewById(R.id.countPresent);
+        absentCounter = view.findViewById(R.id.countAbsent);
+        excusedCounter = view.findViewById(R.id.countExcused);
+        remainingCounter = view.findViewById(R.id.countRemaining);
+
         loadSampleRecords();
+        updateCounters();
 
         presentFilter.setOnClickListener(v -> filterTable("Present"));
+
         absentFilter.setOnClickListener(v -> filterTable("Absent"));
+
         excusedFilter.setOnClickListener(v -> filterTable("Excused"));
 
         displayAllRows();
@@ -59,6 +76,33 @@ public class ClassAttendanceFragment extends Fragment {
         records.add(new AttendanceRecord("11/22/25", "Wed", "9:00 - 10:00", "Present"));
         records.add(new AttendanceRecord("11/23/25", "Thu", "9:00 - 10:00", "Excused"));
         records.add(new AttendanceRecord("11/25/25", "Sat", "9:00 - 10:00", "Present"));
+    }
+
+    private void updateCounters() {
+        int present = 0;
+        int absent = 0;
+        int excused = 0;
+
+        for (AttendanceRecord r : records) {
+            String s = r.status.toLowerCase();
+
+            if (s.equals("present")) {
+                present++;
+            }
+            else if (s.equals("absent")) {
+                absent++;
+            }
+            else if (s.equals("excused")) {
+                excused++;
+            }
+        }
+
+        int remaining = 5 - absent;
+
+        presentCounter.setText(String.valueOf(present));
+        absentCounter.setText(String.valueOf(absent));
+        excusedCounter.setText(String.valueOf(excused));
+        remainingCounter.setText(String.valueOf(Math.max(remaining, 0)));
     }
 
     private void filterTable(String filterStatus) {
