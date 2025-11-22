@@ -7,8 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.rfid.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,18 +31,14 @@ public class NotificationFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private LinearLayout tableContentContainer;
+    private TextView notifHeader;
+    private List<String> notificationList = new ArrayList<>();
+
     public NotificationFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NotificationFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static NotificationFragment newInstance(String param1, String param2) {
         NotificationFragment fragment = new NotificationFragment();
@@ -61,6 +62,61 @@ public class NotificationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+        View view = inflater.inflate(R.layout.fragment_notification, container, false);
+
+        tableContentContainer = view.findViewById(R.id.table_content_container);
+        notifHeader = view.findViewById(R.id.textView32);
+
+        seedNotification();
+        displayNotifications();
+
+        return view;
+    }
+
+    private void seedNotification() {
+        notificationList.add("Notification 1");
+        notificationList.add("Notification 2");
+    }
+
+    private void displayNotifications() {
+        tableContentContainer.removeAllViews();
+
+        int notifCount = notificationList.size();
+        notifHeader.setText("You have " + notifCount + " Notification" + (notifCount == 1 ? "" : "s"));
+
+        if (notifCount == 0) {
+            tableContentContainer.setVisibility(View.GONE);
+            return;
+        } else {
+            tableContentContainer.setVisibility(View.VISIBLE);
+        }
+
+        for (String notif : notificationList) {
+            // Create row container
+            LinearLayout row = new LinearLayout(getContext());
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setPadding(16, 16, 16, 16);
+            row.setBackgroundResource(R.drawable.rounded_white_bg); // optional rounded background
+            LinearLayout.LayoutParams rowParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            rowParams.setMargins(0, 8, 0, 8); // spacing between rows
+            row.setLayoutParams(rowParams);
+
+            // Add notification text
+            TextView textView = new TextView(getContext());
+            textView.setText(notif);
+            textView.setTextColor(getResources().getColor(R.color.black));
+            textView.setTextSize(16);
+            textView.setLayoutParams(new LinearLayout.LayoutParams(
+                    0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f
+            )); // weight=1 so it fills the row
+
+            row.addView(textView);
+
+            // Add the row to container
+            tableContentContainer.addView(row);
+        }
     }
 }
