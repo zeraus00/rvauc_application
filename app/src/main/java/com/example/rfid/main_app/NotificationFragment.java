@@ -15,11 +15,7 @@ import com.example.rfid.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NotificationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class NotificationFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -96,26 +92,25 @@ public class NotificationFragment extends Fragment {
             LinearLayout row = new LinearLayout(getContext());
             row.setOrientation(LinearLayout.HORIZONTAL);
             row.setPadding(16, 16, 16, 16);
-            row.setBackgroundResource(R.drawable.rounded_white_bg); // optional rounded background
+            row.setBackgroundResource(R.drawable.rounded_white_bg);
             LinearLayout.LayoutParams rowParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            rowParams.setMargins(0, 8, 0, 8); // spacing between rows
+            rowParams.setMargins(0, 8, 0, 8);
             row.setLayoutParams(rowParams);
 
-            // Add notification text
             TextView textView = new TextView(getContext());
             textView.setText(notif);
             textView.setTextColor(getResources().getColor(R.color.black));
             textView.setTextSize(16);
             textView.setLayoutParams(new LinearLayout.LayoutParams(
                     0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f
-            )); // weight=1 so it fills the row
+            ));
 
             row.addView(textView);
 
-            // Add the row to container
+
             tableContentContainer.addView(row);
         }
     }

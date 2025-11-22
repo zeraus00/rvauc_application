@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RFID">
         <activity
+            android:name=".item_carousel"
+            android:exported="false" />
+        <activity
             android:name=".main_app.status"
             android:exported="false" />
         <activity

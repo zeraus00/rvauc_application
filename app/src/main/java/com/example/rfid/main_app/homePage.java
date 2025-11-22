@@ -2,7 +2,12 @@ package com.example.rfid.main_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,13 +47,59 @@ public class homePage extends AppCompatActivity {
         notifBtn = findViewById(R.id.btn_notif);
         policyBtn = findViewById(R.id.btn_policy);
 
-
         statsBtn.setOnClickListener(v -> loadFragment(new StatusFragment()));
         classBtn.setOnClickListener(v -> loadFragment(new ClassFragment()));
         notifBtn.setOnClickListener(v -> loadFragment(new NotificationFragment()));
         policyBtn.setOnClickListener(v -> loadFragment(new PolicyFragment()));
 
         homeBtn.setOnClickListener(v -> clearFragment());
+
+        ImageSwitcher carousel = findViewById(R.id.carouselSwitcher);
+
+        if (carousel != null) {
+
+            // Factory for ImageSwitcher
+            carousel.setFactory(() -> {
+                ImageView img = new ImageView(homePage.this);
+                img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                img.setLayoutParams(new ImageSwitcher.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT
+                ));
+                return img;
+            });
+
+
+            int[] images = {
+                    R.drawable.type_a,
+                    R.drawable.buffalo,
+                    R.drawable.department_shirt,
+                    R.drawable.pe_uniform
+            };
+
+            final int[] index = {0};
+
+
+            carousel.setImageResource(images[index[0]]);
+
+            Handler handler = new Handler();
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    index[0]++;
+                    if (index[0] >= images.length) index[0] = 0;
+
+                    carousel.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in));
+                    carousel.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_out));
+
+                    carousel.setImageResource(images[index[0]]);
+                    handler.postDelayed(this, 3000);
+                }
+            };
+
+            handler.postDelayed(runnable, 3000);
+        }
+
     }
 
     public void loadFragment(Fragment fragment) {
@@ -63,4 +114,5 @@ public class homePage extends AppCompatActivity {
                 .replace(R.id.fragment_container, new Fragment())
                 .commit();
     }
+
 }
