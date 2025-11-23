@@ -10,83 +10,88 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="50dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="103dp"
-        android:layout_marginEnd="326dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/backbtn"
         android:tint="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/actionModeCloseDrawable"
         tools:ignore="ContentDescription,MissingConstraints,UseAppTint,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-    <TextView
-        android:id="@+id/textView11"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="188dp"
-        android:layout_marginEnd="164dp"
-        android:layout_marginBottom="7dp"
-        android:text="Email Verified"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView20"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2"/>
 
-    <TextView
-        android:id="@+id/textView20"
+    <LinearLayout
+        android:id="@+id/headerSection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/guideTop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/txtEmailVerified"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Verified"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/txtEmailVerifiedDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Email has been successfully Verified."
+            android:textColor="@color/white"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideUpperMiddle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="119dp"
-        android:layout_marginBottom="644dp"
-        android:text="Your Email has been successfully Verified."
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
-        tools:ignore="HardcodedText" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"/>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imgCheck"
         android:layout_width="200dp"
-        android:layout_height="171dp"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="151dp"
-        android:layout_marginBottom="384dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toBottomOf="@id/guideUpperMiddle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/check"
         tools:ignore="ContentDescription" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLowerMiddle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55"/>
+
     <LinearLayout
+        android:id="@+id/rfidApplication"
         android:layout_width="300dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="101dp"
-        android:layout_marginBottom="322dp"
+        android:layout_height="60dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingStart="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/guideLowerMiddle"
         tools:ignore="RtlSymmetry">
 
         <ImageView
@@ -98,7 +103,6 @@
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/textView16"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -110,38 +114,21 @@
             tools:ignore="HardcodedText,TextContrastCheck" />
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="365dp"
-        android:layout_height="76dp"
-        android:layout_marginStart="23dp"
-
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="195dp"
-        android:background="@drawable/num_box_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/btnVerifying"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_max="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/button_style"
+        android:text="@string/Login_text"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints">
-
-        <Button
-            android:id="@+id/verifying_btn"
-            android:layout_width="350dp"
-            android:layout_height="47dp"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="44dp"
-            android:layout_marginBottom="25dp"
-            android:background="@drawable/button_style"
-            android:text="@string/Login_text"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TouchTargetSizeCheck" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@id/rfidApplication"
+        tools:ignore="TouchTargetSizeCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

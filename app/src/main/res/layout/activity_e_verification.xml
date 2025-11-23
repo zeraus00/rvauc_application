@@ -9,7 +9,7 @@
     tools:context=".auth.LoginEmailVerification">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideHeaderMiddle"
+        android:id="@+id/guideMiddle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -17,8 +17,8 @@
 
     <ImageButton
         android:id="@+id/backButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:background="@drawable/backbtn"
         android:tint="@android:color/white"
         android:layout_marginStart="16dp"
@@ -29,7 +29,7 @@
         tools:ignore="UseAppTint" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideHeaderTop"
+        android:id="@+id/guideTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -45,7 +45,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideHeaderTop">
+        app:layout_constraintTop_toBottomOf="@id/guideTop">
 
         <ImageView
             android:id="@+id/imageView4"
@@ -107,7 +107,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideHeaderMiddle">
+        app:layout_constraintTop_toBottomOf="@+id/guideMiddle">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -309,6 +309,7 @@
         <Button
             android:id="@+id/btnVerifying1"
             android:layout_width="0dp"
+            app:layout_constraintWidth_max="300dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_style"
             android:text="@string/submitBtn"
