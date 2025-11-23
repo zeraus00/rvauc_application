@@ -36,10 +36,10 @@ public class LoginEmailVerification extends AppCompatActivity {
             return insets;
         });
 
-        textCountdown = findViewById(R.id.textCountdown);
-        resendText = findViewById(R.id.textView18); // your “Resend” text
+        textCountdown = findViewById(R.id.txtCountdown);
+        resendText = findViewById(R.id.txtResendCode); // your “Resend” text
         ImageButton backBtn = findViewById(R.id.backButton);
-        loginBtn = findViewById(R.id.verifying_btn1);
+        loginBtn = findViewById(R.id.btnVerifying1);
 
         backBtn.setOnClickListener(v -> {
             startActivity(new Intent(LoginEmailVerification.this, LoginActivity.class));
