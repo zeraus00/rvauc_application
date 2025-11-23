@@ -27,7 +27,7 @@ public class EmailVerifiedSuccessful extends AppCompatActivity {
             return insets;
         });
 
-        Button btn_to_login = findViewById(R.id.verifying_btn);
+        Button btn_to_login = findViewById(R.id.btnVerifying);
 
         btn_to_login.setOnClickListener(v -> {
             startActivity(new Intent(EmailVerifiedSuccessful.this, homePage.class));
