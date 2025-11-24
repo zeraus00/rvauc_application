@@ -38,8 +38,8 @@ public class FrgtPassEmailVerification extends AppCompatActivity {
             return insets;
         });
 
-        textCountdown1 = findViewById(R.id.textCountdown1);
-        resendText = findViewById(R.id.textView18); // "Resend" TextView
+        textCountdown1 = findViewById(R.id.txtFrgtCountdown);
+        resendText = findViewById(R.id.txtFrgtResendCode); // "Resend" TextView
         ImageButton backBtn = findViewById(R.id.backButton);
 
         // Back button listener
@@ -76,7 +76,7 @@ public class FrgtPassEmailVerification extends AppCompatActivity {
         };
         countDownTimer.start();
 
-        verifying_button1=findViewById(R.id.verifying_button1);
+        verifying_button1=findViewById(R.id.btnFrgtVerifying);
         verifying_button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
