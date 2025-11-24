@@ -99,15 +99,15 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingStart="20dp"
             app:srcCompat="@drawable/signin_logo"
             tools:ignore="ContentDescription" />
 
         <TextView
+            android:id="@+id/textView16"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:paddingStart="-80dp"
             android:text="RFID Application"
             android:textColor="@color/white"
             android:textSize="15sp"
