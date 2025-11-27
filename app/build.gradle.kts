@@ -32,7 +32,11 @@ android {
 }
 
 dependencies {
-
+    implementation("com.fasterxml.jackson.core:jackson-core:2.19.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.19.2")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.19.2")
+    implementation(libs.moshi.kotlin)
+    implementation(libs.okhttp)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
