@@ -1,4 +1,4 @@
-package com.example.rfid.auth.services;
+package com.example.rfid.features.auth.services;
 
 public class SessionManager {
     private static SessionManager instance;

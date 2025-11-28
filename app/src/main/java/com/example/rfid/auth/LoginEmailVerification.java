@@ -20,8 +20,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.rfid.R;
-import com.example.rfid.auth.services.AuthenticationService;
-import com.example.rfid.auth.services.SessionManager;
+import com.example.rfid.features.auth.services.AuthenticationService;
+import com.example.rfid.features.auth.services.SessionManager;
 import com.example.rfid.dto.ApiResponse;
 import com.example.rfid.interfaces.HttpCallback;
 import com.fasterxml.jackson.core.type.TypeReference;

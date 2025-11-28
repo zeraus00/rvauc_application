@@ -1,4 +1,4 @@
-package com.example.rfid.auth.services;
+package com.example.rfid.features.auth.services;
 
 import com.example.rfid.interfaces.HttpCallback;
 import com.example.rfid.services.RequestService;

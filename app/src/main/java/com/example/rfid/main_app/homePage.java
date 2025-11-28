@@ -1,6 +1,6 @@
 package com.example.rfid.main_app;
 
-import static com.example.rfid.auth.services.AuthenticationService.logout;
+import static com.example.rfid.features.auth.services.AuthenticationService.logout;
 import static com.example.rfid.utils.JsonParser.fromJson;
 import static com.example.rfid.utils.JsonParser.toJson;
 
@@ -23,8 +23,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.rfid.R;
 import com.example.rfid.auth.LoginActivity;
-import com.example.rfid.auth.services.AuthenticationService;
-import com.example.rfid.auth.services.SessionManager;
+import com.example.rfid.features.auth.services.AuthenticationService;
+import com.example.rfid.features.auth.services.SessionManager;
 import com.example.rfid.dto.ApiResponse;
 import com.example.rfid.interfaces.HttpCallback;
 import com.fasterxml.jackson.core.type.TypeReference;
