@@ -11,7 +11,6 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -25,19 +24,12 @@ import com.example.rfid.auth.services.AuthenticationService;
 import com.example.rfid.auth.services.SessionManager;
 import com.example.rfid.dto.ApiResponse;
 import com.example.rfid.interfaces.HttpCallback;
-import com.example.rfid.services.RequestService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.util.Map;
 
 public class LoginEmailVerification extends AppCompatActivity {
     private final String authTag = "Authentication";
     private TextView textCountdown;
-    private TextView resendText;
     private CountDownTimer countDownTimer;
-    private Button loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +45,9 @@ public class LoginEmailVerification extends AppCompatActivity {
         });
 
         textCountdown = findViewById(R.id.txtCountdown);
-        resendText = findViewById(R.id.txtResendCode); // your “Resend” text
+        var resendText = findViewById(R.id.txtResendCode); // your “Resend” text
         ImageButton backBtn = findViewById(R.id.backButton);
-        loginBtn = findViewById(R.id.btnVerifying1);
+        var loginBtn = findViewById(R.id.btnVerifying1);
         EditText[] inputs = {
                 findViewById(R.id.etInputBox1),
                 findViewById(R.id.etInputBox2),
@@ -100,7 +92,7 @@ public class LoginEmailVerification extends AppCompatActivity {
                 if (digit.isBlank()) {
                     toastFail("Please input a complete 6-digit code.");
                     return;
-                };
+                }
 
                 code.append(digit);
             }
@@ -142,6 +134,7 @@ public class LoginEmailVerification extends AppCompatActivity {
                         SharedPreferences prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
                         var editor = prefs.edit();
                         editor.putString("refreshToken", res.result.refreshToken);
+                        editor.apply();
 
                         SessionManager.getInstance().setAccessToken(res.result.accessToken);
                     }
@@ -156,9 +149,7 @@ public class LoginEmailVerification extends AppCompatActivity {
 
             @Override
             public void onError(Exception e) {
-                runOnUiThread(()-> {
-                    toastFail("Failed verifying code: " + e.getMessage());
-                });
+                runOnUiThread(()-> toastFail("Failed verifying code: " + e.getMessage()));
             }
         });
     }

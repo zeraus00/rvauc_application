@@ -14,6 +14,11 @@ public class AuthenticationService {
         new RequestService().post(url, jsonReq, callback);
     }
 
+    public static void logout(String jsonReq, HttpCallback callback) {
+        String url = "http://10.0.2.2:2620/auth/session-management/sign-out";
+        new RequestService().post(url, jsonReq, callback);
+    }
+
 
     public static class LoginRequest {
         public String identifier;
@@ -26,6 +31,10 @@ public class AuthenticationService {
         public String code;
         public boolean isPersistentAuth = false;
         public VerifyCodeRequest() {}
+    }
+    public static class LogOutRequest {
+        public String refreshToken;
+        public LogOutRequest(){}
     }
     public static class Tokens {
         public String accessToken;

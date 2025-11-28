@@ -1,5 +1,9 @@
 package com.example.rfid.main_app;
 
+import static com.example.rfid.auth.services.AuthenticationService.logout;
+import static com.example.rfid.utils.JsonParser.fromJson;
+import static com.example.rfid.utils.JsonParser.toJson;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +23,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.rfid.R;
 import com.example.rfid.auth.LoginActivity;
+import com.example.rfid.auth.services.AuthenticationService;
+import com.example.rfid.auth.services.SessionManager;
+import com.example.rfid.dto.ApiResponse;
+import com.example.rfid.interfaces.HttpCallback;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 public class homePage extends AppCompatActivity {
     ImageButton statsBtn, classBtn, homeBtn, notifBtn, policyBtn;
@@ -37,6 +46,13 @@ public class homePage extends AppCompatActivity {
         ImageButton logoutBtn = findViewById(R.id.imagebtn_logout);
 
         logoutBtn.setOnClickListener(v -> {
+            var prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
+            String token = prefs.getString("refreshToken", null);
+
+            if (token != null) {
+                logoutUser(token);
+            }
+
             startActivity(new Intent(homePage.this, LoginActivity.class));
             finish();
         });
@@ -100,6 +116,35 @@ public class homePage extends AppCompatActivity {
             handler.postDelayed(runnable, 3000);
         }
 
+    }
+
+    public void logoutUser(String refreshToken) {
+        var logOutRequest = new AuthenticationService.LogOutRequest() {};
+        logOutRequest.refreshToken = refreshToken;
+
+        String json = toJson(logOutRequest);
+
+        logout(json, new HttpCallback() {
+            @Override
+            public void onSuccess(String json) {
+                runOnUiThread(() -> {
+                    var res = fromJson(json, new TypeReference<ApiResponse<Void>>() {});
+
+                    if (res.success) {
+                        var prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
+                        var editor = prefs.edit();
+                        editor.clear();
+                        editor.apply();
+                        SessionManager.getInstance().clear();
+                    }
+                });
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
     }
 
     public void loadFragment(Fragment fragment) {
