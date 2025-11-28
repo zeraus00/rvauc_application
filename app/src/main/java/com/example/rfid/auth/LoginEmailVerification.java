@@ -1,8 +1,14 @@
 package com.example.rfid.auth;
 
+import static com.example.rfid.utils.JsonParser.fromJson;
+import static com.example.rfid.utils.JsonParser.toJson;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Button;
@@ -15,9 +21,19 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.rfid.R;
+import com.example.rfid.auth.services.AuthenticationService;
+import com.example.rfid.auth.services.SessionManager;
+import com.example.rfid.dto.ApiResponse;
+import com.example.rfid.interfaces.HttpCallback;
+import com.example.rfid.services.RequestService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.Map;
 
 public class LoginEmailVerification extends AppCompatActivity {
-
+    private final String authTag = "Authentication";
     private TextView textCountdown;
     private TextView resendText;
     private CountDownTimer countDownTimer;
@@ -40,6 +56,14 @@ public class LoginEmailVerification extends AppCompatActivity {
         resendText = findViewById(R.id.txtResendCode); // your “Resend” text
         ImageButton backBtn = findViewById(R.id.backButton);
         loginBtn = findViewById(R.id.btnVerifying1);
+        EditText[] inputs = {
+                findViewById(R.id.etInputBox1),
+                findViewById(R.id.etInputBox2),
+                findViewById(R.id.etInputBox3),
+                findViewById(R.id.etInputBox4),
+                findViewById(R.id.etInputBox5),
+                findViewById(R.id.etInputBox6)
+        };
 
         backBtn.setOnClickListener(v -> {
             startActivity(new Intent(LoginEmailVerification.this, LoginActivity.class));
@@ -58,8 +82,30 @@ public class LoginEmailVerification extends AppCompatActivity {
         });
 
         loginBtn.setOnClickListener(v -> {
-            startActivity(new Intent(LoginEmailVerification.this, EmailVerifiedSuccessful.class));
-            finish();
+            SharedPreferences prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
+            String email = prefs.getString("email", null);
+            boolean rememberMe = prefs.getBoolean("rememberMe", false);
+
+            if (email == null || email.isBlank()) {
+                toastFail("Please retry logging-in");
+                return;
+            }
+
+            Log.i(authTag, "Retrieving code...");
+
+            StringBuilder code = new StringBuilder();
+
+            for (EditText input: inputs) {
+                String digit = input.getText().toString();
+                if (digit.isBlank()) {
+                    toastFail("Please input a complete 6-digit code.");
+                    return;
+                };
+
+                code.append(digit);
+            }
+
+            verifyCode(email, code.toString(), rememberMe);
         });
     }
 
@@ -77,5 +123,46 @@ public class LoginEmailVerification extends AppCompatActivity {
             }
         };
         countDownTimer.start();
+    }
+    void verifyCode(String email, String code, boolean rememberMe) {
+        var verifyRequest = new AuthenticationService.VerifyCodeRequest() {};
+        verifyRequest.email = email;
+        verifyRequest.code = code;
+        verifyRequest.isPersistentAuth = rememberMe;
+
+        String json = toJson(verifyRequest);
+
+        AuthenticationService.verifyCode(json, new HttpCallback() {
+            @Override
+            public void onSuccess(String json) {
+                runOnUiThread(() -> {
+                    var res = fromJson(json, new TypeReference<ApiResponse<AuthenticationService.Tokens>>() {});
+
+                    if (res.success) {
+                        SharedPreferences prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
+                        var editor = prefs.edit();
+                        editor.putString("refreshToken", res.result.refreshToken);
+
+                        SessionManager.getInstance().setAccessToken(res.result.accessToken);
+                    }
+                    else {
+                        toastFail(res.message);
+                        return;
+                    }
+                    startActivity(new Intent(LoginEmailVerification.this, EmailVerifiedSuccessful.class));
+                    finish();
+                });
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(()-> {
+                    toastFail("Failed verifying code: " + e.getMessage());
+                });
+            }
+        });
+    }
+    private void toastFail(String message) {
+        Toast.makeText(LoginEmailVerification.this, message, Toast.LENGTH_SHORT).show();
     }
 }
