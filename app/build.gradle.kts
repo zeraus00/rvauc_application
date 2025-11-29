@@ -32,10 +32,8 @@ android {
 }
 
 dependencies {
-    implementation("com.fasterxml.jackson.core:jackson-core:2.19.2")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.19.2")
-    implementation("com.fasterxml.jackson.core:jackson-annotations:2.19.2")
-    implementation(libs.moshi.kotlin)
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.retrofit2:converter-jackson:3.0.0")
     implementation(libs.okhttp)
     implementation(libs.appcompat)
     implementation(libs.material)

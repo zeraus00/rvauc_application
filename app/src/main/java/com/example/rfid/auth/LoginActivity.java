@@ -1,8 +1,5 @@
 package com.example.rfid.auth;
 
-import static com.example.rfid.utils.JsonParser.fromJson;
-import static com.example.rfid.utils.JsonParser.toJson;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,10 +18,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.rfid.R;
+import com.example.rfid.dto.VoidResponse;
 import com.example.rfid.features.auth.services.AuthenticationService;
-import com.example.rfid.dto.ApiResponse;
 import com.example.rfid.interfaces.HttpCallback;
-import com.fasterxml.jackson.core.type.TypeReference;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -77,23 +73,19 @@ public class LoginActivity extends AppCompatActivity {
 
 
     void loginUser(String email, String password, boolean rememberMe) {
-        var loginRequest = new AuthenticationService.LoginRequest(){};
-        loginRequest.identifier = email;
-        loginRequest.password = password;
-        loginRequest.isPersistentAuth = rememberMe;
-
-        String json = toJson(loginRequest);
+        var signInCodeRequest = new AuthenticationService.SignInCodeRequest(){};
+        signInCodeRequest.identifier = email;
+        signInCodeRequest.password = password;
+        signInCodeRequest.isPersistentAuth = rememberMe;
 
         Log.d(authTag, "Requesting code...");
-        AuthenticationService.login(json, new HttpCallback() {
+        AuthenticationService.requestSignInCode(signInCodeRequest, new HttpCallback<VoidResponse>() {
             @Override
-            public void onSuccess(String json) {
+            public void onSuccess(VoidResponse response) {
                 runOnUiThread(() -> {
-                    var res = fromJson(json, new TypeReference<ApiResponse<Void>>() {});
-
                     SharedPreferences prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
-                    if (res.success) {
+                    if (response.success) {
                         Log.i(authTag, "Success requesting code.");
                         editor.putString("email", email);
                         editor.putBoolean("rememberMe", rememberMe);
@@ -101,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         Log.i(authTag, "Failed requesting code.");
                         editor.clear().apply();
-                        toastFail(res.message);
+                        toastFail(response.message);
                         return;
                     }
 
@@ -112,10 +104,11 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onError(Exception e) {
+            public void onError(String message) {
                 runOnUiThread(() -> {
-                    Log.e(authTag, "Sign in code request failed.", e);
-                    toastFail("Authentication failed: " + e.getMessage());
+                    String failMsg = "Authentication failed: " + message;
+                    Log.e(authTag, failMsg);
+                    toastFail(failMsg);
                 });
             }
         });

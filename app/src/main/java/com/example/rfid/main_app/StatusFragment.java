@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.rfid.R;
 
@@ -62,5 +63,11 @@ public class StatusFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_status, container, false);
+    }
+    private void toast(String message) {
+        var activity = getActivity();
+        if (activity != null) {
+            Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+        }
     }
 }

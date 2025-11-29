@@ -1,6 +1,6 @@
 package com.example.rfid.interfaces;
 
-public interface HttpCallback {
-    void onSuccess(String json);
-    void onError(Exception e);
+public interface HttpCallback<T> {
+    void onSuccess(T response);
+    void onError(String message);
 }

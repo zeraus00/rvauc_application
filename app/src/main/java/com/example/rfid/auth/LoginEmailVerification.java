@@ -1,8 +1,5 @@
 package com.example.rfid.auth;
 
-import static com.example.rfid.utils.JsonParser.fromJson;
-import static com.example.rfid.utils.JsonParser.toJson;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,9 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.rfid.R;
 import com.example.rfid.features.auth.services.AuthenticationService;
 import com.example.rfid.features.auth.services.SessionManager;
-import com.example.rfid.dto.ApiResponse;
 import com.example.rfid.interfaces.HttpCallback;
-import com.fasterxml.jackson.core.type.TypeReference;
 
 public class LoginEmailVerification extends AppCompatActivity {
     private final String authTag = "Authentication";
@@ -117,29 +112,25 @@ public class LoginEmailVerification extends AppCompatActivity {
         countDownTimer.start();
     }
     void verifyCode(String email, String code, boolean rememberMe) {
-        var verifyRequest = new AuthenticationService.VerifyCodeRequest() {};
-        verifyRequest.email = email;
-        verifyRequest.code = code;
-        verifyRequest.isPersistentAuth = rememberMe;
+        var verifyCodeRequest = new AuthenticationService.VerifyCodeRequest() {};
+        verifyCodeRequest.email = email;
+        verifyCodeRequest.code = code;
+        verifyCodeRequest.isPersistentAuth = rememberMe;
 
-        String json = toJson(verifyRequest);
-
-        AuthenticationService.verifyCode(json, new HttpCallback() {
+        AuthenticationService.verifyCode(verifyCodeRequest, new HttpCallback<AuthenticationService.TokensResponse>() {
             @Override
-            public void onSuccess(String json) {
+            public void onSuccess(AuthenticationService.TokensResponse response) {
                 runOnUiThread(() -> {
-                    var res = fromJson(json, new TypeReference<ApiResponse<AuthenticationService.Tokens>>() {});
-
-                    if (res.success) {
+                    if (response.success) {
                         SharedPreferences prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
                         var editor = prefs.edit();
-                        editor.putString("refreshToken", res.result.refreshToken);
+                        editor.putString("refreshToken", response.result.refreshToken);
                         editor.apply();
 
-                        SessionManager.getInstance().setAccessToken(res.result.accessToken);
+                        SessionManager.getInstance().setAccessToken(response.result.accessToken);
                     }
                     else {
-                        toastFail(res.message);
+                        toastFail(response.message);
                         return;
                     }
                     startActivity(new Intent(LoginEmailVerification.this, EmailVerifiedSuccessful.class));
@@ -148,8 +139,8 @@ public class LoginEmailVerification extends AppCompatActivity {
             }
 
             @Override
-            public void onError(Exception e) {
-                runOnUiThread(()-> toastFail("Failed verifying code: " + e.getMessage()));
+            public void onError(String message) {
+                runOnUiThread(()-> toastFail("Failed verifying code: " + message));
             }
         });
     }

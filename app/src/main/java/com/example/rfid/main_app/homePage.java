@@ -1,9 +1,5 @@
 package com.example.rfid.main_app;
 
-import static com.example.rfid.features.auth.services.AuthenticationService.logout;
-import static com.example.rfid.utils.JsonParser.fromJson;
-import static com.example.rfid.utils.JsonParser.toJson;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,11 +19,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.rfid.R;
 import com.example.rfid.auth.LoginActivity;
+import com.example.rfid.dto.VoidResponse;
 import com.example.rfid.features.auth.services.AuthenticationService;
 import com.example.rfid.features.auth.services.SessionManager;
-import com.example.rfid.dto.ApiResponse;
 import com.example.rfid.interfaces.HttpCallback;
-import com.fasterxml.jackson.core.type.TypeReference;
 
 public class homePage extends AppCompatActivity {
     ImageButton statsBtn, classBtn, homeBtn, notifBtn, policyBtn;
@@ -119,18 +114,14 @@ public class homePage extends AppCompatActivity {
     }
 
     public void logoutUser(String refreshToken) {
-        var logOutRequest = new AuthenticationService.LogOutRequest() {};
+        var logOutRequest = new AuthenticationService.SignOutRequest() {};
         logOutRequest.refreshToken = refreshToken;
 
-        String json = toJson(logOutRequest);
-
-        logout(json, new HttpCallback() {
+        AuthenticationService.signOut(logOutRequest, new HttpCallback<VoidResponse>() {
             @Override
-            public void onSuccess(String json) {
+            public void onSuccess(VoidResponse response) {
                 runOnUiThread(() -> {
-                    var res = fromJson(json, new TypeReference<ApiResponse<Void>>() {});
-
-                    if (res.success) {
+                    if (response.success) {
                         var prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
                         var editor = prefs.edit();
                         editor.clear();
@@ -141,7 +132,7 @@ public class homePage extends AppCompatActivity {
             }
 
             @Override
-            public void onError(Exception e) {
+            public void onError(String message) {
 
             }
         });
