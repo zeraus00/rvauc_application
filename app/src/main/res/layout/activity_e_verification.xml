@@ -16,13 +16,12 @@
         app:layout_constraintGuide_percent="0.12"/>
 
     <ImageButton
-        android:id="@+id/backButton"
+        android:id="@+id/btnBack"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:background="@drawable/backbtn"
-        android:tint="@android:color/white"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:background="@drawable/backbtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/homeAsUpIndicator"
@@ -99,35 +98,14 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <include
         android:id="@+id/rfidApplication"
-        android:layout_width="300dp"
+        layout="@layout/component_logo"
         android:layout_height="60dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingStart="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideMiddle">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingStart="20dp"
-            app:srcCompat="@drawable/signin_logo"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="RFID Application"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideMiddle" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/codeBoxContainer"
