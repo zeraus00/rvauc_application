@@ -1,30 +1,55 @@
 package com.example.rfid.features.auth.services;
 
+import static com.example.rfid.services.RvaucMsService.rvaucMsCallback;
+
+import com.example.rfid.dto.ApiResponse;
+import com.example.rfid.dto.VoidResponse;
 import com.example.rfid.interfaces.HttpCallback;
-import com.example.rfid.services.RequestService;
+import com.example.rfid.services.RvaucMsService;
+
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 
 public class AuthenticationService {
-    public static void login(String jsonReq, HttpCallback callback) {
-        String url = "http://10.0.2.2:2620/auth/session-management/sign-in";
-        new RequestService().post(url, jsonReq, callback);
+    private static AuthenticationClient authenticationClient;
+    public static void requestSignInCode(SignInCodeRequest request, HttpCallback<VoidResponse> callback) {
+        var auth = getAuthenticationClient();
+
+        auth.requestSignInCode(request).enqueue(rvaucMsCallback(callback));
+
+    }
+    public static void verifyCode(VerifyCodeRequest request, HttpCallback<TokensResponse> callback) {
+        var auth = getAuthenticationClient();
+
+        auth.verifyCode(request).enqueue(rvaucMsCallback(callback));
     }
 
-    public static void verifyCode(String jsonReq, HttpCallback callback) {
-        String url = "http://10.0.2.2:2620/auth/session-management/verify-code";
-        new RequestService().post(url, jsonReq, callback);
+    public static void signOut(SignOutRequest request, HttpCallback<VoidResponse> callback) {
+        var auth = getAuthenticationClient();
+
+        auth.signOut(request).enqueue(rvaucMsCallback(callback));
+    }
+    private static AuthenticationClient getAuthenticationClient() {
+        if (authenticationClient == null) authenticationClient = RvaucMsService.createService(AuthenticationClient.class);
+        return authenticationClient;
     }
 
-    public static void logout(String jsonReq, HttpCallback callback) {
-        String url = "http://10.0.2.2:2620/auth/session-management/sign-out";
-        new RequestService().post(url, jsonReq, callback);
+    interface AuthenticationClient {
+        @POST("/auth/session-management/sign-in")
+        Call<VoidResponse> requestSignInCode(@Body SignInCodeRequest request);
+
+        @POST("/auth/session-management/verify-code")
+        Call<TokensResponse> verifyCode(@Body VerifyCodeRequest request);
+
+        @POST("/auth/session-management/sign-out")
+        Call<VoidResponse> signOut(@Body SignOutRequest signOutRequest);
     }
-
-
-    public static class LoginRequest {
+    public static class SignInCodeRequest {
         public String identifier;
         public String password;
         public boolean isPersistentAuth = false;
-        public LoginRequest(){}
+        public SignInCodeRequest(){}
     }
     public static class VerifyCodeRequest {
         public String email;
@@ -32,10 +57,11 @@ public class AuthenticationService {
         public boolean isPersistentAuth = false;
         public VerifyCodeRequest() {}
     }
-    public static class LogOutRequest {
+    public static class SignOutRequest {
         public String refreshToken;
-        public LogOutRequest(){}
+        public SignOutRequest(){}
     }
+    public static class TokensResponse extends ApiResponse<Tokens> {}
     public static class Tokens {
         public String accessToken;
         public String refreshToken;
