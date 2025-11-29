@@ -19,6 +19,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.rfid.R;
 import com.example.rfid.auth.LoginActivity;
+import com.example.rfid.dto.VoidResponse;
+import com.example.rfid.features.auth.services.AuthenticationService;
+import com.example.rfid.features.auth.services.SessionManager;
+import com.example.rfid.interfaces.HttpCallback;
 
 public class homePage extends AppCompatActivity {
     ImageButton statsBtn, classBtn, homeBtn, notifBtn, policyBtn;
@@ -37,6 +41,13 @@ public class homePage extends AppCompatActivity {
         ImageButton logoutBtn = findViewById(R.id.imagebtn_logout);
 
         logoutBtn.setOnClickListener(v -> {
+            var prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
+            String token = prefs.getString("refreshToken", null);
+
+            if (token != null) {
+                logoutUser(token);
+            }
+
             startActivity(new Intent(homePage.this, LoginActivity.class));
             finish();
         });
@@ -100,6 +111,25 @@ public class homePage extends AppCompatActivity {
             handler.postDelayed(runnable, 3000);
         }
 
+    }
+
+    public void logoutUser(String refreshToken) {
+        var logOutRequest = new AuthenticationService.SignOutRequest() {};
+        logOutRequest.refreshToken = refreshToken;
+
+        AuthenticationService.signOut(logOutRequest, new HttpCallback<VoidResponse>() {
+            @Override
+            public void onSuccess(VoidResponse response) {
+                runOnUiThread(() -> {
+                    if (response.success) SessionManager.getInstance().clear();
+                });
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
     }
 
     public void loadFragment(Fragment fragment) {
