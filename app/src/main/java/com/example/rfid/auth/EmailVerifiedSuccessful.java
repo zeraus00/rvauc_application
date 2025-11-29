@@ -33,12 +33,5 @@ public class EmailVerifiedSuccessful extends AppCompatActivity {
             startActivity(new Intent(EmailVerifiedSuccessful.this, homePage.class));
             finish();
         });
-
-        ImageButton backBtn = findViewById(R.id.imageButton);
-
-        backBtn.setOnClickListener(v -> {
-            startActivity(new Intent(EmailVerifiedSuccessful.this, LoginActivity.class));
-            finish();
-        });
     }
 }

@@ -44,7 +44,7 @@ public class LoginEmailVerification extends AppCompatActivity {
 
         textCountdown = findViewById(R.id.txtCountdown);
         var resendText = findViewById(R.id.txtResendCode); // your “Resend” text
-        ImageButton backBtn = findViewById(R.id.backButton);
+        ImageButton backBtn = findViewById(R.id.btnBack);
         var loginBtn = findViewById(R.id.btnVerifying1);
         EditText[] inputs = {
                 findViewById(R.id.etInputBox1),

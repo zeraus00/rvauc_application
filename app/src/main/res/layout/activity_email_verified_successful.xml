@@ -8,19 +8,6 @@
     android:background="@drawable/gradient_background"
     tools:context=".auth.EmailVerifiedSuccessful">
 
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/backbtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/actionModeCloseDrawable"
-        app:tint="@android:color/white"
-        tools:ignore="ContentDescription,MissingConstraints,UseAppTint,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideTop"
         android:layout_width="wrap_content"
