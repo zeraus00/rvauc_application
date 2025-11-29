@@ -25,6 +25,7 @@ public class SessionManager {
         accessToken = null;
         var editor = prefs.edit();
         editor.clear();
+        editor.apply();
     }
     public void setAccessToken(String token) { accessToken = token; }
     public String getAccessToken() { return accessToken; }

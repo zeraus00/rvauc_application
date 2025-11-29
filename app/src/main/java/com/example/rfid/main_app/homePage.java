@@ -40,17 +40,7 @@ public class homePage extends AppCompatActivity {
 
         ImageButton logoutBtn = findViewById(R.id.imagebtn_logout);
 
-        logoutBtn.setOnClickListener(v -> {
-            var prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
-            String token = prefs.getString("refreshToken", null);
-
-            if (token != null) {
-                logoutUser(token);
-            }
-
-            startActivity(new Intent(homePage.this, LoginActivity.class));
-            finish();
-        });
+        logoutBtn.setOnClickListener(v -> logoutUser());
 
         statsBtn = findViewById(R.id.stats);
         classBtn = findViewById(R.id.btn_class);
@@ -113,15 +103,18 @@ public class homePage extends AppCompatActivity {
 
     }
 
-    public void logoutUser(String refreshToken) {
+    public void logoutUser() {
         var logOutRequest = new AuthenticationService.SignOutRequest() {};
-        logOutRequest.refreshToken = refreshToken;
+        logOutRequest.refreshToken = SessionManager.getInstance().getRefreshToken();
 
         AuthenticationService.signOut(logOutRequest, new HttpCallback<VoidResponse>() {
             @Override
             public void onSuccess(VoidResponse response) {
                 runOnUiThread(() -> {
                     if (response.success) SessionManager.getInstance().clear();
+
+                    startActivity(new Intent(homePage.this, LoginActivity.class));
+                    finish();
                 });
             }
 
