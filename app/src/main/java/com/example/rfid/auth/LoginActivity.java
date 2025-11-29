@@ -21,6 +21,7 @@ import com.example.rfid.dto.VoidResponse;
 import com.example.rfid.features.auth.services.AuthenticationService;
 import com.example.rfid.features.auth.services.SessionManager;
 import com.example.rfid.interfaces.HttpCallback;
+import com.example.rfid.main_app.homePage;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -37,6 +38,13 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
 
         });
+
+
+        var token = SessionManager.getInstance().getRefreshToken();
+
+        if (token != null) {
+            startActivity(new Intent(this, homePage.class));
+        }
 
         sessionManager = SessionManager.getInstance();
 
