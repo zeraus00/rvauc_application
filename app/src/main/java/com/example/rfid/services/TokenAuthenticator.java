@@ -24,6 +24,8 @@ public class TokenAuthenticator implements Authenticator {
     @Override
     public Request authenticate(@Nullable Route route, @NonNull Response response) throws IOException {
         synchronized (this) {
+            if (!isMarkedForInjection(response.request())) return null;
+
             var currentAccessToken = sessionManager.getAccessToken();
             var refreshToken = sessionManager.getRefreshToken();
 
@@ -52,10 +54,13 @@ public class TokenAuthenticator implements Authenticator {
 
         }
     }
-
+    private boolean isMarkedForInjection(Request request) {
+        return request.header("X-Inject-Auth") != null;
+    }
     private Request buildNewRequest(Response response, String token) {
         return response.request().newBuilder()
                 .header("Authorization", "Bearer " + token)
                 .build();
     }
+
 }

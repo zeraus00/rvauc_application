@@ -1,9 +1,16 @@
 package com.example.rfid.services;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
+import com.example.rfid.dto.ApiError;
 import com.example.rfid.dto.ApiResponse;
 import com.example.rfid.interfaces.HttpCallback;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 
 import okhttp3.Authenticator;
 import okhttp3.Interceptor;
@@ -16,17 +23,32 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class RvaucMsService {
     private static Retrofit retrofit;
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     public static <R, T extends ApiResponse<R>> Callback<T> rvaucMsCallback(HttpCallback<T> callback) {
         return new Callback<T>() {
             @Override
             public void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
-                var body = response.body();
-
                 if(response.isSuccessful()) {
-                    callback.onSuccess(body);
+                    callback.onSuccess(response.body());
                 } else {
-                    String message = body != null ? body.message : "Something went wrong.";
+                    String message = "Something went wrong";
+
+                    try {
+                        try (var errorBody = response.errorBody()) {
+
+                            if (errorBody != null) {
+                                var json = errorBody.string();
+
+                                var mapped = mapper.readValue(json, ApiError.class);
+
+                                message = mapped.message;
+                            }
+                        }
+                    } catch (IOException e) {
+                        Log.e("ApiErrorParser", "Failed to parse error", e);
+                    }
+
                     callback.onError(message);
                 }
             }
