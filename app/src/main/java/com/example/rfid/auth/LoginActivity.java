@@ -1,7 +1,6 @@
 package com.example.rfid.auth;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,10 +19,12 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.rfid.R;
 import com.example.rfid.dto.VoidResponse;
 import com.example.rfid.features.auth.services.AuthenticationService;
+import com.example.rfid.features.auth.services.SessionManager;
 import com.example.rfid.interfaces.HttpCallback;
 
 
 public class LoginActivity extends AppCompatActivity {
+    private SessionManager sessionManager;
     private final String authTag = "Authentication";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
 
         });
+
+        sessionManager = SessionManager.getInstance();
 
         Button login_btn = findViewById(R.id.button);
         EditText emailView = findViewById(R.id.editTextTextEmailAddress2);
@@ -83,16 +86,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(VoidResponse response) {
                 runOnUiThread(() -> {
-                    SharedPreferences prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = prefs.edit();
                     if (response.success) {
                         Log.i(authTag, "Success requesting code.");
-                        editor.putString("email", email);
-                        editor.putBoolean("rememberMe", rememberMe);
-                        editor.apply();
+                        sessionManager.setEmail(email);
+                        sessionManager.setRememberMe(rememberMe);
                     } else {
                         Log.i(authTag, "Failed requesting code.");
-                        editor.clear().apply();
+                        sessionManager.clear();
                         toastFail(response.message);
                         return;
                     }

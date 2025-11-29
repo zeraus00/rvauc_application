@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.example.rfid.dto.ApiResponse;
 import com.example.rfid.interfaces.HttpCallback;
 
+import okhttp3.Authenticator;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -44,19 +45,22 @@ public class RvaucMsService {
         if (retrofit == null) throw new RuntimeException("RvaucMs client was not initialized.");
         return retrofit;
     }
-    public static <TInterceptor extends Interceptor> void init(TInterceptor[] interceptors) {
+
+    public static <TInterceptor extends Interceptor> void init(TInterceptor[] interceptors, Authenticator authenticator) {
         var retrofitBuilder = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:2620")
                 .addConverterFactory(JacksonConverterFactory.create());
 
-        if (interceptors.length > 0) {
-            var okHttpClientBuilder = new OkHttpClient.Builder();
-            for (TInterceptor interceptor : interceptors) {
-                okHttpClientBuilder.addInterceptor(interceptor);
-            }
-            var okHttpClient = okHttpClientBuilder.build();
-            retrofitBuilder.client(okHttpClient);
+        var okHttpClientBuilder = new OkHttpClient.Builder()
+                .authenticator(authenticator);
+
+        for (TInterceptor interceptor : interceptors) {
+            okHttpClientBuilder.addInterceptor(interceptor);
         }
+
+        var okHttpClient = okHttpClientBuilder.build();
+
+        retrofitBuilder.client(okHttpClient);
 
         retrofit = retrofitBuilder.build();
     }

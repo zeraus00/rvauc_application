@@ -22,6 +22,7 @@ import com.example.rfid.features.auth.services.SessionManager;
 import com.example.rfid.interfaces.HttpCallback;
 
 public class LoginEmailVerification extends AppCompatActivity {
+    private SessionManager sessionManager;
     private final String authTag = "Authentication";
     private TextView textCountdown;
     private CountDownTimer countDownTimer;
@@ -38,6 +39,8 @@ public class LoginEmailVerification extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        sessionManager = SessionManager.getInstance();
 
         textCountdown = findViewById(R.id.txtCountdown);
         var resendText = findViewById(R.id.txtResendCode); // your “Resend” text
@@ -69,9 +72,8 @@ public class LoginEmailVerification extends AppCompatActivity {
         });
 
         loginBtn.setOnClickListener(v -> {
-            SharedPreferences prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
-            String email = prefs.getString("email", null);
-            boolean rememberMe = prefs.getBoolean("rememberMe", false);
+            String email = sessionManager.getEmail();
+            boolean rememberMe = sessionManager.getRememberMe();
 
             if (email == null || email.isBlank()) {
                 toastFail("Please retry logging-in");
@@ -122,12 +124,8 @@ public class LoginEmailVerification extends AppCompatActivity {
             public void onSuccess(AuthenticationService.TokensResponse response) {
                 runOnUiThread(() -> {
                     if (response.success) {
-                        SharedPreferences prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
-                        var editor = prefs.edit();
-                        editor.putString("refreshToken", response.result.refreshToken);
-                        editor.apply();
-
-                        SessionManager.getInstance().setAccessToken(response.result.accessToken);
+                        sessionManager.setRefreshToken(response.result.refreshToken);
+                        sessionManager.setAccessToken(response.result.accessToken);
                     }
                     else {
                         toastFail(response.message);

@@ -121,13 +121,7 @@ public class homePage extends AppCompatActivity {
             @Override
             public void onSuccess(VoidResponse response) {
                 runOnUiThread(() -> {
-                    if (response.success) {
-                        var prefs = getSharedPreferences("RvaucMs", MODE_PRIVATE);
-                        var editor = prefs.edit();
-                        editor.clear();
-                        editor.apply();
-                        SessionManager.getInstance().clear();
-                    }
+                    if (response.success) SessionManager.getInstance().clear();
                 });
             }
 
