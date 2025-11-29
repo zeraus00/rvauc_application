@@ -137,7 +137,7 @@
         android:layout_height="81dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:background="#A4CFA2"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:padding="6dp"
         android:weightSum="5"
@@ -156,16 +156,17 @@
 
             <ImageButton
                 android:id="@+id/stats"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_status" />
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_status"
+                app:tint="@color/green" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Status"
-                android:textColor="#000000"
-                android:textSize="12sp" />
+                android:textColor="@color/green"
+                android:textSize="13sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -177,16 +178,17 @@
 
             <ImageButton
                 android:id="@+id/btn_class"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_class" />
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_class"
+                app:tint="@color/green"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Class"
-                android:textColor="#000000"
-                android:textSize="12sp" />
+                android:textColor="@color/green"
+                android:textSize="13sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -198,16 +200,17 @@
 
             <ImageButton
                 android:id="@+id/btn_home"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_home" />
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_home"
+                app:tint="@color/green"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
-                android:textColor="#000000"
-                android:textSize="12sp" />
+                android:textColor="@color/green"
+                android:textSize="13sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -219,16 +222,17 @@
 
             <ImageButton
                 android:id="@+id/btn_notif"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_notifications" />
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_notifications"
+                app:tint="@color/green"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Notifications"
-                android:textColor="#000000"
-                android:textSize="12sp" />
+                android:textColor="@color/green"
+                android:textSize="13sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -240,49 +244,19 @@
 
             <ImageButton
                 android:id="@+id/btn_policy"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_policy" />
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_policy"
+                app:tint="@color/green" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Policy"
-                android:textColor="#000000"
-                android:textSize="12sp" />
+                android:textColor="@color/green"
+                android:textSize="13sp" />
         </LinearLayout>
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="54dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/circle_mask"
-        android:clipToOutline="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/nikki"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.088"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageButton
-        android:id="@+id/imagebtn_logout"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="28dp"
-        android:background="@android:color/transparent"
-        android:padding="0dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.051"
-        app:srcCompat="@drawable/logout_icon" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
