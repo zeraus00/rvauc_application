@@ -9,16 +9,16 @@
     tools:context=".auth.EmailVerifiedSuccessful">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btnBack"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/backbtn"
-        android:tint="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/actionModeCloseDrawable"
+        app:tint="@android:color/white"
         tools:ignore="ContentDescription,MissingConstraints,UseAppTint,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="Email Verified"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="26sp"
             android:textStyle="bold"
             android:gravity="center"
             tools:ignore="HardcodedText" />
@@ -67,8 +67,8 @@
 
     <ImageView
         android:id="@+id/imgCheck"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         app:layout_constraintTop_toBottomOf="@id/guideUpperMiddle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,37 +82,14 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.55"/>
 
-    <LinearLayout
+    <include
         android:id="@+id/rfidApplication"
-        android:layout_width="300dp"
+        layout="@layout/component_logo"
         android:layout_height="60dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingStart="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideLowerMiddle"
-        tools:ignore="RtlSymmetry">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingStart="20dp"
-            app:srcCompat="@drawable/signin_logo"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="RFID Application"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            tools:ignore="HardcodedText,TextContrastCheck" />
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideLowerMiddle" />
 
     <Button
         android:id="@+id/btnVerifying"
