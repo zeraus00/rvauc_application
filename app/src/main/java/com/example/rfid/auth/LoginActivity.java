@@ -71,13 +71,10 @@ public class LoginActivity extends AppCompatActivity {
 
         TextView forgot=findViewById(R.id.forgot);
 
-        forgot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(LoginActivity.this, FrgtPassword.class);
-                startActivity(intent);
-                finish();
-            }
+        forgot.setOnClickListener(v -> {
+            Intent intent=new Intent(LoginActivity.this, FrgtPassword.class);
+            startActivity(intent);
+            finish();
         });
 
     }
