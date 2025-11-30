@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +27,7 @@ import com.example.rfid.features.auth.services.SessionManager;
 import com.example.rfid.interfaces.HttpCallback;
 
 public class homePage extends AppCompatActivity {
-    ImageButton statsBtn, classBtn, homeBtn, notifBtn, policyBtn;
+    private LinearLayout statsBtn, classBtn, homeBtn, notifBtn, policyBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +44,11 @@ public class homePage extends AppCompatActivity {
 
         logoutBtn.setOnClickListener(v -> logoutUser());
 
-        statsBtn = findViewById(R.id.stats);
-        classBtn = findViewById(R.id.btn_class);
-        homeBtn = findViewById(R.id.btn_home);
-        notifBtn = findViewById(R.id.btn_notif);
-        policyBtn = findViewById(R.id.btn_policy);
+        statsBtn = findViewById(R.id.statslayout);
+        classBtn = findViewById(R.id.classlayout);
+        homeBtn = findViewById(R.id.homelayout);
+        notifBtn = findViewById(R.id.notiflayout);
+        policyBtn = findViewById(R.id.policylayout);
 
         statsBtn.setOnClickListener(v -> loadFragment(new StatusFragment()));
         classBtn.setOnClickListener(v -> loadFragment(new ClassFragment()));
