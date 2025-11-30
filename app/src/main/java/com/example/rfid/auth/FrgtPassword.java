@@ -29,7 +29,7 @@ public class FrgtPassword extends AppCompatActivity {
             return insets;
         });
 
-        backButton = findViewById(R.id.backButton);
+        backButton = findViewById(R.id.btnBack);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
