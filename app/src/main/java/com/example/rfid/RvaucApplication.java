@@ -6,6 +6,7 @@ import com.example.rfid.features.auth.services.SessionManager;
 import com.example.rfid.services.AuthInterceptor;
 import com.example.rfid.services.RvaucMsService;
 import com.example.rfid.services.TokenAuthenticator;
+import com.google.firebase.FirebaseApp;
 
 import okhttp3.Interceptor;
 
@@ -13,6 +14,8 @@ public class RvaucApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        FirebaseApp.initializeApp(this);
 
         SessionManager.init(this);
         RvaucMsService.init(

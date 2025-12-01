@@ -30,7 +30,6 @@ public class AuthenticationService {
 
     public static void signOut(SignOutRequest request, HttpCallback<VoidResponse> callback) {
         var auth = getAuthenticationClient();
-
         auth.signOut(request).enqueue(rvaucMsCallback(callback));
     }
     private static AuthenticationClient getAuthenticationClient() {
@@ -55,6 +54,7 @@ public class AuthenticationService {
         public String identifier;
         public String password;
         public boolean isPersistentAuth = false;
+        public String deviceToken = "";
         public SignInCodeRequest(){}
     }
     public static class VerifyCodeRequest {
