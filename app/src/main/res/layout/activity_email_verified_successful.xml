@@ -8,22 +8,16 @@
     android:background="@drawable/gradient_background"
     tools:context=".auth.EmailVerifiedSuccessful">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2"/>
-
     <LinearLayout
         android:id="@+id/headerSection"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/guideTop"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/imgCheck">
 
         <TextView
             android:id="@+id/txtEmailVerified"
@@ -45,29 +39,16 @@
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideUpperMiddle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3"/>
-
     <ImageView
         android:id="@+id/imgCheck"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        app:layout_constraintTop_toBottomOf="@id/guideUpperMiddle"
+        app:layout_constraintTop_toBottomOf="@id/headerSection"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rfidApplication"
         app:srcCompat="@drawable/check"
         tools:ignore="ContentDescription" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideLowerMiddle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55"/>
 
     <include
         android:id="@+id/rfidApplication"
@@ -76,7 +57,8 @@
         android:layout_width="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideLowerMiddle" />
+        app:layout_constraintTop_toBottomOf="@id/imgCheck"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <Button
         android:id="@+id/btnVerifying"
