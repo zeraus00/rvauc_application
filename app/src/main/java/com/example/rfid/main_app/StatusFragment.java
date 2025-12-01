@@ -1,5 +1,6 @@
 package com.example.rfid.main_app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +21,6 @@ import com.example.rfid.R;
 import com.example.rfid.features.uniformcompliance.services.UniformComplianceService;
 import com.example.rfid.interfaces.HttpCallback;
 
-import java.util.Arrays;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,17 +78,27 @@ public class StatusFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        LinearLayout tableContainer = requireActivity().findViewById(R.id.table_content_container);
 
         UniformComplianceService.viewRecords(new HttpCallback<UniformComplianceService.RecordResponse>() {
             @Override
             public void onSuccess(UniformComplianceService.RecordResponse response) {
-                requireActivity().runOnUiThread(() -> {
-                    if (!isAdded() || getView() == null) return;
+                Fragment fragment = StatusFragment.this;
+                Activity activity = fragment.getActivity();
+
+                if (activity == null) return;
+
+                activity.runOnUiThread(() -> {
+                    if (!fragment.isAdded() || fragment.getContext() == null) return;
+
+                    View root = fragment.getView();
+                    if (root == null) return;
+
+                    LinearLayout tableContainer = root.findViewById(R.id.table_content_container);
                     if (tableContainer == null) return;
 
                     if (response.success) {
                         var recordList = response.result;
+
                         for (UniformComplianceService.Record record : recordList) {
                             LinearLayout linearLayout = getLinearLayout(tableContainer.getContext());
 
@@ -128,7 +137,15 @@ public class StatusFragment extends Fragment {
 
             @Override
             public void onError(String message) {
-                Toast.makeText(requireContext(), "Fail loading data: " + message, Toast.LENGTH_SHORT).show();
+                Fragment fragment = StatusFragment.this;
+                Activity activity = fragment.getActivity();
+                if (activity == null) return;
+
+                activity.runOnUiThread(() -> {
+                    if (!fragment.isAdded() || fragment.getContext() == null) return;
+
+                    Toast.makeText(fragment.getContext(), "Fail loading data: " + message, Toast.LENGTH_SHORT).show();
+                });
             }
         });
     }
@@ -167,11 +184,5 @@ public class StatusFragment extends Fragment {
         textView.setText(text);
 
         return textView;
-    }
-    private void toast(String message) {
-        var activity = getActivity();
-        if (activity != null) {
-            Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-        }
     }
 }

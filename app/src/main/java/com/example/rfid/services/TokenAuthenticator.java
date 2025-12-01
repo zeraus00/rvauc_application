@@ -32,7 +32,7 @@ public class TokenAuthenticator implements Authenticator {
             var header = response.request().header("Authorization");
             var headerToken = header != null ? header.split(" ")[1] : null;
 
-            if (!currentAccessToken.equals(headerToken)) {
+            if (currentAccessToken != null && !currentAccessToken.equals(headerToken)) {
                 return buildNewRequest(response, currentAccessToken);
             }
 

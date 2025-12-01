@@ -3,7 +3,6 @@ package com.example.rfid.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -22,6 +21,7 @@ import com.example.rfid.features.auth.services.AuthenticationService;
 import com.example.rfid.features.auth.services.SessionManager;
 import com.example.rfid.interfaces.HttpCallback;
 import com.example.rfid.main_app.homePage;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -71,13 +71,10 @@ public class LoginActivity extends AppCompatActivity {
 
         TextView forgot=findViewById(R.id.forgot);
 
-        forgot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(LoginActivity.this, FrgtPassword.class);
-                startActivity(intent);
-                finish();
-            }
+        forgot.setOnClickListener(v -> {
+            Intent intent=new Intent(LoginActivity.this, FrgtPassword.class);
+            startActivity(intent);
+            finish();
         });
 
     }
@@ -90,35 +87,46 @@ public class LoginActivity extends AppCompatActivity {
         signInCodeRequest.isPersistentAuth = rememberMe;
 
         Log.d(authTag, "Requesting code...");
-        AuthenticationService.requestSignInCode(signInCodeRequest, new HttpCallback<VoidResponse>() {
-            @Override
-            public void onSuccess(VoidResponse response) {
-                runOnUiThread(() -> {
-                    if (response.success) {
-                        Log.i(authTag, "Success requesting code.");
-                        sessionManager.setEmail(email);
-                        sessionManager.setRememberMe(rememberMe);
-                    } else {
-                        Log.i(authTag, "Failed requesting code.");
-                        sessionManager.clear();
-                        toastFail(response.message);
-                        return;
-                    }
 
-                    Intent intent = new Intent(LoginActivity.this, LoginEmailVerification.class);
-                    startActivity(intent);
-                    finish();
-                });
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.d("FCM", "Device token: " + task.getResult());
+                signInCodeRequest.deviceToken = task.getResult();
+            }
+            else {
+                Log.e("FCM", "Token retrieval failed: " + task.getException());
             }
 
-            @Override
-            public void onError(String message) {
-                runOnUiThread(() -> {
-                    String failMsg = "Authentication failed: " + message;
-                    Log.e(authTag, failMsg);
-                    toastFail(failMsg);
-                });
-            }
+            AuthenticationService.requestSignInCode(signInCodeRequest, new HttpCallback<VoidResponse>() {
+                @Override
+                public void onSuccess(VoidResponse response) {
+                    runOnUiThread(() -> {
+                        if (response.success) {
+                            Log.i(authTag, "Success requesting code.");
+                            sessionManager.setEmail(email);
+                            sessionManager.setRememberMe(rememberMe);
+                        } else {
+                            Log.i(authTag, "Failed requesting code.");
+                            sessionManager.clear();
+                            toastFail(response.message);
+                            return;
+                        }
+
+                        Intent intent = new Intent(LoginActivity.this, LoginEmailVerification.class);
+                        startActivity(intent);
+                        finish();
+                    });
+                }
+
+                @Override
+                public void onError(String message) {
+                    runOnUiThread(() -> {
+                        String failMsg = "Authentication failed: " + message;
+                        Log.e(authTag, failMsg);
+                        toastFail(failMsg);
+                    });
+                }
+            });
         });
     }
 

@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import com.example.rfid.dto.ApiError;
 import com.example.rfid.dto.ApiResponse;
 import com.example.rfid.interfaces.HttpCallback;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -70,7 +69,7 @@ public class RvaucMsService {
 
     public static <TInterceptor extends Interceptor> void init(TInterceptor[] interceptors, Authenticator authenticator) {
         var retrofitBuilder = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:2620")
+                .baseUrl("http://192.168.100.6:2620")
                 .addConverterFactory(JacksonConverterFactory.create());
 
         var okHttpClientBuilder = new OkHttpClient.Builder()

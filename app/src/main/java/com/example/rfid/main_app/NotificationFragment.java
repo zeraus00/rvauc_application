@@ -1,16 +1,25 @@
 package com.example.rfid.main_app;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rfid.R;
+import com.example.rfid.features.notification.services.NotificationService;
+import com.example.rfid.interfaces.HttpCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +36,7 @@ public class NotificationFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private LinearLayout tableContentContainer;
     private TextView notifHeader;
-    private List<String> notificationList = new ArrayList<>();
 
     public NotificationFragment() {
         // Required empty public constructor
@@ -60,58 +67,122 @@ public class NotificationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
 
-        tableContentContainer = view.findViewById(R.id.table_content_container);
         notifHeader = view.findViewById(R.id.textView32);
-
-        seedNotification();
-        displayNotifications();
 
         return view;
     }
 
-    private void seedNotification() {
-        notificationList.add("Notification 1");
-        notificationList.add("Notification 2");
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Fragment fragment = NotificationFragment.this;
+        Activity activity = fragment.getActivity();
+
+        if (activity == null) return;
+
+        NotificationService.getNotifications(new HttpCallback<NotificationService.RecordResponse>() {
+            @Override
+            public void onSuccess(NotificationService.RecordResponse response) {
+                activity.runOnUiThread(() -> {
+                    if (!fragment.isAdded() || fragment.getContext() == null) return;
+
+                    View root = fragment.getView();
+                    if (root == null) return;
+
+                    LinearLayout tableContainer = root.findViewById(R.id.table_content_container);
+                    if (tableContainer == null) return;
+
+                    Context containerContext = tableContainer.getContext();
+
+                    if (response.success) {
+                        NotificationService.Record[] recordList = response.result;
+
+                        int notifCount = recordList.length;
+                        notifHeader.setText("You have " + notifCount + " Notification" + (notifCount == 1 ? "" : "s"));
+
+                        for (NotificationService.Record record : recordList) {
+                            LinearLayout linearLayout = getLinearLayout(containerContext);
+
+                            String title = record.title;
+                            String message = record.message;
+                            boolean isRead = record.isRead;
+                            String sentAt = record.sentAt;
+
+                            Context context = linearLayout.getContext();
+                            TextView messageView = getTextView(context, message, Color.BLACK);
+
+                            linearLayout.addView(messageView);
+
+                            tableContainer.addView(linearLayout);
+
+                            View divider = new View(containerContext);
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    1
+                            );
+                            divider.setLayoutParams(layoutParams);
+                            divider.setBackgroundColor(Color.GRAY);
+
+                            tableContainer.addView(divider);
+                        }
+                    }
+                    else Toast.makeText(containerContext, "Fail loading data: " + response.message, Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onError(String message) {
+                Fragment fragment = NotificationFragment.this;
+                Activity activity = fragment.getActivity();
+                if (activity == null) return;
+
+                activity.runOnUiThread(() -> {
+                    if (!fragment.isAdded() || fragment.getContext() == null) return;
+
+                    Toast.makeText(fragment.getContext(), "Fail loading data: " + message, Toast.LENGTH_SHORT).show();
+                });
+            }
+        });
     }
+    @NonNull
+    private LinearLayout getLinearLayout(Context context) {
+        LinearLayout linearLayout = new LinearLayout(context);
 
-    private void displayNotifications() {
-        tableContentContainer.removeAllViews();
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        layoutParams.setMargins(0, 8, 0, 8);
 
-        int notifCount = notificationList.size();
-        notifHeader.setText("You have " + notifCount + " Notification" + (notifCount == 1 ? "" : "s"));
+        linearLayout.setLayoutParams(layoutParams);
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        linearLayout.setPadding(16, 16, 16, 16);
+        linearLayout.setBackgroundResource(R.drawable.rounded_white_bg);
 
-        if (notifCount == 0) {
-            tableContentContainer.setVisibility(View.GONE);
-            return;
-        } else {
-            tableContentContainer.setVisibility(View.VISIBLE);
-        }
+//        int paddingTopDp = (int) TypedValue.applyDimension(
+//                TypedValue.COMPLEX_UNIT_DIP,
+//                12,
+//                getResources().getDisplayMetrics()
+//        );
+//
+//        linearLayout.setPadding(linearLayout.getPaddingLeft(), paddingTopDp, linearLayout.getPaddingRight(), linearLayout.getPaddingBottom());
+        return linearLayout;
+    }
+    public TextView getTextView(Context context, String text, int color) {
+        TextView textView = new TextView(context);
 
-        for (String notif : notificationList) {
-            // Create row container
-            LinearLayout row = new LinearLayout(getContext());
-            row.setOrientation(LinearLayout.HORIZONTAL);
-            row.setPadding(16, 16, 16, 16);
-            row.setBackgroundResource(R.drawable.rounded_white_bg);
-            LinearLayout.LayoutParams rowParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-            rowParams.setMargins(0, 8, 0, 8);
-            row.setLayoutParams(rowParams);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                1f
+        );
 
-            TextView textView = new TextView(getContext());
-            textView.setText(notif);
-            textView.setTextColor(getResources().getColor(R.color.black));
-            textView.setTextSize(16);
-            textView.setLayoutParams(new LinearLayout.LayoutParams(
-                    0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f
-            ));
+        textView.setLayoutParams(layoutParams);
+        textView.setTextColor(color);
+        textView.setText(text);
+        textView.setTextSize(16);
 
-            row.addView(textView);
-
-
-            tableContentContainer.addView(row);
-        }
+        return textView;
     }
 }
