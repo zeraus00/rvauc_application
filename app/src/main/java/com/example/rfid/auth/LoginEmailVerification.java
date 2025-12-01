@@ -1,7 +1,6 @@
 package com.example.rfid.auth;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -23,6 +22,7 @@ import com.example.rfid.interfaces.HttpCallback;
 
 public class LoginEmailVerification extends AppCompatActivity {
     private SessionManager sessionManager;
+    private String email;
     private final String authTag = "Authentication";
     private TextView textCountdown;
     private CountDownTimer countDownTimer;
@@ -41,6 +41,10 @@ public class LoginEmailVerification extends AppCompatActivity {
         });
 
         sessionManager = SessionManager.getInstance();
+        email = sessionManager.getEmail();
+
+        TextView emailView = findViewById(R.id.textView14);
+        emailView.setText(email);
 
         textCountdown = findViewById(R.id.txtCountdown);
         var resendText = findViewById(R.id.txtResendCode); // your “Resend” text
@@ -72,7 +76,6 @@ public class LoginEmailVerification extends AppCompatActivity {
         });
 
         loginBtn.setOnClickListener(v -> {
-            String email = sessionManager.getEmail();
             boolean rememberMe = sessionManager.getRememberMe();
 
             if (email == null || email.isBlank()) {

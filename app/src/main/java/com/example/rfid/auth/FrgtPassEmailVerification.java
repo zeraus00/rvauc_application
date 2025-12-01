@@ -23,7 +23,8 @@ import com.example.rfid.features.auth.services.PasswordResetManager;
 import com.example.rfid.interfaces.HttpCallback;
 
 public class FrgtPassEmailVerification extends AppCompatActivity {
-
+    private PasswordResetManager passwordResetManager;
+    private String email;
     private TextView textCountdown1;
     private CountDownTimer countDownTimer;
     private EditText[] inputs;
@@ -41,6 +42,12 @@ public class FrgtPassEmailVerification extends AppCompatActivity {
             return insets;
         });
 
+        passwordResetManager = PasswordResetManager.getInstance();
+        email = passwordResetManager.getEmail();
+
+        TextView emailView = findViewById(R.id.textView14);
+        emailView.setText(email);
+
         EditText input1 = findViewById(R.id.etInputBox1);
         EditText input2 = findViewById(R.id.etInputBox2);
         EditText input3 = findViewById(R.id.etInputBox3);
@@ -56,7 +63,7 @@ public class FrgtPassEmailVerification extends AppCompatActivity {
 
         // Back button listener
         backBtn.setOnClickListener(v -> {
-            PasswordResetManager.getInstance().setEmail(null);
+            passwordResetManager.setEmail(null);
             Intent backIntent = new Intent(FrgtPassEmailVerification.this, LoginActivity.class);
             startActivity(backIntent);
             finish();
@@ -70,7 +77,6 @@ public class FrgtPassEmailVerification extends AppCompatActivity {
     }
 
     private void handleResend() {
-        String email = PasswordResetManager.getInstance().getEmail();
         PasswordManagementService.ForgotPasswordRequest request = new PasswordManagementService.ForgotPasswordRequest();
         request.email = email;
 
@@ -123,7 +129,7 @@ public class FrgtPassEmailVerification extends AppCompatActivity {
                 runOnUiThread(() -> {
                     toast("Code verification success.");
 
-                    PasswordResetManager.getInstance().setCode(code);
+                    passwordResetManager.setCode(code);
 
                     Intent intent=new Intent(FrgtPassEmailVerification.this, ResetPass.class);
                     startActivity(intent);
@@ -138,7 +144,6 @@ public class FrgtPassEmailVerification extends AppCompatActivity {
         });
     }
     private String getEmail() {
-        String email = PasswordResetManager.getInstance().getEmail();
         if (email == null) toast("Email could not be found. Please try again later.");
         return email;
     }
