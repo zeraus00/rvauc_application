@@ -3,10 +3,12 @@ package com.example.rfid.features.notification.services;
 import static com.example.rfid.services.RvaucMsService.rvaucMsCallback;
 
 import com.example.rfid.dto.ApiResponse;
+import com.example.rfid.dto.VoidResponse;
 import com.example.rfid.interfaces.HttpCallback;
 import com.example.rfid.services.RvaucMsService;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 
@@ -15,6 +17,9 @@ public class NotificationService {
 
     public static void getNotifications(HttpCallback<RecordResponse> callback) {
         getClient().getNotifications().enqueue(rvaucMsCallback(callback));
+    }
+    public static void clearNotifications(HttpCallback<VoidResponse> callback) {
+        getClient().clearNotifications().enqueue(rvaucMsCallback(callback));
     }
     private static Client getClient() {
         if (client == null) client = RvaucMsService.createService(Client.class);
@@ -25,6 +30,10 @@ public class NotificationService {
         @Headers("X-Inject-Auth: true")
         @GET("/notifications/get-notifications")
         Call<RecordResponse> getNotifications();
+
+        @Headers("X-Inject-Auth: true")
+        @DELETE("/notifications/clear-notifications")
+        Call<VoidResponse> clearNotifications();
 
     }
     public static class RecordResponse extends ApiResponse<Record[]> {}
