@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,13 +17,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.rfid.R;
+import com.example.rfid.dto.VoidResponse;
+import com.example.rfid.features.auth.services.PasswordManagementService;
+import com.example.rfid.features.auth.services.PasswordResetManager;
+import com.example.rfid.interfaces.HttpCallback;
 
 public class FrgtPassEmailVerification extends AppCompatActivity {
 
     private TextView textCountdown1;
-    private TextView resendText;
     private CountDownTimer countDownTimer;
-    private Button verifying_button1;
+    private EditText[] inputs;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -38,12 +41,22 @@ public class FrgtPassEmailVerification extends AppCompatActivity {
             return insets;
         });
 
+        EditText input1 = findViewById(R.id.etInputBox1);
+        EditText input2 = findViewById(R.id.etInputBox2);
+        EditText input3 = findViewById(R.id.etInputBox3);
+        EditText input4 = findViewById(R.id.etInputBox4);
+        EditText input5 = findViewById(R.id.etInputBox5);
+        EditText input6 = findViewById(R.id.etInputBox6);
+        inputs = new EditText[]{input1, input2, input3, input4, input5, input6};
+
         textCountdown1 = findViewById(R.id.txtFrgtCountdown);
-        resendText = findViewById(R.id.txtFrgtResendCode); // "Resend" TextView
+        Button submitBtn = findViewById(R.id.btnFrgtVerifying);
+        TextView resendText = findViewById(R.id.txtFrgtResendCode); // "Resend" TextView
         ImageButton backBtn = findViewById(R.id.backButton);
 
         // Back button listener
         backBtn.setOnClickListener(v -> {
+            PasswordResetManager.getInstance().setEmail(null);
             Intent backIntent = new Intent(FrgtPassEmailVerification.this, LoginActivity.class);
             startActivity(backIntent);
             finish();
@@ -51,16 +64,34 @@ public class FrgtPassEmailVerification extends AppCompatActivity {
 
         startCountdown(); // Start timer on load
 
+        submitBtn.setOnClickListener(v -> handleSubmit());
         // Handle “Resend” tap to restart the timer
-        resendText.setOnClickListener(v -> {
-            if (countDownTimer != null) {
-                countDownTimer.cancel(); // Stop current timer
-            }
-            startCountdown(); // Restart timer
-            Toast.makeText(this, "Verification code resent!", Toast.LENGTH_SHORT).show();
-        });
+        resendText.setOnClickListener(v -> handleResend());
     }
 
+    private void handleResend() {
+        String email = PasswordResetManager.getInstance().getEmail();
+        PasswordManagementService.ForgotPasswordRequest request = new PasswordManagementService.ForgotPasswordRequest();
+        request.email = email;
+
+        PasswordManagementService.forgotPassword(request, new HttpCallback<VoidResponse>() {
+            @Override
+            public void onSuccess(VoidResponse response) {
+                runOnUiThread(() -> {
+                    toast("Verification code resent.");
+                    if (countDownTimer != null) {
+                        countDownTimer.cancel(); // Stop current timer
+                    }
+                    startCountdown(); // Restart timer
+                });
+            }
+
+            @Override
+            public void onError(String message) {
+                runOnUiThread(() -> toast("Failed sending code: " + message));
+            }
+        });
+    }
     private void startCountdown() {
         countDownTimer = new CountDownTimer(60000, 1000) { // 60 seconds
             @Override
@@ -75,15 +106,58 @@ public class FrgtPassEmailVerification extends AppCompatActivity {
             }
         };
         countDownTimer.start();
+    }
+    private void handleSubmit() {
+        String email = getEmail();
+        String code = getCode();
 
-        verifying_button1=findViewById(R.id.btnFrgtVerifying);
-        verifying_button1.setOnClickListener(new View.OnClickListener() {
+        if (email == null || code == null) return;
+
+        PasswordManagementService.VerifyCodeRequest request = new PasswordManagementService.VerifyCodeRequest();
+        request.code = code;
+        request.email = email;
+
+        PasswordManagementService.verifyCode(request, new HttpCallback<VoidResponse>() {
             @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(FrgtPassEmailVerification.this, ResetPass.class);
-                startActivity(intent);
-                finish();
+            public void onSuccess(VoidResponse response) {
+                runOnUiThread(() -> {
+                    toast("Code verification success.");
+
+                    PasswordResetManager.getInstance().setCode(code);
+
+                    Intent intent=new Intent(FrgtPassEmailVerification.this, ResetPass.class);
+                    startActivity(intent);
+                    finish();
+                });
+            }
+
+            @Override
+            public void onError(String message) {
+                runOnUiThread(() -> toast("Failed verifying code: " + message));
             }
         });
+    }
+    private String getEmail() {
+        String email = PasswordResetManager.getInstance().getEmail();
+        if (email == null) toast("Email could not be found. Please try again later.");
+        return email;
+    }
+    private String getCode() {
+        StringBuilder sb = new StringBuilder();
+
+        for (EditText input : inputs) {
+            String digit = input.getText().toString();
+            if (digit.isBlank()) {
+                toast("Please input a valid 6-digit code.");
+                return null;
+            }
+            sb.append(input.getText().toString());
+        }
+
+        return sb.toString();
+    }
+
+    private void toast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 }
