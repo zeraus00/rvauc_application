@@ -3,12 +3,16 @@ package com.example.rfid.features.auth.services;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.rfid.features.auth.dto.Payload;
+import com.example.rfid.utils.JwtDecoder;
+
 public class SessionManager {
     private final SharedPreferences prefs;
     private static SessionManager instance;
     private String email;
     private boolean rememberMe;
     private String accessToken;
+    private Payload payload;
     private SessionManager(Context context) {
         prefs = context.getSharedPreferences("session", Context.MODE_PRIVATE);
     }
@@ -23,11 +27,13 @@ public class SessionManager {
         email = null;
         rememberMe = false;
         accessToken = null;
+        payload = null;
         var editor = prefs.edit();
         editor.clear();
         editor.apply();
     }
-    public void setAccessToken(String token) { accessToken = token; }
+    public Payload getPayload() { return payload; }
+    public void setAccessToken(String token) { accessToken = token; setPayload(token); }
     public String getAccessToken() { return accessToken; }
     public void setRefreshToken(String token) {
         var editor = prefs.edit();
@@ -41,5 +47,5 @@ public class SessionManager {
     public String getEmail() { return email; }
     public void setRememberMe(boolean rememberMe) { this.rememberMe = rememberMe; }
     public boolean getRememberMe() { return rememberMe; }
-
+    private void setPayload(String token) { payload = JwtDecoder.decodeJwt(token); }
 }

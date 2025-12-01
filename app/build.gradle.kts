@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+    implementation("com.auth0.android:jwtdecode:2.0.2")
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-jackson:3.0.0")
     implementation(libs.okhttp)

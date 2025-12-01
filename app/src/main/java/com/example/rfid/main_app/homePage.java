@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +40,11 @@ public class homePage extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        SessionManager sessionManager = SessionManager.getInstance();
+        TextView welcomeView = findViewById(R.id.txtWelcome);
+        String welcomeText = "Welcome, " + sessionManager.getPayload().getUsername();
+        welcomeView.setText(welcomeText);
 
         ImageButton logoutBtn = findViewById(R.id.imagebtn_logout);
 
