@@ -8,6 +8,13 @@
     android:background="@drawable/gradient_background"
     tools:context=".auth.EmailVerifiedSuccessful">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideMiddle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7"/>
+
     <LinearLayout
         android:id="@+id/headerSection"
         android:layout_width="0dp"
@@ -57,23 +64,24 @@
         android:layout_width="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgCheck"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/guideMiddle"
+        app:layout_constraintBottom_toBottomOf="@id/btnVerifying"/>
 
     <Button
         android:id="@+id/btnVerifying"
         android:layout_width="0dp"
         app:layout_constraintWidth_max="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:background="@drawable/button_style"
         android:text="@string/Login_text"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textStyle="bold"
+        android:layout_marginBottom="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rfidApplication"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
 

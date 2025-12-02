@@ -54,16 +54,6 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintWidth_percent="0.12"/>
 
-        <include
-            android:id="@+id/rfidApplication"
-            layout="@layout/component_logo"
-            android:layout_height="60dp"
-            android:layout_width="match_parent"
-            app:layout_constraintStart_toEndOf="@id/imgProfile"
-            app:layout_constraintEnd_toStartOf="@id/imagebtn_logout"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
         <ImageButton
             android:id="@+id/imagebtn_logout"
             android:layout_width="0dp"
@@ -75,9 +65,20 @@
             app:layout_constraintTop_toTopOf="@id/imgProfile"
             app:layout_constraintBottom_toBottomOf="@id/imgProfile"
             app:layout_constraintWidth_percent="0.12"
-            app:layout_constraintDimensionRatio="1:1"/>
+            app:layout_constraintDimensionRatio="1:1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/rfidApplication"
+        layout="@layout/component_logo"
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/headerContainer"
+        app:layout_constraintBottom_toBottomOf="@id/txtWelcome"/>
 
     <TextView
         android:id="@+id/txtWelcome"
