@@ -43,7 +43,9 @@ public class homePage extends AppCompatActivity {
 
         SessionManager sessionManager = SessionManager.getInstance();
         TextView welcomeView = findViewById(R.id.txtWelcome);
-        String welcomeText = "Welcome, " + sessionManager.getPayload().getUsername();
+        var payload = sessionManager.getPayload();
+        String username = payload == null ? "pogi" : payload.getUsername(); //  remove in prod
+        String welcomeText = "Welcome, " + username;
         welcomeView.setText(welcomeText);
 
         ImageButton logoutBtn = findViewById(R.id.imagebtn_logout);
