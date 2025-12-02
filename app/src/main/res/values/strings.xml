@@ -4,20 +4,13 @@
     <string name="num">Contact Number</string>
     <string name="pass">Password</string>
     <string name="forgot"><font color="blue">Forgot Password?</font></string>
-    <string name="signin1"><font color="white">Enter your Email and password to login</font></string>
-    <string name="signin">
-        <font size="25">
-            <font color="white">
-                Sign in to your
-            </font>
+    <string name="signin1">
+        <font color="white">
+            Enter your email and password to login
         </font>
     </string>
-    <string name="Acc">
-        <font size="25">
-            <font color="white">
-                Account
-            </font>
-        </font>
+    <string name="signin">
+        Sign In to your\nAccount
     </string>
     <string name="login">
         <font size="25">
@@ -40,6 +33,11 @@
             </font>
         </font>
     </string>
+    <string name="resetPassDesc">
+        Password must be 8 characters long.
+        \nPassword must contain at least one number or\nspecial character.
+        \nPassword must contain at leat one upper case.
+    </string>
     <string name="rfid"><font color="white">RFID Application</font></string>
     <string name="entrmail"><font color="white">Enter your email address</font></string>
     <string name="entrnum"><font color="white">Enter your Contact Number</font></string>
@@ -48,7 +46,6 @@
     <string name="Login_text">Login</string>
     <string name="Verify_text">Verify your email address.</string>
     <string name="Email">(sample@gmail.com)</string>
-    <string name="rst">Password must contain at least one number or\nspecial character.</string>
     <string name="rmnabs">Remaining \nAbsence</string>
     <string name="submitBtn">
         <font size="15">
@@ -57,6 +54,7 @@
             </font>
         </font>
     </string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="student_name">student_name</string>
