@@ -58,12 +58,30 @@ public class homePage extends AppCompatActivity {
         notifBtn = findViewById(R.id.notiflayout);
         policyBtn = findViewById(R.id.policylayout);
 
-        statsBtn.setOnClickListener(v -> loadFragment(new StatusFragment()));
-        classBtn.setOnClickListener(v -> loadFragment(new ClassFragment()));
-        notifBtn.setOnClickListener(v -> loadFragment(new NotificationFragment()));
-        policyBtn.setOnClickListener(v -> loadFragment(new PolicyFragment()));
+        statsBtn.setOnClickListener(v -> {
+            loadFragment(new StatusFragment());
+            setActiveTab(statsBtn);
+        });
 
-        homeBtn.setOnClickListener(v -> clearFragment());
+        classBtn.setOnClickListener(v -> {
+            loadFragment(new ClassFragment());
+            setActiveTab(classBtn);
+        });
+
+        homeBtn.setOnClickListener(v -> {
+            clearFragment();
+            setActiveTab(homeBtn);
+        });
+
+        notifBtn.setOnClickListener(v -> {
+            loadFragment(new NotificationFragment());
+            setActiveTab(notifBtn);
+        });
+
+        policyBtn.setOnClickListener(v -> {
+            loadFragment(new PolicyFragment());
+            setActiveTab(policyBtn);
+        });
 
         ImageSwitcher carousel = findViewById(R.id.carouselSwitcher);
 
@@ -111,6 +129,34 @@ public class homePage extends AppCompatActivity {
             handler.postDelayed(runnable, 3000);
         }
 
+    }
+
+    private void setActiveTab(LinearLayout active) {
+        resetNavItem(statsBtn);
+        resetNavItem(classBtn);
+        resetNavItem(homeBtn);
+        resetNavItem(notifBtn);
+        resetNavItem(policyBtn);
+
+        highlightNavItem(active);
+    }
+
+    private void resetNavItem(LinearLayout item) {
+        ImageView icon = (ImageView) item.getChildAt(0);
+        TextView label = (TextView) item.getChildAt(1);
+
+        icon.setColorFilter(getColor(R.color.green));
+        label.setTextColor(getColor(R.color.green));
+        item.setBackgroundColor(getColor(android.R.color.transparent));
+    }
+
+    private void highlightNavItem(LinearLayout item) {
+        ImageView icon = (ImageView) item.getChildAt(0);
+        TextView label = (TextView) item.getChildAt(1);
+
+        icon.setColorFilter(getColor(R.color.white));
+        label.setTextColor(getColor(R.color.white));
+        item.setBackgroundColor(getColor(R.color.green));
     }
 
     public void logoutUser() {
