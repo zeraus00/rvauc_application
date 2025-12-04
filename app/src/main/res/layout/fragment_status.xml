@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="12dp"
+    android:padding="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient_background"
     tools:context=".main_app.StatusFragment">
@@ -72,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Date"
+                android:gravity="center"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
@@ -80,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Day"
+                android:gravity="center"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
@@ -88,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Hours"
+                android:gravity="center"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
@@ -96,6 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Status"
+                android:gravity="center"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
         </LinearLayout>
