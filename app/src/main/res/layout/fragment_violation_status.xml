@@ -22,17 +22,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9" />
 
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@drawable/backbtn"
-        android:layout_marginTop="32dp"
-        app:tint="@android:color/white"
-        app:srcCompat="?attr/homeAsUpIndicator"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/txtViolationStatus"
         android:layout_width="match_parent"
