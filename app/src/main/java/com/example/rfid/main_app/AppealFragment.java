@@ -38,18 +38,10 @@ public class AppealFragment extends Fragment {
 
         btnCancel = view.findViewById(R.id.btnCancel);
         btnSubmit = view.findViewById(R.id.btnSubmit);
-        descriptionInput = view.findViewById(R.id.descriptionInput);
 
         btnCancel.setOnClickListener(v -> replaceFragment(new ClassAttendanceFragment()));
 
         btnSubmit.setOnClickListener(v -> {
-            String description = descriptionInput.getText().toString().trim();
-
-            if (TextUtils.isEmpty(description)) {
-                Toast.makeText(getContext(), "Please enter a description", Toast.LENGTH_SHORT).show();
-            } else {
-                replaceFragment(new AppealSubmittedFragment());
-            }
         });
 
         return view;
