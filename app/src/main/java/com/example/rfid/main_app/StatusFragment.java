@@ -148,6 +148,19 @@ public class StatusFragment extends Fragment {
                 });
             }
         });
+
+        TextView hyperlink = view.findViewById(R.id.hplViolationStatus);
+        hyperlink.setOnClickListener(v -> {
+            Fragment violationFragment = new ViolationStatusFragment();
+
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, violationFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
+
     }
 
     @NonNull
