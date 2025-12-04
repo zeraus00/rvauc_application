@@ -19,8 +19,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.rfid.R;
+import com.example.rfid.adapters.CarouselAdapter;
 import com.example.rfid.auth.LoginActivity;
 import com.example.rfid.dto.VoidResponse;
 import com.example.rfid.features.auth.services.AuthenticationService;
@@ -83,21 +85,7 @@ public class homePage extends AppCompatActivity {
             setActiveTab(policyBtn);
         });
 
-        ImageSwitcher carousel = findViewById(R.id.carouselSwitcher);
-
-        if (carousel != null) {
-
-            // Factory for ImageSwitcher
-            carousel.setFactory(() -> {
-                ImageView img = new ImageView(homePage.this);
-                img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                img.setLayoutParams(new ImageSwitcher.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT
-                ));
-                return img;
-            });
-
+        ViewPager2 viewPager = findViewById(R.id.carouselSwitcher);
 
             int[] images = {
                     R.drawable.type_a,
@@ -106,28 +94,24 @@ public class homePage extends AppCompatActivity {
                     R.drawable.pe_uniform
             };
 
-            final int[] index = {0};
+        CarouselAdapter adapter = new CarouselAdapter(images);
+        viewPager.setAdapter(adapter);
 
+        Handler handler = new Handler();
+        Runnable autoSlide = new Runnable() {
+            @Override
+            public void run() {
+                int next = viewPager.getCurrentItem() + 1;
 
-            carousel.setImageResource(images[index[0]]);
+                if (next >= images.length)
+                    next = 0;
 
-            Handler handler = new Handler();
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    index[0]++;
-                    if (index[0] >= images.length) index[0] = 0;
+                viewPager.setCurrentItem(next, true);
+                handler.postDelayed(this, 4000);
+            }
+        };
 
-                    carousel.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in));
-                    carousel.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_out));
-
-                    carousel.setImageResource(images[index[0]]);
-                    handler.postDelayed(this, 3000);
-                }
-            };
-
-            handler.postDelayed(runnable, 3000);
-        }
+        handler.postDelayed(autoSlide, 4000);
 
     }
 
