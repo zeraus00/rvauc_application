@@ -220,20 +220,44 @@
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="Medical:"
                         android:textColor="#333" />
 
 
-                    <TextView
+                    <LinearLayout
+                        android:id="@+id/medicalUploadLayout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="upload"
-                        android:textColor="#333" />
+                        android:layout_weight="1.3"
+                        android:orientation="horizontal"
+                        android:background="@drawable/custom_upload_border"
+                        android:padding="1dp"
+                        android:gravity="center_vertical">
+
+                        <Button
+                            android:id="@+id/btnChooseMedicalFile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_marginEnd="5dp"
+                            android:text="Choose File"
+                            android:textSize="12sp"
+                            android:paddingHorizontal="8dp"
+                            android:backgroundTint="@android:color/darker_gray" />
+
+                        <TextView
+                            android:id="@+id/medicalFileName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="No file chosen"
+                            android:textColor="#333"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -245,20 +269,43 @@
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="Parent ID:"
                         android:textColor="#333" />
 
-                    <!-- gawin nalang clickable sa link 'di kasya pag button -->
-                    <TextView
+                    <LinearLayout
+                        android:id="@+id/parentIdUploadLayout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="upload"
-                        android:textColor="#333" />
+                        android:layout_weight="1.3"
+                        android:orientation="horizontal"
+                        android:background="@drawable/custom_upload_border"
+                        android:padding="1dp"
+                        android:gravity="center_vertical">
+
+                        <Button
+                            android:id="@+id/btnChooseParentIdFile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_marginEnd="5dp"
+                            android:text="Choose File"
+                            android:textSize="12sp"
+                            android:paddingHorizontal="8dp"
+                            android:backgroundTint="@android:color/darker_gray" />
+
+                        <TextView
+                            android:id="@+id/parentIdFileName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="No file chosen"
+                            android:textColor="#333"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -270,31 +317,42 @@
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
-                        android:text="Description:"
-                        android:textColor="#333"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:gravity="center"
+                        android:text="Excuse Letter:"
+                        android:textColor="#333" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="5dp">
-
-                    <EditText
-                        android:id="@+id/descriptionInput"
+                    <LinearLayout
+                        android:id="@+id/excuseLetterUploadLayout"
                         android:layout_width="0dp"
-                        android:layout_height="80dp"
-                        android:layout_weight="2"
-                        android:background="@drawable/edit_textbg"
-                        android:padding="6dp"
-                        android:inputType="textMultiLine"
-                        android:maxLines="5"
-                        android:textColor="#000" />
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.3"
+                        android:orientation="horizontal"
+                        android:background="@drawable/custom_upload_border"
+                        android:padding="1dp"
+                        android:gravity="center_vertical">
+
+                        <Button
+                            android:id="@+id/btnChooseExcuseLetterFile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_marginEnd="5dp"
+                            android:text="Choose File"
+                            android:textSize="12sp"
+                            android:paddingHorizontal="8dp"
+                            android:backgroundTint="@android:color/darker_gray" />
+
+                        <TextView
+                            android:id="@+id/excuseLetterFileName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="No file chosen"
+                            android:textColor="#333"
+                            android:textSize="12sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
