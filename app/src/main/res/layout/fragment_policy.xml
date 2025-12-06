@@ -7,56 +7,84 @@
     android:background="@drawable/gradient_background"
     tools:context=".main_app.PolicyFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_h_top_anchor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_h_title_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_h_bottom_nav_anchor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_v_margin_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_v_margin_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
     <TextView
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="176dp"
-        android:layout_marginEnd="51dp"
-        android:layout_marginBottom="681dp"
         android:text="Uniform Policy"
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guide_h_top_anchor"
+        app:layout_constraintBottom_toTopOf="@+id/guide_h_title_bottom" />
 
     <LinearLayout
         android:id="@+id/linearLayout10"
-        android:layout_width="338dp"
-        android:layout_height="450dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_white_bg"
         android:orientation="vertical"
         android:padding="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView30"
-        app:layout_constraintVertical_bias="0.073"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintBottom_toTopOf="@+id/guide_h_bottom_nav_anchor"
+        app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
+        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
+        app:layout_constraintTop_toBottomOf="@+id/textView30">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:background="@color/green"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/green"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/textView33"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Daily Uniform Schedule"
-            android:textColor="@color/white"
-            android:textStyle="bold"/>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daily Uniform Schedule"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -68,9 +96,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp">
                     <TextView
                         android:id="@+id/TypeASched"
                         android:layout_width="match_parent"
@@ -84,7 +114,6 @@
                         android:id="@+id/TypeUnifA"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/TypeASched"
                         android:paddingVertical="8dp"
                         android:textStyle="bold"
                         android:textColor="#333"
@@ -92,16 +121,18 @@
 
                     <ImageView
                         android:id="@+id/typeAuniform"
-                        android:padding="0dp"
-                        android:layout_below="@+id/TypeUnifA"
-                        android:layout_width="wrap_content"
-                        android:layout_height="300dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
                         android:src="@drawable/type_a" />
-                </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp">
                     <TextView
                         android:id="@+id/BuffaloSched"
                         android:layout_width="match_parent"
@@ -115,7 +146,6 @@
                         android:id="@+id/BuffaloUnif"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/BuffaloSched"
                         android:paddingVertical="8dp"
                         android:textStyle="bold"
                         android:textColor="#333"
@@ -123,16 +153,18 @@
 
                     <ImageView
                         android:id="@+id/buffaloUniform"
-                        android:padding="0dp"
-                        android:layout_below="@+id/BuffaloUnif"
-                        android:layout_width="wrap_content"
-                        android:layout_height="300dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
                         android:src="@drawable/buffalo" />
-                </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp">
                     <TextView
                         android:id="@+id/DeptSched"
                         android:layout_width="match_parent"
@@ -146,7 +178,6 @@
                         android:id="@+id/DeptUnif"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/DeptSched"
                         android:paddingVertical="8dp"
                         android:textStyle="bold"
                         android:textColor="#333"
@@ -154,16 +185,18 @@
 
                     <ImageView
                         android:id="@+id/DeptUniform"
-                        android:padding="0dp"
-                        android:layout_below="@+id/DeptUnif"
-                        android:layout_width="wrap_content"
-                        android:layout_height="300dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
                         android:src="@drawable/department_shirt" />
-                </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp">
                     <TextView
                         android:id="@+id/PESched"
                         android:layout_width="match_parent"
@@ -177,7 +210,6 @@
                         android:id="@+id/PEUnif"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/PESched"
                         android:paddingVertical="8dp"
                         android:textStyle="bold"
                         android:textColor="#333"
@@ -185,12 +217,12 @@
 
                     <ImageView
                         android:id="@+id/PEUniform"
-                        android:padding="0dp"
-                        android:layout_below="@+id/PEUnif"
-                        android:layout_width="wrap_content"
-                        android:layout_height="300dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
                         android:src="@drawable/pe_uniform" />
-                </RelativeLayout>
+                </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
