@@ -7,6 +7,47 @@
     android:background="@drawable/gradient_background"
     tools:context=".main_app.AppealFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_h_top_anchor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_h_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_h_info_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.28" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_h_bottom_nav_anchor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_v_margin_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_v_margin_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
 
     <TextView
         android:id="@+id/textView8"
@@ -16,67 +57,56 @@
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.144" />
+        app:layout_constraintTop_toTopOf="@+id/guide_h_title"
+        app:layout_constraintBottom_toTopOf="@+id/classCode"/>
 
     <TextView
         android:id="@+id/classCode"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:text="Class Code: 2113"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.122"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
         android:id="@+id/className"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="8dp"
         android:text="Class Name: Class Name"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.147"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
         app:layout_constraintTop_toBottomOf="@+id/classCode" />
-
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="39dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/attndc_tbl"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.891"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
+        app:layout_constraintTop_toTopOf="@+id/classCode"
+        app:layout_constraintBottom_toBottomOf="@+id/className" />
 
     <LinearLayout
         android:id="@+id/linearLayout10"
-        android:layout_width="376dp"
-        android:layout_height="505dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_white_bg"
         android:orientation="vertical"
         android:padding="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/className"
-        app:layout_constraintVertical_bias="0.204"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintBottom_toTopOf="@+id/guide_h_bottom_nav_anchor"
+        app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
+        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
+        app:layout_constraintTop_toTopOf="@+id/guide_h_info_bottom">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,6 +123,7 @@
                 android:paddingTop="5dp"
                 android:text="Submit Appeal Request"
                 android:textColor="#FFFFFF"
+                android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -111,7 +142,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingVertical="1dp">
+                    android:paddingVertical="8dp">
 
                     <TextView
                         android:layout_width="0dp"
@@ -121,7 +152,6 @@
                         android:text="Date:"
                         android:textColor="#333" />
 
-
                     <TextView
                         android:id="@+id/appealDate"
                         android:layout_width="0dp"
@@ -130,7 +160,6 @@
                         android:gravity="center"
                         android:text="10/13/25"
                         android:textColor="#333" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -138,7 +167,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingVertical="12dp">
+                    android:paddingVertical="8dp">
 
                     <TextView
                         android:layout_width="0dp"
@@ -148,7 +177,6 @@
                         android:text="Time:"
                         android:textColor="#333" />
 
-
                     <TextView
                         android:id="@+id/appealTime"
                         android:layout_width="0dp"
@@ -157,14 +185,13 @@
                         android:gravity="center"
                         android:text="9:00 - 10:00"
                         android:textColor="#333" />
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingVertical="1dp">
+                    android:paddingVertical="8dp">
 
                     <TextView
                         android:layout_width="0dp"
@@ -174,7 +201,6 @@
                         android:text="Instructor:"
                         android:textColor="#333" />
 
-
                     <TextView
                         android:id="@+id/profName"
                         android:layout_width="0dp"
@@ -183,14 +209,13 @@
                         android:gravity="center"
                         android:text="Aljur sahur"
                         android:textColor="#333" />
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingVertical="12dp">
+                    android:paddingVertical="8dp">
 
                     <TextView
                         android:layout_width="0dp"
@@ -200,7 +225,6 @@
                         android:text="Class Name|Class Code:"
                         android:textColor="#333" />
 
-
                     <TextView
                         android:id="@+id/nameAndCode"
                         android:layout_width="0dp"
@@ -209,23 +233,22 @@
                         android:gravity="center"
                         android:text="Class Name|Class Code"
                         android:textColor="#333" />
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingVertical="12dp">
+                    android:gravity="center_vertical"
+                    android:paddingVertical="8dp">
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="Medical:"
                         android:textColor="#333" />
-
 
                     <LinearLayout
                         android:id="@+id/medicalUploadLayout"
@@ -258,18 +281,18 @@
                             android:textSize="12sp" />
 
                     </LinearLayout>
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingVertical="12dp">
+                    android:gravity="center_vertical"
+                    android:paddingVertical="8dp">
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="Parent ID:"
@@ -304,20 +327,19 @@
                             android:text="No file chosen"
                             android:textColor="#333"
                             android:textSize="12sp" />
-
                     </LinearLayout>
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingVertical="12dp">
+                    android:gravity="center_vertical"
+                    android:paddingVertical="8dp">
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="Excuse Letter:"
@@ -361,7 +383,8 @@
                     android:gravity="end"
                     android:orientation="horizontal"
                     android:paddingHorizontal="5dp"
-                    android:paddingVertical="15dp">
+                    android:paddingTop="30dp"
+                    android:paddingBottom="10dp">
 
                     <Button
                         android:id="@+id/btnCancel"
@@ -383,11 +406,7 @@
                         android:textColor="@android:color/white" />
 
                 </LinearLayout>
-
-
             </LinearLayout>
         </ScrollView>
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
