@@ -8,8 +8,6 @@
     android:background="@drawable/gradient_background"
     tools:context=".auth.FrgtPassEmailVerification">
 
-    <!-- Back Button -->
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideTop"
         android:layout_width="wrap_content"
@@ -18,39 +16,62 @@
         app:layout_constraintGuide_percent="0.12"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideMiddle"
+        android:id="@+id/guideHeaderBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.45"/>
 
-    <!-- TOP SECTION -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLogoBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.52"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_h_bottom_anchor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_v_margin_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_v_margin_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/backbtn"
-        android:tint="@android:color/white"
-        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@android:color/white"
+        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/homeAsUpIndicator"
         tools:ignore="ContentDescription,UseAppTint,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-    <!-- CODE INPUT FORM -->
-
     <LinearLayout
         android:id="@+id/headerSection"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="0dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideTop">
+        app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
+        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
+        app:layout_constraintTop_toTopOf="@id/guideTop"
+        app:layout_constraintBottom_toTopOf="@id/guideHeaderBottom">
 
         <ImageView
             android:id="@+id/imageView4"
@@ -58,7 +79,6 @@
             android:layout_height="90dp"
             app:srcCompat="@drawable/email_icon"
             tools:ignore="ContentDescription" />
-
 
         <TextView
             android:id="@+id/textView12"
@@ -79,7 +99,6 @@
             android:text="We sent you a 6 digit code to verify your email address"
             android:textColor="@color/white"
             android:textSize="15sp"
-            tools:ignore="SmallSp"
             android:layout_marginTop="8dp"/>
 
         <TextView
@@ -90,7 +109,6 @@
             android:text="@string/Email"
             android:textColor="@color/white"
             android:textSize="15sp"
-            tools:ignore="SmallSp"
             android:layout_marginTop="4dp"/>
 
         <TextView
@@ -101,42 +119,37 @@
             android:gravity="center"
             android:text="Enter in the field below."
             android:textColor="@color/white"
-            android:textSize="15sp"
-            tools:ignore="HardcodedText,SmallSp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/rfidApplication"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingStart="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideMiddle"
-        tools:ignore="RtlSymmetry">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideHeaderBottom"
+        app:layout_constraintBottom_toTopOf="@id/guideLogoBottom">
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingStart="20dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/signin_logo"
             tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/textView16"
-            android:layout_width="250dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingStart="-80dp"
             android:text="RFID Application"
             android:textColor="@color/white"
             android:textSize="15sp"
-            tools:ignore="HardcodedText" />
+            android:layout_marginStart="8dp" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -144,16 +157,15 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="20dp"
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/edit_textbg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rfidApplication"
-
+        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
+        app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
+        app:layout_constraintTop_toTopOf="@id/guideLogoBottom"
+        app:layout_constraintBottom_toTopOf="@+id/guide_h_bottom_anchor"
         app:layout_constraintWidth_max="420dp"
         app:layout_constraintHeight_max="350dp"
-        app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.40">
+        app:layout_constraintHeight_default="wrap">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/g1"
@@ -165,7 +177,7 @@
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/g2"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.4"
+            app:layout_constraintGuide_percent="0.35"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -179,11 +191,10 @@
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/g4"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.9"
+            app:layout_constraintGuide_percent="0.95"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!-- OTP DIGIT FIELDS -->
         <LinearLayout
             android:id="@+id/inputBoxes"
             android:layout_width="0dp"
@@ -204,7 +215,6 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1" />
-
             <EditText
                 android:id="@+id/etInputBox2"
                 android:layout_width="0dp"
@@ -215,7 +225,6 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1" />
-
             <EditText
                 android:id="@+id/etInputBox3"
                 android:layout_width="0dp"
@@ -226,7 +235,6 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1" />
-
             <EditText
                 android:id="@+id/etInputBox4"
                 android:layout_width="0dp"
@@ -237,7 +245,6 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1" />
-
             <EditText
                 android:id="@+id/etInputBox5"
                 android:layout_width="0dp"
@@ -248,7 +255,6 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="1" />
-
             <EditText
                 android:id="@+id/etInputBox6"
                 android:layout_width="0dp"
@@ -268,7 +274,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/g2"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/inputBoxes"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
@@ -295,7 +302,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/g3"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/resendSection"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
@@ -326,7 +334,8 @@
             android:text="@string/submitBtn"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/g4"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/expireSection"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
