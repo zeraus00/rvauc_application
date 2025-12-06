@@ -105,7 +105,7 @@
         android:background="@drawable/form"
         android:elevation="4dp"
         android:orientation="vertical"
-        android:padding="60dp"
+        android:padding="40dp"
         app:layout_constraintBottom_toTopOf="@+id/guide_h_bottom_anchor"
         app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
         app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
