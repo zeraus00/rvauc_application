@@ -7,53 +7,78 @@
     android:background="@drawable/gradient_background"
     tools:context=".main_app.NotificationFragment">
 
-    <!-- Title -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_h_top_anchor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10" />
 
-    <!-- Notification count -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_h_title_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.18" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_h_bottom_nav_anchor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_v_margin_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_v_margin_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+
     <TextView
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="140dp"
         android:text="Notification"
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Container for notifications -->
+        app:layout_constraintTop_toTopOf="@+id/guide_h_top_anchor"
+        app:layout_constraintBottom_toTopOf="@+id/guide_h_title_bottom" />
 
     <TextView
         android:id="@+id/textView32"
-        android:layout_width="225dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="93dp"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="93dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="You have 0 Notification"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
+        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
         app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
     <LinearLayout
         android:id="@+id/linearLayout10"
-        android:layout_width="338dp"
-        android:layout_height="400dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="37dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_white_bg"
         android:orientation="vertical"
         android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guide_h_bottom_nav_anchor"
+        app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
+        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
         app:layout_constraintTop_toBottomOf="@+id/textView32">
 
         <ScrollView
@@ -67,7 +92,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Divider placeholder -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
