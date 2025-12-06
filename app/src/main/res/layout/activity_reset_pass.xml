@@ -16,21 +16,48 @@
         app:layout_constraintGuide_percent="0.12" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideDescBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.30" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideMiddle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.40" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_h_bottom_anchor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_v_margin_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_v_margin_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/backbtn"
         app:tint="@android:color/white"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/homeAsUpIndicator" />
 
@@ -43,47 +70,46 @@
         android:textStyle="bold"
         android:textAlignment="center"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/guideTop"
+        app:layout_constraintTop_toTopOf="@id/guideTop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textView22"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/resetPassDesc"
         android:textColor="@color/white"
+        android:gravity="center"
+        android:paddingHorizontal="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtResetPassword"
-        app:layout_constraintBottom_toTopOf="@+id/guideMiddle" />
+        app:layout_constraintBottom_toTopOf="@+id/guideDescBottom" />
 
     <include
         android:id="@+id/rfidApplication"
         layout="@layout/component_logo"
-        android:layout_height="60dp"
+        android:layout_height="0dp"
         android:layout_width="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/resetFormContainer"
-        app:layout_constraintBottom_toBottomOf="@id/guideMiddle" />
+        app:layout_constraintTop_toBottomOf="@id/guideDescBottom"
+        app:layout_constraintBottom_toTopOf="@id/guideMiddle"
+        app:layout_constraintHeight_percent="0.08" />
 
     <LinearLayout
         android:id="@+id/resetFormContainer"
-        android:layout_width="360dp"
-        android:layout_height="353dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="90dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/form"
         android:elevation="4dp"
         android:orientation="vertical"
-        android:padding="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideMiddle" >
+        android:padding="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/guide_h_bottom_anchor"
+        app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
+        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
+        app:layout_constraintTop_toTopOf="@+id/guideMiddle">
 
 
         <TextView
@@ -99,13 +125,15 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_textbg"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"/>
 
         <TextView
             android:id="@+id/textView26"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="12dp"
             android:text="Confirm Password"
             android:textStyle="bold" />
 
@@ -115,7 +143,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_textbg"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"/>
 
         <Button
             android:id="@+id/submitBtn"
