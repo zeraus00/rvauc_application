@@ -16,11 +16,39 @@
         app:layout_constraintGuide_percent="0.12" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideMiddle"
+        android:id="@+id/guideTitleBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLogoBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.38" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_h_bottom_anchor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_v_margin_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_v_margin_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
 
     <TextView
         android:id="@+id/txtSignIn"
@@ -31,44 +59,45 @@
         android:textColor="@color/white"
         android:textAlignment="center"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/guideTop"
+        app:layout_constraintTop_toTopOf="@id/guideTop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/txtSubtitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/signin1"
         android:textColor="@color/white"
         android:gravity="center"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/txtSignIn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintStart_toStartOf="@id/guide_v_margin_start"
+        app:layout_constraintEnd_toEndOf="@id/guide_v_margin_end"
+        app:layout_constraintBottom_toTopOf="@id/guideTitleBottom" />
 
     <include
         layout="@layout/component_logo"
-        android:layout_height="60dp"
-        android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/guideMiddle"
-        app:layout_constraintBottom_toTopOf="@id/formContainer"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
+        app:layout_constraintTop_toTopOf="@id/guideTitleBottom"
+        app:layout_constraintBottom_toTopOf="@id/guideLogoBottom"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintDimensionRatio="3:1" />
 
     <LinearLayout
         android:id="@+id/formContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
         android:orientation="vertical"
-        android:padding="24dp"
+        android:padding="40dp"
         android:background="@drawable/form"
         android:elevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/guideMiddle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="@id/guideLogoBottom"
+        app:layout_constraintStart_toStartOf="@id/guide_v_margin_start"
+        app:layout_constraintEnd_toEndOf="@id/guide_v_margin_end"
+        app:layout_constraintBottom_toTopOf="@+id/guide_h_bottom_anchor">
 
         <TextView
             android:id="@+id/textView5"
@@ -100,22 +129,21 @@
             android:layout_marginTop="16dp"
             android:text="@string/pass" />
 
-            <EditText
-                android:id="@+id/editTextTextPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:background="@drawable/edit_textbg"
-                android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/editTextTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:background="@drawable/edit_textbg"
+            android:inputType="textPassword" />
 
-
-        <!-- Row layout para sa 'Remember me' checkbox on the left and 'Forgot password?'-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="12dp">
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical">
 
             <CheckBox
                 android:id="@+id/checkBox2"
@@ -137,8 +165,6 @@
                 android:text="@string/forgot"
                 android:textColor="@drawable/hover_effect" />
         </LinearLayout>
-        <!-- End -->
-
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
@@ -147,7 +173,6 @@
             android:textColor="@color/white"
             android:background="@drawable/button_style"
             android:text="@string/Login_text" />
-
 
     </LinearLayout>
 
