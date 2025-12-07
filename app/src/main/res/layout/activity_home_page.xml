@@ -92,6 +92,8 @@
             android:clipToOutline="true"
             android:scaleType="centerCrop"
             android:src="@drawable/nikki"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
