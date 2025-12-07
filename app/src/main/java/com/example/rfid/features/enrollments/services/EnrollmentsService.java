@@ -14,8 +14,8 @@ import retrofit2.http.Path;
 public class EnrollmentsService {
     private static Client client;
 
-    public static void getAttendanceList(String classNumber, HttpCallback<AttendanceListResponse> callback) {
-        getClient().getAttendanceList(classNumber).enqueue(rvaucMsCallback(callback));
+    public static void getAttendanceList(int classId, HttpCallback<AttendanceListResponse> callback) {
+        getClient().getAttendanceList(classId).enqueue(rvaucMsCallback(callback));
     }
 
     public static void getClassList(HttpCallback<ClassListResponse> callback) {
@@ -31,8 +31,8 @@ public class EnrollmentsService {
     interface  Client {
 
         @Headers("X-Inject-Auth: true")
-        @GET("/enrollments/attendance/view-records/enrollment/{classNumber}")
-        Call<AttendanceListResponse> getAttendanceList(@Path("classNumber") String classNumber);
+        @GET("/enrollments/attendance/view-records/enrollment/{classId}")
+        Call<AttendanceListResponse> getAttendanceList(@Path("classId") int classId);
         @Headers("X-Inject-Auth: true")
         @GET("/enrollments/schedule/get-class-list")
         Call<ClassListResponse> getClassList();

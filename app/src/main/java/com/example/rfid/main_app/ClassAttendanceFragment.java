@@ -76,12 +76,12 @@ public class ClassAttendanceFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (getArguments() == null) return;
-        String classNumber= getArguments().getString("classNumber");
+        int classId = getArguments().getInt("classId");
         String weekDay = getArguments().getString("weekDay");
         String startTime = getArguments().getString("startTime");
         String endTime = getArguments().getString("endTime");
 
-        EnrollmentsService.getAttendanceList(classNumber, new HttpCallback<EnrollmentsService.AttendanceListResponse>() {
+        EnrollmentsService.getAttendanceList(classId, new HttpCallback<EnrollmentsService.AttendanceListResponse>() {
             @Override
             public void onSuccess(EnrollmentsService.AttendanceListResponse response) {
                 Fragment fragment = ClassAttendanceFragment.this;

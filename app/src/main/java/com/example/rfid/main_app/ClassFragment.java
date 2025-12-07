@@ -63,7 +63,7 @@ public class ClassFragment extends Fragment {
 
                             var professor = _class.professor;
                             String professorName = "Prof. " + professor.surname;
-                            classList.add(new ClassModel( professorName, _class.courseName, _class.classNumber, _class.courseCode, _class.weekDay, _class.startTimeText, _class.endTimeText));
+                            classList.add(new ClassModel( professorName, _class.courseName,_class.classId, _class.classNumber, _class.courseCode, _class.weekDay, _class.startTimeText, _class.endTimeText));
                         }
 
                         generateTableRows();
@@ -90,10 +90,10 @@ public class ClassFragment extends Fragment {
     }
 
     private void loadSampleClasses() {
-        classList.add(new ClassModel("Prof. Santos", "Mobile Programming", "525","MP101", "", "", ""));
-        classList.add(new ClassModel( "Prof. Dela Cruz", "Data Structures", "526","DS103", "", "", ""));
-        classList.add(new ClassModel("Prof. Reyes", "Operating Systems", "527","OS203", "", "", ""));
-        classList.add(new ClassModel("Prof. Cruz", "Web Development", "528","WEB202", "", "", ""));
+        classList.add(new ClassModel("Prof. Santos", "Mobile Programming", 1,"525","MP101", "", "", ""));
+        classList.add(new ClassModel( "Prof. Dela Cruz", "Data Structures", 2, "526","DS103", "", "", ""));
+        classList.add(new ClassModel("Prof. Reyes", "Operating Systems", 3, "527","OS203", "", "", ""));
+        classList.add(new ClassModel("Prof. Cruz", "Web Development", 4, "528","WEB202", "", "", ""));
     }
 
     private void generateTableRows() {
@@ -152,6 +152,7 @@ public class ClassFragment extends Fragment {
 
         Bundle bundle = new Bundle();
         bundle.putString("professor", classItem.professor);
+        bundle.putInt("classId", classItem.classId);
         bundle.putString("className", classItem.className);
         bundle.putString("classNumber", classItem.classNumber);
         bundle.putString("classCode", classItem.classCode);
@@ -171,6 +172,7 @@ public class ClassFragment extends Fragment {
 
     static class ClassModel {
         String professor;
+        public int classId;
         String className;
         String classNumber;
         String classCode;
@@ -179,8 +181,9 @@ public class ClassFragment extends Fragment {
         String startTime;
         String endTime;
 
-        ClassModel(String professor, String className, String classNumber, String classCode, String weekDay, String startTime, String endTime) {
+        ClassModel(String professor, String className, int classId, String classNumber, String classCode, String weekDay, String startTime, String endTime) {
             this.professor = professor;
+            this.classId = classId;
             this.className = className;
             this.classNumber = classNumber;
             this.classCode = classCode;
