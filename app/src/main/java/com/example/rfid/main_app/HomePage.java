@@ -28,7 +28,7 @@ import com.example.rfid.features.auth.services.AuthenticationService;
 import com.example.rfid.features.auth.services.SessionManager;
 import com.example.rfid.interfaces.HttpCallback;
 
-public class homePage extends AppCompatActivity {
+public class HomePage extends AppCompatActivity {
 
     private LinearLayout statsBtn, classBtn, homeBtn, notifBtn, policyBtn;
 
@@ -133,7 +133,7 @@ public class homePage extends AppCompatActivity {
     }
 
     private void openProfileFragment() {
-        loadFragment(new profileFragment());
+        loadFragment(new ProfileFragment());
         clearNavHighlight();
     }
 
@@ -205,7 +205,7 @@ public class homePage extends AppCompatActivity {
             public void onSuccess(VoidResponse response) {
                 runOnUiThread(() -> {
                     if (response.success) SessionManager.getInstance().clear();
-                    startActivity(new Intent(homePage.this, LoginActivity.class));
+                    startActivity(new Intent(HomePage.this, LoginActivity.class));
                     finish();
                 });
             }

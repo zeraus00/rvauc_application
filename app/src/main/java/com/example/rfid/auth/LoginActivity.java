@@ -22,7 +22,7 @@ import com.example.rfid.dto.VoidResponse;
 import com.example.rfid.features.auth.services.AuthenticationService;
 import com.example.rfid.features.auth.services.SessionManager;
 import com.example.rfid.interfaces.HttpCallback;
-import com.example.rfid.main_app.homePage;
+import com.example.rfid.main_app.HomePage;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class LoginActivity extends AppCompatActivity {
@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             boolean refreshed = sessionManager.refreshOnDemand();
 
             runOnUiThread(() -> {
-                if (refreshed) startActivity(new Intent(this, homePage.class));
+                if (refreshed) startActivity(new Intent(this, HomePage.class));
             });
         }).start();
 

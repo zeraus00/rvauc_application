@@ -3,7 +3,6 @@ package com.example.rfid.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
@@ -13,7 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.rfid.R;
-import com.example.rfid.main_app.homePage;
+import com.example.rfid.main_app.HomePage;
 
 public class EmailVerifiedSuccessful extends AppCompatActivity {
 
@@ -56,7 +55,7 @@ public class EmailVerifiedSuccessful extends AppCompatActivity {
         Button btn_to_login = findViewById(R.id.btnVerifying);
 
         btn_to_login.setOnClickListener(v -> {
-            startActivity(new Intent(EmailVerifiedSuccessful.this, homePage.class));
+            startActivity(new Intent(EmailVerifiedSuccessful.this, HomePage.class));
             finish();
         });
     }

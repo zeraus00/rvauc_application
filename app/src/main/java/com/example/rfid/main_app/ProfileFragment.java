@@ -14,20 +14,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.rfid.R;
+import com.example.rfid.features.auth.dto.Payload;
+import com.example.rfid.features.auth.services.SessionManager;
 
-public class profileFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private Payload payload;
     private String mParam1;
     private String mParam2;
 
-    public profileFragment() {
+    public ProfileFragment() {
     }
 
-    public static profileFragment newInstance(String param1, String param2) {
-        profileFragment fragment = new profileFragment();
+    public static ProfileFragment newInstance(String param1, String param2) {
+        ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -42,6 +45,8 @@ public class profileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        payload = SessionManager.getInstance().getPayload();
     }
 
     @Override
@@ -70,16 +75,20 @@ public class profileFragment extends Fragment {
         if (activity == null) return;
 
         // Sample data
-        String fullName = "Bogard D. Relapse";
-        String studentNo = "231-44223";
+        String firstName = payload.getFirstName() + " ";
+        String raw = payload.getMiddleName().strip();
+        String middleName = raw.isBlank() ? "" : raw.charAt(0) + ". ";
+        String surname = payload.getSurname();
+        String fullName = firstName + middleName + surname;
+        String studentNo = payload.getStudentNumber();
         String gender = "Male";
-        String department = "College of Computer Studies";
-        String yearLevel = "3rd Year";
-        String block = "1A";
-        String email = "sampleEmail@example.com";
-        String contactNumber = "0917-XXX-XXXX";
+        String department = payload.getDepartment();
+        int yearLevel = payload.getYearLevel();
+        String block = payload.getBlock();
+        String email = payload.getEmail();
+        String contactNumber = payload.getContactNumber();
 
-        populateUI(rootView, fullName, studentNo, gender, department, yearLevel, block, email, contactNumber);
+        populateUI(rootView, fullName, studentNo, gender, department, String.valueOf(yearLevel), block, email, contactNumber);
 
         Toast.makeText(getContext(), "Profile data loaded successfully!", Toast.LENGTH_SHORT).show();
     }

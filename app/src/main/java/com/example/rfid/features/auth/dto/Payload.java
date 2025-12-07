@@ -10,6 +10,7 @@ public class Payload {
     private final String surname;
     private final String firstName;
     private final String middleName;
+    private final String contactNumber;
     private final String role;
     private final String department;
     private final String studentNumber;
@@ -22,6 +23,7 @@ public class Payload {
         surname = b.surname;
         firstName = b.firstName;
         middleName = b.middleName;
+        contactNumber = b.contactNumber;
         role = b.role;
         department = b.department;
         studentNumber = b.studentNumber;
@@ -35,6 +37,7 @@ public class Payload {
     public String getSurname() { return surname; }
     public String getFirstName() { return firstName; }
     public String getMiddleName() { return middleName; }
+    public String getContactNumber() { return contactNumber; }
     public String getRole() { return role; }
     public String getDepartment() { return department; }
     public String getStudentNumber() { return studentNumber; }
@@ -47,6 +50,7 @@ public class Payload {
         private String surname;
         private String firstName;
         private String middleName = "";
+        private String contactNumber;
         private String role;
         private String department;
         private String studentNumber;
@@ -75,6 +79,10 @@ public class Payload {
         }
         public Builder middleName(String val) {
             middleName = val;
+            return this;
+        }
+        public Builder contactNumber(String val) {
+            contactNumber = val;
             return this;
         }
         public Builder role(String val) {
