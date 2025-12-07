@@ -4,6 +4,12 @@
     <string name="num">Contact Number</string>
     <string name="pass">Password</string>
     <string name="forgot"><font color="blue">Forgot Password?</font></string>
+    <string name="codeMessage">We sent you a 6 digit code to verify your email address</string>
+    <string name="fieldMessage">Enter in the field below.</string>
+    <string name="DidntgetCode">Didn\'t get the code?</string>
+    <string name="resendText">Resend</string>
+    <string name="countDownText">01:00</string>
+    <string name="expireText">Expires in: </string>
     <string name="signin1">
         <font color="white">
             Enter your email and password to login

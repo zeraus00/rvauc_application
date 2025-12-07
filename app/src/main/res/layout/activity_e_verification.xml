@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="We sent you a 6 digit code to verify your email address"
+            android:text="@string/codeMessage"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:layout_marginTop="8dp"/>
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="Enter in the field below."
+            android:text="@string/fieldMessage"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
@@ -265,7 +265,7 @@
                 android:id="@+id/txtDidntGetCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Didn't get the code?"
+                android:text="@string/DidntgetCode"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -274,7 +274,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Resend"
+                android:text="@string/resendText"
                 android:textColor="@color/blue"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -294,7 +294,7 @@
                 android:id="@+id/txtExpiresIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Expires in: "
+                android:text="@string/expireText"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -303,7 +303,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="01:00"
+                android:text="@string/countDownText"
                 android:textColor="@color/black" />
         </LinearLayout>
 
