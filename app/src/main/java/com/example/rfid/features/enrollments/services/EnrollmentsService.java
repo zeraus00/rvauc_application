@@ -14,8 +14,8 @@ import retrofit2.http.Path;
 public class EnrollmentsService {
     private static Client client;
 
-    public static void getAttendanceList(int enrollmentId, HttpCallback<AttendanceListResponse> callback) {
-        getClient().getAttendanceList(enrollmentId).enqueue(rvaucMsCallback(callback));
+    public static void getAttendanceList(String classNumber, HttpCallback<AttendanceListResponse> callback) {
+        getClient().getAttendanceList(classNumber).enqueue(rvaucMsCallback(callback));
     }
 
     public static void getClassList(HttpCallback<ClassListResponse> callback) {
@@ -31,8 +31,8 @@ public class EnrollmentsService {
     interface  Client {
 
         @Headers("X-Inject-Auth: true")
-        @GET("/enrollments/attendance/view-records/enrollment/{enrollmentId}")
-        Call<AttendanceListResponse> getAttendanceList(@Path("enrollmentId") int enrollmentId);
+        @GET("/enrollments/attendance/view-records/enrollment/{classNumber}")
+        Call<AttendanceListResponse> getAttendanceList(@Path("classNumber") String classNumber);
         @Headers("X-Inject-Auth: true")
         @GET("/enrollments/schedule/get-class-list")
         Call<ClassListResponse> getClassList();
@@ -67,11 +67,9 @@ public class EnrollmentsService {
 
     public static class ClassRecord {
 
-        // Optional field with default -1
-        public int enrollmentId = -1;
-
         // Class metadata
         public int id;
+        public int classId;
         public String weekDay;
         public String startTimeText;
         public String endTimeText;
