@@ -129,13 +129,29 @@
             android:layout_marginTop="16dp"
             android:text="@string/pass" />
 
-        <EditText
-            android:id="@+id/editTextTextPassword"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:background="@drawable/edit_textbg"
-            android:inputType="textPassword" />
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:background="@drawable/edit_textbg"
+                android:inputType="textPassword"
+                android:paddingEnd="48dp" />
+
+            <ImageView
+                android:id="@+id/ivTogglePassword"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:src="@drawable/view" />
+        </RelativeLayout>
+
 
 
         <LinearLayout
