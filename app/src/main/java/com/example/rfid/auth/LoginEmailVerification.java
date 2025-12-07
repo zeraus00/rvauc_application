@@ -28,16 +28,14 @@ public class LoginEmailVerification extends AppCompatActivity {
     private final String authTag = "Authentication";
     private TextView textCountdown;
     private CountDownTimer countDownTimer;
-    private TextView userEmailView; // Declaring globally for easy access
+    private TextView userEmailView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        // Ensure this layout ID matches the XML file name used in R.layout.
         setContentView(R.layout.activity_e_verification);
 
-        // Handle system bar insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -47,11 +45,9 @@ public class LoginEmailVerification extends AppCompatActivity {
         sessionManager = SessionManager.getInstance();
         email = sessionManager.getEmail();
 
-        // FIX: Correctly reference the TextView using the XML ID 'userEmail'
         userEmailView = findViewById(R.id.userEmail);
         textCountdown = findViewById(R.id.txtCountdown);
 
-        // Use the actual email retrieved from the session manager
         if (email != null) {
             userEmailView.setText(email);
         } else {
@@ -60,7 +56,7 @@ public class LoginEmailVerification extends AppCompatActivity {
 
         TextView resendText = findViewById(R.id.txtResendCode);
         ImageButton backBtn = findViewById(R.id.btnBack);
-        Button loginBtn = findViewById(R.id.btnVerifying1); // Use Button instead of var
+        Button loginBtn = findViewById(R.id.btnVerifying1);
 
         EditText[] inputs = {
                 findViewById(R.id.etInputBox1),
@@ -71,10 +67,10 @@ public class LoginEmailVerification extends AppCompatActivity {
                 findViewById(R.id.etInputBox6)
         };
 
-        // --- Listeners ---
+
 
         backBtn.setOnClickListener(v -> {
-            // Stop the countdown before leaving the activity
+
             if (countDownTimer != null) {
                 countDownTimer.cancel();
             }
@@ -82,15 +78,14 @@ public class LoginEmailVerification extends AppCompatActivity {
             finish();
         });
 
-        startCountdown(); // Start the initial 60s timer
+        startCountdown();
 
-        // Reset timer when "Resend" text is tapped
+
         resendText.setOnClickListener(v -> {
             if (countDownTimer != null) {
-                countDownTimer.cancel(); // stop current timer
+                countDownTimer.cancel();
             }
-            startCountdown(); // start a new 60s timer
-            // Optionally, call API to resend the code here
+            startCountdown();
             Toast.makeText(this, "Verification code resent!", Toast.LENGTH_SHORT).show();
         });
 
@@ -122,14 +117,13 @@ public class LoginEmailVerification extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Ensure the timer is cancelled when the activity is destroyed to prevent memory leaks
+
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
     }
 
     private void startCountdown() {
-        // Cancel existing timer before starting a new one
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
@@ -145,12 +139,9 @@ public class LoginEmailVerification extends AppCompatActivity {
             @Override
             public void onFinish() {
                 textCountdown.setText("00:00");
-                // Optional: Disable the verification button here if the code expires
             }
         }.start();
     }
-
-    // [The rest of the verifyCode and toastFail methods remain the same]
     void verifyCode(String email, String code, boolean rememberMe) {
         var verifyCodeRequest = new AuthenticationService.VerifyCodeRequest() {};
         verifyCodeRequest.email = email;
