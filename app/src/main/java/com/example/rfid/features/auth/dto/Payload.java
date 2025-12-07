@@ -1,10 +1,15 @@
 package com.example.rfid.features.auth.dto;
 
 
+import androidx.annotation.Nullable;
+
 public class Payload {
     private final Integer id;
     private final String email;
     private final String username;
+    private final String surname;
+    private final String firstName;
+    private final String middleName;
     private final String role;
     private final String department;
     private final String studentNumber;
@@ -14,6 +19,9 @@ public class Payload {
         id = b.id;
         email = b.email;
         username = b.username;
+        surname = b.surname;
+        firstName = b.firstName;
+        middleName = b.middleName;
         role = b.role;
         department = b.department;
         studentNumber = b.studentNumber;
@@ -24,6 +32,9 @@ public class Payload {
     public Integer getId() { return id; }
     public String getEmail() { return email; }
     public String getUsername() { return username; }
+    public String getSurname() { return surname; }
+    public String getFirstName() { return firstName; }
+    public String getMiddleName() { return middleName; }
     public String getRole() { return role; }
     public String getDepartment() { return department; }
     public String getStudentNumber() { return studentNumber; }
@@ -33,6 +44,9 @@ public class Payload {
         private Integer id;
         private String email;
         private String username;
+        private String surname;
+        private String firstName;
+        private String middleName = "";
         private String role;
         private String department;
         private String studentNumber;
@@ -49,6 +63,18 @@ public class Payload {
         }
         public Builder username(String val) {
             username = val;
+            return this;
+        }
+        public Builder surname(String val) {
+            surname = val;
+            return this;
+        }
+        public Builder firstName(String val) {
+            firstName = val;
+            return this;
+        }
+        public Builder middleName(String val) {
+            middleName = val;
             return this;
         }
         public Builder role(String val) {
