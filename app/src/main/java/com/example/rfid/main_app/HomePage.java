@@ -8,6 +8,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.PopupMenu;
+import android.view.MenuItem; // Make sure this is imported
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +19,6 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
-import android.widget.PopupMenu;
-import android.view.MenuItem;
 
 import com.example.rfid.R;
 import com.example.rfid.adapters.CarouselAdapter;
@@ -52,13 +52,9 @@ public class HomePage extends AppCompatActivity {
         welcomeView.setText("Welcome, " + username);
 
 
-        ImageButton logoutBtn = findViewById(R.id.imagebtn_logout);
-        logoutBtn.setOnClickListener(this::showLogoutPopupMenu);
 
         ImageView profileImg = findViewById(R.id.imgProfile);
-        profileImg.setOnClickListener(v -> {
-            openProfileFragment();
-        });
+        profileImg.setOnClickListener(this::showPopupMenu);
 
 
         statsBtn = findViewById(R.id.statslayout);
@@ -115,15 +111,21 @@ public class HomePage extends AppCompatActivity {
         handler.postDelayed(autoSlide, 4000);
     }
 
-    private void showLogoutPopupMenu(View view) {
+    private void showPopupMenu(View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
+
         popupMenu.getMenuInflater().inflate(R.menu.logout_menu, popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if(item.getItemId() == R.id.menu_logout_action) {
+                int id = item.getItemId();
+
+                if(id == R.id.menu_logout_action) {
                     logoutUser();
+                    return true;
+                } else if (id == R.id.menu_profile) {
+                    openProfileFragment();
                     return true;
                 }
                 return false;
@@ -212,7 +214,6 @@ public class HomePage extends AppCompatActivity {
 
             @Override
             public void onError(String message) {
-
             }
         });
     }
