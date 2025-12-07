@@ -3,6 +3,7 @@ package com.example.rfid.main_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +17,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
+import android.widget.PopupMenu;
+import android.view.MenuItem;
 
 import com.example.rfid.R;
 import com.example.rfid.adapters.CarouselAdapter;
@@ -50,7 +53,7 @@ public class homePage extends AppCompatActivity {
 
 
         ImageButton logoutBtn = findViewById(R.id.imagebtn_logout);
-        logoutBtn.setOnClickListener(v -> logoutUser());
+        logoutBtn.setOnClickListener(this::showLogoutPopupMenu);
 
         ImageView profileImg = findViewById(R.id.imgProfile);
         profileImg.setOnClickListener(v -> {
@@ -110,6 +113,23 @@ public class homePage extends AppCompatActivity {
             }
         };
         handler.postDelayed(autoSlide, 4000);
+    }
+
+    private void showLogoutPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.getMenuInflater().inflate(R.menu.logout_menu, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId() == R.id.menu_logout_action) {
+                    logoutUser();
+                    return true;
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
     }
 
     private void openProfileFragment() {
