@@ -40,13 +40,15 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
-        var token = SessionManager.getInstance().getRefreshToken();
-
-        if (token != null) {
-            startActivity(new Intent(this, homePage.class));
-        }
-
         sessionManager = SessionManager.getInstance();
+
+        new Thread(() -> {
+            boolean refreshed = sessionManager.refreshOnDemand();
+
+            runOnUiThread(() -> {
+                if (refreshed) startActivity(new Intent(this, homePage.class));
+            });
+        }).start();
 
         Button login_btn = findViewById(R.id.button);
         EditText emailView = findViewById(R.id.editTextTextEmailAddress2);

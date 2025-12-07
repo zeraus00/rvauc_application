@@ -48,7 +48,7 @@ public class homePage extends AppCompatActivity {
         SessionManager sessionManager = SessionManager.getInstance();
         TextView welcomeView = findViewById(R.id.txtWelcome);
         var payload = sessionManager.getPayload();
-        String username = payload == null ? "pogi" : payload.getUsername();
+        String username = payload == null ? "pogi" : payload.getSurname() + ".";
         welcomeView.setText("Welcome, " + username);
 
 
