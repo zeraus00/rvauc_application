@@ -1,19 +1,24 @@
 package com.example.rfid.main_app;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.rfid.R;
+import com.example.rfid.features.classes.services.ClassesService;
+import com.example.rfid.interfaces.HttpCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +45,54 @@ public class ClassFragment extends Fragment {
 
         classListContainer = view.findViewById(R.id.class_list_container);
 
-        loadSampleClasses();
-        generateTableRows();
+        Log.i("class_fragment", "running");
+        ClassesService.getClassList(new HttpCallback<ClassesService.ClassListResponse>() {
+            @Override
+            public void onSuccess(ClassesService.ClassListResponse response) {
+                Fragment fragment = ClassFragment.this;
+                Activity activity = fragment.getActivity();
+
+                if (activity == null) return;
+
+                activity.runOnUiThread(() -> {
+                    Log.i("class_fragment", "running");
+                    if (!fragment.isAdded() || fragment.getContext() == null) return;
+
+                    View root = fragment.getView();
+
+                    if (response.success) {
+                        Log.i("class_fragment", "success");
+                        var result = response.result;
+
+                        for(ClassesService.ClassRecord _class : result.classList) {
+
+                            Log.i("class_fragment", _class.toString());
+                            var professor = _class.professor;
+                            String professorName = "Prof. " + professor.surname;
+                            classList.add(new ClassModel(professorName, _class.courseName, _class.courseCode));
+                        }
+
+                        generateTableRows();
+                    }
+                    else Toast.makeText(requireContext(), "Fail loading data: " + response.message, Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onError(String message) {
+                Fragment fragment = ClassFragment.this;
+                Activity activity = fragment.getActivity();
+                if (activity == null) return;
+
+                activity.runOnUiThread(() -> {
+                    if (!fragment.isAdded() || fragment.getContext() == null) return;
+
+                    Toast.makeText(fragment.getContext(), "Fail loading data: " + message, Toast.LENGTH_SHORT).show();
+                });
+            }
+        });
+        //loadSampleClasses();
+        //generateTableRows();
     }
 
     private void loadSampleClasses() {
