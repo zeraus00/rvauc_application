@@ -2,10 +2,12 @@ package com.example.rfid.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,10 +25,10 @@ import com.example.rfid.interfaces.HttpCallback;
 import com.example.rfid.main_app.homePage;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-
 public class LoginActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private final String authTag = "Authentication";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +38,7 @@ public class LoginActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-
         });
-
 
         var token = SessionManager.getInstance().getRefreshToken();
 
@@ -52,6 +52,19 @@ public class LoginActivity extends AppCompatActivity {
         EditText emailView = findViewById(R.id.editTextTextEmailAddress2);
         EditText passwordView = findViewById(R.id.editTextTextPassword);
         CheckBox rememberMeView = findViewById(R.id.checkBox2);
+        ImageView ivTogglePassword = findViewById(R.id.ivTogglePassword);
+
+        ivTogglePassword.setOnClickListener(v -> {
+            if (passwordView.getInputType() == (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
+                passwordView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                ivTogglePassword.setImageResource(R.drawable.view);
+            } else {
+                passwordView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                ivTogglePassword.setImageResource(R.drawable.hide);
+            }
+
+            passwordView.setSelection(passwordView.getText().length());
+        });
 
         login_btn.setOnClickListener(v -> {
             Log.i(authTag, "Attempting to request sign in code.");
@@ -69,16 +82,14 @@ public class LoginActivity extends AppCompatActivity {
             loginUser(email, password, rememberMe);
         });
 
-        TextView forgot=findViewById(R.id.forgot);
-
+        TextView forgot = findViewById(R.id.forgot);
         forgot.setOnClickListener(v -> {
-            Intent intent=new Intent(LoginActivity.this, FrgtPassword.class);
+            Intent intent = new Intent(LoginActivity.this, FrgtPassword.class);
             startActivity(intent);
             finish();
         });
 
     }
-
 
     void loginUser(String email, String password, boolean rememberMe) {
         var signInCodeRequest = new AuthenticationService.SignInCodeRequest(){};
