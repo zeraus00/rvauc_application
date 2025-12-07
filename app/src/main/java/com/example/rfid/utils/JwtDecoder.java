@@ -10,12 +10,14 @@ public class JwtDecoder {
     public static Payload decodeJwt(String token) {
         try {
             JWT jwt = new JWT(token);
-
             ClaimParser cp = new ClaimParser(jwt);
             return new Payload.Builder()
                     .id(cp.getIntClaim("id"))
                     .email(cp.getStrClaim("email"))
                     .username(cp.getStrClaim("username"))
+                    .surname(cp.getStrClaim("surname"))
+                    .firstName(cp.getStrClaim("firstName"))
+                    .middleName(cp.getStrClaim("middleName"))
                     .role(cp.getStrClaim("role"))
                     .department(cp.getStrClaim("department"))
                     .studentNumber(cp.getStrClaim("studentNumber"))
