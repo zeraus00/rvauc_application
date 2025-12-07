@@ -17,7 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.rfid.R;
-import com.example.rfid.features.classes.services.ClassesService;
+import com.example.rfid.features.enrollments.services.EnrollmentsService;
 import com.example.rfid.interfaces.HttpCallback;
 
 import java.util.ArrayList;
@@ -45,31 +45,25 @@ public class ClassFragment extends Fragment {
 
         classListContainer = view.findViewById(R.id.class_list_container);
 
-        Log.i("class_fragment", "running");
-        ClassesService.getClassList(new HttpCallback<ClassesService.ClassListResponse>() {
+        EnrollmentsService.getClassList(new HttpCallback<EnrollmentsService.ClassListResponse>() {
             @Override
-            public void onSuccess(ClassesService.ClassListResponse response) {
+            public void onSuccess(EnrollmentsService.ClassListResponse response) {
                 Fragment fragment = ClassFragment.this;
                 Activity activity = fragment.getActivity();
 
                 if (activity == null) return;
 
                 activity.runOnUiThread(() -> {
-                    Log.i("class_fragment", "running");
                     if (!fragment.isAdded() || fragment.getContext() == null) return;
 
-                    View root = fragment.getView();
-
                     if (response.success) {
-                        Log.i("class_fragment", "success");
                         var result = response.result;
 
-                        for(ClassesService.ClassRecord _class : result.classList) {
+                        for(EnrollmentsService.ClassRecord _class : result.classList) {
 
-                            Log.i("class_fragment", _class.toString());
                             var professor = _class.professor;
                             String professorName = "Prof. " + professor.surname;
-                            classList.add(new ClassModel(professorName, _class.courseName, _class.courseCode));
+                            classList.add(new ClassModel(_class.enrollmentId, professorName, _class.courseName, _class.courseCode, _class.weekDay, _class.startTimeText, _class.endTimeText));
                         }
 
                         generateTableRows();
@@ -96,10 +90,10 @@ public class ClassFragment extends Fragment {
     }
 
     private void loadSampleClasses() {
-        classList.add(new ClassModel("Prof. Santos", "Mobile Programming", "MP101"));
-        classList.add(new ClassModel("Prof. Dela Cruz", "Data Structures", "DS103"));
-        classList.add(new ClassModel("Prof. Reyes", "Operating Systems", "OS203"));
-        classList.add(new ClassModel("Prof. Cruz", "Web Development", "WEB202"));
+        classList.add(new ClassModel(1,"Prof. Santos", "Mobile Programming", "MP101", "", "", ""));
+        classList.add(new ClassModel(2, "Prof. Dela Cruz", "Data Structures", "DS103", "", "", ""));
+        classList.add(new ClassModel(3, "Prof. Reyes", "Operating Systems", "OS203", "", "", ""));
+        classList.add(new ClassModel(3,"Prof. Cruz", "Web Development", "WEB202", "", "", ""));
     }
 
     private void generateTableRows() {
@@ -157,9 +151,13 @@ public class ClassFragment extends Fragment {
         Fragment attendanceFragment = new ClassAttendanceFragment();
 
         Bundle bundle = new Bundle();
+        bundle.putInt("enrollmentId", classItem.enrollmentId );
         bundle.putString("professor", classItem.professor);
         bundle.putString("className", classItem.className);
         bundle.putString("classCode", classItem.classCode);
+        bundle.putString("weekDay", classItem.weekDay);
+        bundle.putString("startTime", classItem.startTime);
+        bundle.putString("endTime", classItem.endTime);
 
         attendanceFragment.setArguments(bundle);
 
@@ -172,14 +170,23 @@ public class ClassFragment extends Fragment {
     }
 
     static class ClassModel {
+        int enrollmentId;
         String professor;
         String className;
         String classCode;
 
-        ClassModel(String professor, String className, String classCode) {
+        String weekDay;
+        String startTime;
+        String endTime;
+
+        ClassModel(int enrollmentId, String professor, String className, String classCode, String weekDay, String startTime, String endTime) {
+            this.enrollmentId = enrollmentId;
             this.professor = professor;
             this.className = className;
             this.classCode = classCode;
+            this.weekDay = weekDay;
+            this.startTime = startTime;
+            this.endTime = endTime;
         }
     }
 }

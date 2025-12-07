@@ -1,4 +1,4 @@
-package com.example.rfid.features.classes.services;
+package com.example.rfid.features.enrollments.services;
 
 import static com.example.rfid.services.RvaucMsService.rvaucMsCallback;
 
@@ -9,9 +9,14 @@ import com.example.rfid.services.RvaucMsService;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Path;
 
-public class ClassesService {
+public class EnrollmentsService {
     private static Client client;
+
+    public static void getAttendanceList(int enrollmentId, HttpCallback<AttendanceListResponse> callback) {
+        getClient().getAttendanceList(enrollmentId).enqueue(rvaucMsCallback(callback));
+    }
 
     public static void getClassList(HttpCallback<ClassListResponse> callback) {
         getClient().getClassList().enqueue(rvaucMsCallback(callback));
@@ -24,6 +29,10 @@ public class ClassesService {
         return client;
     }
     interface  Client {
+
+        @Headers("X-Inject-Auth: true")
+        @GET("/enrollments/attendance/view-records/enrollment/{enrollmentId}")
+        Call<AttendanceListResponse> getAttendanceList(@Path("enrollmentId") int enrollmentId);
         @Headers("X-Inject-Auth: true")
         @GET("/enrollments/schedule/get-class-list")
         Call<ClassListResponse> getClassList();
@@ -33,9 +42,27 @@ public class ClassesService {
         Call<ClassListResponse> getSchedule();
     }
 
+    public static class AttendanceListResponse extends ApiResponse<AttendanceList> {}
     public static class ClassListResponse extends ApiResponse<ClassList>{}
+
+    public static class AttendanceList {
+        public AttendanceRecord[] attendanceList;
+
+        public AttendanceList() {}
+    }
+    public static class AttendanceRecord {
+        public int id = -1;
+        public String status = "";
+        public String date = "";
+        public String time = "";
+
+        public AttendanceRecord() {}
+    }
+
     public static class ClassList {
         public ClassRecord[] classList;
+
+        public ClassList() {}
     }
 
     public static class ClassRecord {

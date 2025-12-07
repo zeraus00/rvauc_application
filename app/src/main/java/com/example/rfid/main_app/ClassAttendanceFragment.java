@@ -1,18 +1,25 @@
 package com.example.rfid.main_app;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.rfid.R;
+import com.example.rfid.features.enrollments.services.EnrollmentsService;
+import com.example.rfid.interfaces.HttpCallback;
 
 import org.w3c.dom.Text;
 
@@ -54,18 +61,68 @@ public class ClassAttendanceFragment extends Fragment {
         excusedCounter = view.findViewById(R.id.countExcused);
         remainingCounter = view.findViewById(R.id.countRemaining);
 
-        loadSampleRecords();
-        updateCounters();
-
         presentFilter.setOnClickListener(v -> filterTable("Present"));
 
         absentFilter.setOnClickListener(v -> filterTable("Absent"));
 
         excusedFilter.setOnClickListener(v -> filterTable("Excused"));
 
-        displayAllRows();
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (getArguments() == null) return;
+
+        int enrollmentId = getArguments().getInt("enrollmentId") ;
+        Log.i("class_attendance", String.valueOf(enrollmentId));
+        String weekDay = getArguments().getString("weekDay");
+        String startTime = getArguments().getString("startTime");
+        String endTime = getArguments().getString("endTime");
+
+        EnrollmentsService.getAttendanceList(enrollmentId, new HttpCallback<EnrollmentsService.AttendanceListResponse>() {
+            @Override
+            public void onSuccess(EnrollmentsService.AttendanceListResponse response) {
+                Fragment fragment = ClassAttendanceFragment.this;
+                Activity activity = fragment.getActivity();
+
+                if (activity == null) return;
+
+                activity.runOnUiThread(() -> {
+                    if (!fragment.isAdded() || fragment.getContext() == null) return;
+
+                    if (response.success) {
+                        var result = response.result;
+                        Log.i("class_attendance", result.toString());
+
+                        for (EnrollmentsService.AttendanceRecord record : result.attendanceList) {
+                            Log.i("class_attendance", record.toString());
+                            records.add(new AttendanceRecord(record.date, weekDay, record.time, record.status));
+                        }
+
+                        updateCounters();
+                        displayAllRows();
+                    }
+                    else Toast.makeText(requireContext(), "Fail loading data: " + response.message, Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onError(String message) {
+                Fragment fragment = ClassAttendanceFragment.this;
+                Activity activity = fragment.getActivity();
+                if (activity == null) return;
+
+                activity.runOnUiThread(() -> {
+                    if (!fragment.isAdded() || fragment.getContext() == null) return;
+
+                    Toast.makeText(fragment.getContext(), "Fail loading data: " + message, Toast.LENGTH_SHORT).show();
+                });
+            }
+        });
     }
 
     private void loadSampleRecords() {
@@ -126,6 +183,7 @@ public class ClassAttendanceFragment extends Fragment {
         LinearLayout row = new LinearLayout(getContext());
         row.setOrientation(LinearLayout.HORIZONTAL);
         row.setPadding(10, 22, 10, 22);
+        row.setWeightSum(4);
 
         TextView date = createCell(record.date);
         TextView day = createCell(record.day);
