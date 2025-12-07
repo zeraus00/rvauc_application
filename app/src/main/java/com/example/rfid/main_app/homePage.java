@@ -3,11 +3,7 @@ package com.example.rfid.main_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +26,7 @@ import com.example.rfid.features.auth.services.SessionManager;
 import com.example.rfid.interfaces.HttpCallback;
 
 public class homePage extends AppCompatActivity {
+
     private LinearLayout statsBtn, classBtn, homeBtn, notifBtn, policyBtn;
 
     @Override
@@ -37,22 +34,29 @@ public class homePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home_page);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+
         SessionManager sessionManager = SessionManager.getInstance();
         TextView welcomeView = findViewById(R.id.txtWelcome);
         var payload = sessionManager.getPayload();
-        String username = payload == null ? "pogi" : payload.getUsername(); //  remove in prod
-        String welcomeText = "Welcome, " + username;
-        welcomeView.setText(welcomeText);
+        String username = payload == null ? "pogi" : payload.getUsername();
+        welcomeView.setText("Welcome, " + username);
+
 
         ImageButton logoutBtn = findViewById(R.id.imagebtn_logout);
-
         logoutBtn.setOnClickListener(v -> logoutUser());
+
+        ImageView profileImg = findViewById(R.id.imgProfile);
+        profileImg.setOnClickListener(v -> {
+            openProfileFragment();
+        });
+
 
         statsBtn = findViewById(R.id.statslayout);
         classBtn = findViewById(R.id.classlayout);
@@ -86,14 +90,12 @@ public class homePage extends AppCompatActivity {
         });
 
         ViewPager2 viewPager = findViewById(R.id.carouselSwitcher);
-
-            int[] images = {
-                    R.drawable.type_a,
-                    R.drawable.buffalo,
-                    R.drawable.department_shirt,
-                    R.drawable.pe_uniform
-            };
-
+        int[] images = {
+                R.drawable.type_a,
+                R.drawable.buffalo,
+                R.drawable.department_shirt,
+                R.drawable.pe_uniform
+        };
         CarouselAdapter adapter = new CarouselAdapter(images);
         viewPager.setAdapter(adapter);
 
@@ -102,17 +104,17 @@ public class homePage extends AppCompatActivity {
             @Override
             public void run() {
                 int next = viewPager.getCurrentItem() + 1;
-
-                if (next >= images.length)
-                    next = 0;
-
+                if (next >= images.length) next = 0;
                 viewPager.setCurrentItem(next, true);
                 handler.postDelayed(this, 4000);
             }
         };
-
         handler.postDelayed(autoSlide, 4000);
+    }
 
+    private void openProfileFragment() {
+        loadFragment(new profileFragment());
+        clearNavHighlight();
     }
 
     private void setActiveTab(LinearLayout active) {
@@ -122,25 +124,56 @@ public class homePage extends AppCompatActivity {
         resetNavItem(notifBtn);
         resetNavItem(policyBtn);
 
-        highlightNavItem(active);
+        if (active != null) highlightNavItem(active);
     }
 
+    private void clearNavHighlight() {
+        resetNavItem(statsBtn);
+        resetNavItem(classBtn);
+        resetNavItem(homeBtn);
+        resetNavItem(notifBtn);
+        resetNavItem(policyBtn);
+    }
     private void resetNavItem(LinearLayout item) {
-        ImageView icon = (ImageView) item.getChildAt(0);
-        TextView label = (TextView) item.getChildAt(1);
-
-        icon.setColorFilter(getColor(R.color.green));
-        label.setTextColor(getColor(R.color.green));
-        item.setBackgroundColor(getColor(android.R.color.transparent));
+        if (item == null) return;
+        try {
+            if (item.getChildCount() >= 2) {
+                ImageView icon = (ImageView) item.getChildAt(0);
+                TextView label = (TextView) item.getChildAt(1);
+                icon.setColorFilter(getColor(R.color.green));
+                label.setTextColor(getColor(R.color.green));
+                item.setBackgroundColor(getColor(android.R.color.transparent));
+            }
+        } catch (Exception ignored) {
+        }
     }
 
+    // safe highlight
     private void highlightNavItem(LinearLayout item) {
-        ImageView icon = (ImageView) item.getChildAt(0);
-        TextView label = (TextView) item.getChildAt(1);
+        if (item == null) return;
+        try {
+            if (item.getChildCount() >= 2) {
+                ImageView icon = (ImageView) item.getChildAt(0);
+                TextView label = (TextView) item.getChildAt(1);
+                icon.setColorFilter(getColor(R.color.white));
+                label.setTextColor(getColor(R.color.white));
+                item.setBackgroundColor(getColor(R.color.green));
+            }
+        } catch (Exception ignored) { }
+    }
 
-        icon.setColorFilter(getColor(R.color.white));
-        label.setTextColor(getColor(R.color.white));
-        item.setBackgroundColor(getColor(R.color.green));
+    public void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void clearFragment() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new Fragment())
+                .commit();
     }
 
     public void logoutUser() {
@@ -152,7 +185,6 @@ public class homePage extends AppCompatActivity {
             public void onSuccess(VoidResponse response) {
                 runOnUiThread(() -> {
                     if (response.success) SessionManager.getInstance().clear();
-
                     startActivity(new Intent(homePage.this, LoginActivity.class));
                     finish();
                 });
@@ -164,18 +196,4 @@ public class homePage extends AppCompatActivity {
             }
         });
     }
-
-    public void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.commit();
-    }
-
-    public void clearFragment() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new Fragment())
-                .commit();
-    }
-
 }
