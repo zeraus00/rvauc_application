@@ -81,7 +81,7 @@
             app:srcCompat="@drawable/email_icon" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/verifyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -92,7 +92,7 @@
             android:layout_marginTop="12dp"/>
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/verificationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -102,7 +102,7 @@
             android:layout_marginTop="8dp"/>
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/userEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -112,7 +112,7 @@
             android:layout_marginTop="4dp"/>
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/fieldBelow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
