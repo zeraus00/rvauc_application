@@ -18,6 +18,7 @@ public class JwtDecoder {
                     .surname(cp.getStrClaim("surname"))
                     .firstName(cp.getStrClaim("firstName"))
                     .middleName(cp.getStrClaim("middleName", ""))
+                    .gender(cp.getStrClaim("gender"))
                     .contactNumber(cp.getStrClaim("contactNumber"))
                     .role(cp.getStrClaim("role"))
                     .department(cp.getStrClaim("department"))

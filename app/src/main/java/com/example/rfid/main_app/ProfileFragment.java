@@ -81,7 +81,8 @@ public class ProfileFragment extends Fragment {
         String surname = payload.getSurname();
         String fullName = firstName + middleName + surname;
         String studentNo = payload.getStudentNumber();
-        String gender = "Male";
+        String first = payload.getGender().charAt(0) + "";
+        String gender = first.toUpperCase() + payload.getGender().substring(1);
         String department = payload.getDepartment();
         int yearLevel = payload.getYearLevel();
         String block = payload.getBlock();
