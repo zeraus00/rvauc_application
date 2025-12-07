@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.View; // Import View for the listener
+import android.widget.Button; // Changed var to Button
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -26,11 +28,13 @@ public class LoginEmailVerification extends AppCompatActivity {
     private final String authTag = "Authentication";
     private TextView textCountdown;
     private CountDownTimer countDownTimer;
+    private TextView userEmailView; // Declaring globally for easy access
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        // Ensure this layout ID matches the XML file name used in R.layout.
         setContentView(R.layout.activity_e_verification);
 
         // Handle system bar insets
@@ -43,13 +47,21 @@ public class LoginEmailVerification extends AppCompatActivity {
         sessionManager = SessionManager.getInstance();
         email = sessionManager.getEmail();
 
-        TextView emailView = findViewById(R.id.textView14);
-        emailView.setText(email);
-
+        // FIX: Correctly reference the TextView using the XML ID 'userEmail'
+        userEmailView = findViewById(R.id.userEmail);
         textCountdown = findViewById(R.id.txtCountdown);
-        var resendText = findViewById(R.id.txtResendCode); // your “Resend” text
+
+        // Use the actual email retrieved from the session manager
+        if (email != null) {
+            userEmailView.setText(email);
+        } else {
+            userEmailView.setText(getString(R.string.Email));
+        }
+
+        TextView resendText = findViewById(R.id.txtResendCode);
         ImageButton backBtn = findViewById(R.id.btnBack);
-        var loginBtn = findViewById(R.id.btnVerifying1);
+        Button loginBtn = findViewById(R.id.btnVerifying1); // Use Button instead of var
+
         EditText[] inputs = {
                 findViewById(R.id.etInputBox1),
                 findViewById(R.id.etInputBox2),
@@ -59,7 +71,13 @@ public class LoginEmailVerification extends AppCompatActivity {
                 findViewById(R.id.etInputBox6)
         };
 
+        // --- Listeners ---
+
         backBtn.setOnClickListener(v -> {
+            // Stop the countdown before leaving the activity
+            if (countDownTimer != null) {
+                countDownTimer.cancel();
+            }
             startActivity(new Intent(LoginEmailVerification.this, LoginActivity.class));
             finish();
         });
@@ -72,6 +90,7 @@ public class LoginEmailVerification extends AppCompatActivity {
                 countDownTimer.cancel(); // stop current timer
             }
             startCountdown(); // start a new 60s timer
+            // Optionally, call API to resend the code here
             Toast.makeText(this, "Verification code resent!", Toast.LENGTH_SHORT).show();
         });
 
@@ -79,7 +98,7 @@ public class LoginEmailVerification extends AppCompatActivity {
             boolean rememberMe = sessionManager.getRememberMe();
 
             if (email == null || email.isBlank()) {
-                toastFail("Please retry logging-in");
+                toastFail("Session error. Please retry logging-in.");
                 return;
             }
 
@@ -93,7 +112,6 @@ public class LoginEmailVerification extends AppCompatActivity {
                     toastFail("Please input a complete 6-digit code.");
                     return;
                 }
-
                 code.append(digit);
             }
 
@@ -101,8 +119,23 @@ public class LoginEmailVerification extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Ensure the timer is cancelled when the activity is destroyed to prevent memory leaks
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+    }
+
     private void startCountdown() {
-        countDownTimer = new CountDownTimer(60000, 1000) { // 60 seconds
+        // Cancel existing timer before starting a new one
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+
+        // Start 60-second timer
+        countDownTimer = new CountDownTimer(60000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 int seconds = (int) (millisUntilFinished / 1000);
@@ -112,10 +145,12 @@ public class LoginEmailVerification extends AppCompatActivity {
             @Override
             public void onFinish() {
                 textCountdown.setText("00:00");
+                // Optional: Disable the verification button here if the code expires
             }
-        };
-        countDownTimer.start();
+        }.start();
     }
+
+    // [The rest of the verifyCode and toastFail methods remain the same]
     void verifyCode(String email, String code, boolean rememberMe) {
         var verifyCodeRequest = new AuthenticationService.VerifyCodeRequest() {};
         verifyCodeRequest.email = email;
@@ -134,6 +169,8 @@ public class LoginEmailVerification extends AppCompatActivity {
                         toastFail(response.message);
                         return;
                     }
+                    // Stop timer on successful verification
+                    if (countDownTimer != null) countDownTimer.cancel();
                     startActivity(new Intent(LoginEmailVerification.this, EmailVerifiedSuccessful.class));
                     finish();
                 });
