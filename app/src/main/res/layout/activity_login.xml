@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.48" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_h_bottom_anchor"
@@ -40,18 +40,15 @@
 
     <LinearLayout
         android:id="@+id/formContainer"
-        android:layout_width="384dp"
-        android:layout_height="383dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/form"
-        android:elevation="4dp"
         android:orientation="vertical"
         android:padding="40dp"
         app:layout_constraintBottom_toTopOf="@+id/guide_h_bottom_anchor"
-        app:layout_constraintEnd_toEndOf="@id/guide_v_margin_end"
-        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="@id/guide_v_margin_start"
-        app:layout_constraintTop_toTopOf="@id/guideLogoBottom"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintEnd_toEndOf="@id/guide_v_margin_end"
+        app:layout_constraintTop_toTopOf="@id/guideLogoBottom">
 
         <TextView
             android:id="@+id/textView5"
@@ -150,8 +147,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="145dp"
-        android:layout_height="154dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         app:layout_constraintBottom_toTopOf="@+id/formContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
