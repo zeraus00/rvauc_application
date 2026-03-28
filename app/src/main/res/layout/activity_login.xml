@@ -5,36 +5,23 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/studentbg"
     tools:context=".auth.LoginActivity">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.12" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideTitleBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideLogoBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.38" />
+        app:layout_constraintGuide_percent="0.48" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_h_bottom_anchor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.91" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_v_margin_start"
@@ -50,63 +37,32 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
-    <TextView
-        android:id="@+id/txtSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/signin"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintTop_toTopOf="@id/guideTop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/txtSubtitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/signin1"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/txtSignIn"
-        app:layout_constraintStart_toStartOf="@id/guide_v_margin_start"
-        app:layout_constraintEnd_toEndOf="@id/guide_v_margin_end"
-        app:layout_constraintBottom_toTopOf="@id/guideTitleBottom" />
-
-    <include
-        layout="@layout/component_logo"
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        app:layout_constraintTop_toTopOf="@id/guideTitleBottom"
-        app:layout_constraintBottom_toTopOf="@id/guideLogoBottom"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintDimensionRatio="3:1" />
 
     <LinearLayout
         android:id="@+id/formContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="40dp"
+        android:layout_width="384dp"
+        android:layout_height="383dp"
         android:background="@drawable/form"
         android:elevation="4dp"
-        app:layout_constraintTop_toTopOf="@id/guideLogoBottom"
-        app:layout_constraintStart_toStartOf="@id/guide_v_margin_start"
+        android:orientation="vertical"
+        android:padding="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/guide_h_bottom_anchor"
         app:layout_constraintEnd_toEndOf="@id/guide_v_margin_end"
-        app:layout_constraintBottom_toTopOf="@+id/guide_h_bottom_anchor">
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="@id/guide_v_margin_start"
+        app:layout_constraintTop_toTopOf="@id/guideLogoBottom"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
+            android:paddingBottom="16dp"
+            android:text="College Student"
             android:textAlignment="center"
-            android:textStyle="bold"
-            android:paddingBottom="16dp"/>
+            android:textColor="@color/green"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView7"
@@ -119,8 +75,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_textbg"
-            android:padding="12dp"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:padding="12dp" />
 
         <TextView
             android:id="@+id/textView9"
@@ -137,9 +93,9 @@
                 android:id="@+id/editTextTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
                 android:background="@drawable/edit_textbg"
                 android:inputType="textPassword"
+                android:padding="12dp"
                 android:paddingEnd="48dp" />
 
             <ImageView
@@ -153,13 +109,12 @@
         </RelativeLayout>
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="12dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/checkBox2"
@@ -181,16 +136,69 @@
                 android:text="@string/forgot"
                 android:textColor="@drawable/hover_effect" />
         </LinearLayout>
+
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textColor="@color/white"
             android:background="@drawable/button_style"
-            android:text="@string/Login_text" />
+            android:text="@string/Login_text"
+            android:textColor="@color/white" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="145dp"
+        android:layout_height="154dp"
+        app:layout_constraintBottom_toTopOf="@+id/formContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.388"
+        app:srcCompat="@drawable/lulogo1" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to AXIS"
+        android:textColor="@color/white"
+        android:textSize="80px"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/formContainer"
+        app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
+        app:layout_constraintHorizontal_bias="0.564"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.306" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your email and password to log in "
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/formContainer"
+        app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.101" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideLogoBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/axis" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
