@@ -7,20 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".main_app.HomePage">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
 
     <FrameLayout
         android:id="@+id/headerFrame"
-        android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:background="@drawable/header_round"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideHeader">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/headerContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingStart="18dp"
             android:paddingTop="18dp"
             android:paddingEnd="18dp"
@@ -72,7 +79,7 @@
                 android:text="AUTOMATED X-POINT&#10;IDENTIFICATION SYSTEM"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
