@@ -4,150 +4,315 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="#DBDCDF"
     tools:context=".main_app.ClassFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_h_top_anchor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_h_title_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.20" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_h_bottom_anchor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.90" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_v_margin_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_v_margin_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
-
-
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Class List"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:background="@drawable/header_round"
+        android:padding="18dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guide_h_top_anchor"
-        app:layout_constraintBottom_toTopOf="@+id/guide_h_title_bottom" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout10"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginVertical="16dp"
-        android:background="@drawable/rounded_white_bg"
-        android:orientation="vertical"
-        android:padding="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/guide_h_bottom_anchor"
-        app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
-        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
-        app:layout_constraintTop_toBottomOf="@+id/textView30">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvClassList"
+            android:layout_marginBottom="12dp">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/keyboard_arrow_left"
+            app:tint="@android:color/white"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go Back"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <TextView
+        android:id="@+id/tvClassList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CLASS LIST"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvClassListDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="3dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvClassList" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="-100dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/headerContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/green"
-            android:orientation="horizontal"
-            android:padding="8dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Professor"
-                android:textColor="#FFFFFF"
+                android:text="Next Class..."
+                android:textColor="#FF8A80"
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Class Name"
-                android:textColor="#FFFFFF"
+                android:layout_marginTop="10dp"
+                android:text="#606 · DS-3202"
+                android:textStyle="bold"
+                android:textColor="#757575"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Machine Learning"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Class Code"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="8dp">
+                android:text="#Instructor Gerald Villaran"
+                android:textColor="#757575"
+                android:textSize="12sp" />
 
             <LinearLayout
-                android:id="@+id/class_list_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="#d4d4d4"
+                android:layout_marginTop="22dp"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="20dp"
+                android:gravity="center">
 
-                <LinearLayout
-                    android:id="@+id/sample_row"
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/time" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="12dp"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    tools:ignore="MissingConstraints"> <TextView
-                    android:id="@+id/template_prof"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:text=" 7:00 AM "
                     android:layout_weight="1"
-                    android:text="Professor X"
-                    android:textColor="#333" />
+                    android:textAlignment="center"
+                    android:textColor="#424242" />
 
-                    <TextView
-                        android:id="@+id/template_classname"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Math 101"
-                        android:textColor="#333" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" |"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="#424242" />
 
-                    <TextView
-                        android:id="@+id/template_classcode"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="M101"
-                        android:textColor="#333" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/location" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" ROOM 402"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:textColor="#424242" />
             </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-        </ScrollView>
+    <LinearLayout
+        android:id="@+id/menuLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/fragment_container">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginHorizontal="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardBackgroundColor="#bcc5db"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/schedule" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Schedule"
+                android:textStyle="bold"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginHorizontal="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardBackgroundColor="#dcc2bf"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/system_report" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Violation"
+                android:textStyle="bold"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/class_list_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginHorizontal="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardBackgroundColor="#dacfc4"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/inspection" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Attendance"
+                android:textStyle="bold"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/menuLayout">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#bcc5db"
+            app:cardCornerRadius="12dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_background_2"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/classId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#606 · DS-3202"
+                    android:textColor="#CCC"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/className"
+                    android:layout_below="@id/classId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Machine Learning"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/classTimePlace"
+                    android:layout_below="@id/className"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7:00 AM - 9:00 AM | AV 308b"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"/>
+
+                <ImageView
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/more_than"
+                    app:tint="@android:color/white" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
