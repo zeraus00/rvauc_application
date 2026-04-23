@@ -69,7 +69,7 @@ public class RvaucMsService {
 
     public static <TInterceptor extends Interceptor> void init(TInterceptor[] interceptors, Authenticator authenticator) {
         var retrofitBuilder = new Retrofit.Builder()
-                .baseUrl("http://172.20.10.14:2620")
+                .baseUrl("http://192.168.100.6:2620")
                 .addConverterFactory(JacksonConverterFactory.create());
 
         var okHttpClientBuilder = new OkHttpClient.Builder()
