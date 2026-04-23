@@ -21,8 +21,6 @@ import com.example.rfid.R;
 import com.example.rfid.features.enrollments.services.EnrollmentsService;
 import com.example.rfid.interfaces.HttpCallback;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +52,7 @@ public class ClassAttendanceFragment extends Fragment {
         absentFilter = view.findViewById(R.id.btnAbsent);
         excusedFilter = view.findViewById(R.id.btnExcused);
 
-        tableContainer = view.findViewById(R.id.tableContent);
+        tableContainer = view.findViewById(R.id.attendanceContainer);
 
         presentCounter = view.findViewById(R.id.countPresent);
         absentCounter = view.findViewById(R.id.countAbsent);
@@ -81,9 +79,9 @@ public class ClassAttendanceFragment extends Fragment {
         String startTime = getArguments().getString("startTime");
         String endTime = getArguments().getString("endTime");
 
-        EnrollmentsService.getAttendanceList(classId, new HttpCallback<EnrollmentsService.AttendanceListResponse>() {
+        EnrollmentsService.getAttendanceList(classId, new HttpCallback<EnrollmentsService.ClassAttendanceResponse>() {
             @Override
-            public void onSuccess(EnrollmentsService.AttendanceListResponse response) {
+            public void onSuccess(EnrollmentsService.ClassAttendanceResponse response) {
                 Fragment fragment = ClassAttendanceFragment.this;
                 Activity activity = fragment.getActivity();
 
@@ -96,7 +94,7 @@ public class ClassAttendanceFragment extends Fragment {
                         var result = response.result;
                         Log.i("class_attendance", result.toString());
 
-                        for (EnrollmentsService.AttendanceRecord record : result.attendanceList) {
+                        for (com.example.rfid.features.enrollments.schemas.classattendance.AttendanceRecord record : result.attendanceRecords) {
                             Log.i("class_attendance", record.toString());
                             records.add(new AttendanceRecord(record.date, weekDay, record.time, record.status));
                         }

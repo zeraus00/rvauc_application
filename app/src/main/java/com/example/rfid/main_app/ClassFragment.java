@@ -2,32 +2,34 @@ package com.example.rfid.main_app;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 
 import com.example.rfid.R;
+import com.example.rfid.features.enrollments.schemas.scheduledclasseswithprofessor.ClassWithProfessor;
+import com.example.rfid.features.enrollments.schemas.scheduledclasseswithprofessor.ClassesWithProfessor;
 import com.example.rfid.features.enrollments.services.EnrollmentsService;
 import com.example.rfid.interfaces.HttpCallback;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.material.card.MaterialCardView;
 
 public class ClassFragment extends Fragment {
 
     LinearLayout classListContainer;
-
-    List<ClassModel> classList = new ArrayList<>();
 
     public ClassFragment() { }
 
@@ -43,11 +45,12 @@ public class ClassFragment extends Fragment {
                               @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         classListContainer = view.findViewById(R.id.class_list_container);
 
-        EnrollmentsService.getClassList(new HttpCallback<EnrollmentsService.ClassListResponse>() {
+        EnrollmentsService.getClassList(new HttpCallback<EnrollmentsService.ClassesWithProfessorResponse>() {
             @Override
-            public void onSuccess(EnrollmentsService.ClassListResponse response) {
+            public void onSuccess(EnrollmentsService.ClassesWithProfessorResponse response) {
                 Fragment fragment = ClassFragment.this;
                 Activity activity = fragment.getActivity();
 
@@ -56,18 +59,7 @@ public class ClassFragment extends Fragment {
                 activity.runOnUiThread(() -> {
                     if (!fragment.isAdded() || fragment.getContext() == null) return;
 
-                    if (response.success) {
-                        var result = response.result;
-
-                        for(EnrollmentsService.ClassRecord _class : result.classList) {
-
-                            var professor = _class.professor;
-                            String professorName = "Prof. " + professor.surname;
-                            classList.add(new ClassModel( professorName, _class.courseName,_class.classId, _class.classNumber, _class.courseCode, _class.weekDay, _class.startTimeText, _class.endTimeText));
-                        }
-
-                        generateTableRows();
-                    }
+                    if (response.success) generateTableRows(response.result);
                     else Toast.makeText(requireContext(), "Fail loading data: " + response.message, Toast.LENGTH_SHORT).show();
                 });
             }
@@ -89,76 +81,165 @@ public class ClassFragment extends Fragment {
         //generateTableRows();
     }
 
-    private void loadSampleClasses() {
-        classList.add(new ClassModel("Prof. Santos", "Mobile Programming", 1,"525","MP101", "", "", ""));
-        classList.add(new ClassModel( "Prof. Dela Cruz", "Data Structures", 2, "526","DS103", "", "", ""));
-        classList.add(new ClassModel("Prof. Reyes", "Operating Systems", 3, "527","OS203", "", "", ""));
-        classList.add(new ClassModel("Prof. Cruz", "Web Development", 4, "528","WEB202", "", "", ""));
+    private void showHeader(View view) {
+        var activity = requireActivity();
+        ConstraintLayout headerContainer = activity.findViewById(R.id.headerContainer);
+
+        ConstraintLayout fragHeader = view.findViewById(R.id.classListFragmentHeader);
+        fragHeader.removeView(fragHeader);
+        var backBtn = view.findViewById(R.id.backBtn);
+        var tvClassList = view.findViewById(R.id.tvClassList);
+        var tvClassListDesc = view.findViewById(R.id.tvClassListDescription);
+
+        ConstraintLayout layout = activity.findViewById(R.id.main);
+
+        ConstraintSet set = new ConstraintSet();
+        set.clone(layout);
+
+        set.connect(
+                R.id.nextClass,
+                ConstraintSet.TOP,
+                R.id.headerContainer,
+                ConstraintSet.BOTTOM
+        );
+
+        set.connect(
+                R.id.nextClass,
+                ConstraintSet.START,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.START
+        );
+
+        set.connect(
+                R.id.nextClass,
+                ConstraintSet.END,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.END
+        );
+
+        set.applyTo(layout);
+
+        headerContainer.addView(backBtn);
+        headerContainer.addView(tvClassList);
+        headerContainer.addView(tvClassListDesc);
+        headerContainer.addView(backBtn);
     }
 
-    private void generateTableRows() {
+    private void generateTableRows(ClassesWithProfessor classList) {
         classListContainer.removeAllViews();
 
-        for (ClassModel item : classList) {
+        var context = getContext();
 
-            LinearLayout row = new LinearLayout(getContext());
-            row.setOrientation(LinearLayout.HORIZONTAL);
-            row.setPadding(10, 20, 10, 20);
+        for (ClassWithProfessor cls : classList.classes) {
 
-            // Layout params for each cell
-            LinearLayout.LayoutParams cellParams =
-                    new LinearLayout.LayoutParams(0,
-                            LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+            MaterialCardView cv = new MaterialCardView(context);
 
-            TextView prof = new TextView(getContext());
-            prof.setText(item.professor);
-            prof.setTextColor(Color.parseColor("#333333"));
-            prof.setLayoutParams(cellParams);
-
-            TextView className = new TextView(getContext());
-            className.setText(item.className);
-            className.setTextColor(Color.parseColor("#333333"));
-            className.setLayoutParams(cellParams);
-
-            TextView classCode = new TextView(getContext());
-            classCode.setText(item.classCode);
-            classCode.setTextColor(Color.parseColor("#333333"));
-            classCode.setGravity(Gravity.END);
-            classCode.setLayoutParams(cellParams);
-
-            row.addView(prof);
-            row.addView(className);
-            row.addView(classCode);
-
-            row.setOnClickListener(v -> openClassAttendance(item));
-
-            classListContainer.addView(row);
-
-            // Divider
-            View divider = new View(getContext());
-            divider.setLayoutParams(
+            cv.setId(cls.id);
+            LinearLayout.LayoutParams cvParams =
                     new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
-                            1
-                    ));
-            divider.setBackgroundColor(Color.parseColor("#E0E0E0"));
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
 
-            classListContainer.addView(divider);
+            cvParams.bottomMargin = (int) (12 * context.getResources().getDisplayMetrics().density);
+            cv.setLayoutParams(cvParams);
+            cv.setCardBackgroundColor(Color.parseColor("#bcc5db"));
+            cv.setRadius((int) (12 * context.getResources().getDisplayMetrics().density));
+
+            RelativeLayout rl = new RelativeLayout(context);
+            RelativeLayout.LayoutParams rlParams =
+                    new RelativeLayout.LayoutParams(
+                            RelativeLayout.LayoutParams.MATCH_PARENT,
+                            RelativeLayout.LayoutParams.WRAP_CONTENT
+                    );
+
+            rl.setLayoutParams(rlParams);
+
+            int paddingPx = (int) (16 * context.getResources().getDisplayMetrics().density);
+            rl.setPadding(paddingPx, paddingPx, paddingPx, paddingPx);
+
+            rl.setBackgroundResource(R.drawable.gradient_background_2);
+
+            ImageView ivIcon = new ImageView(context);
+            ivIcon.setId(View.generateViewId());
+
+            RelativeLayout.LayoutParams iconParams =
+                    new RelativeLayout.LayoutParams(
+                            (int) (20 * context.getResources().getDisplayMetrics().density),
+                            (int) (20 * context.getResources().getDisplayMetrics().density)
+                    );
+
+            iconParams.addRule(RelativeLayout.ALIGN_PARENT_END);
+            iconParams.addRule(RelativeLayout.CENTER_VERTICAL);
+
+            ivIcon.setLayoutParams(iconParams);
+            ivIcon.setImageResource(R.drawable.more_than);
+            ivIcon.setColorFilter(android.graphics.Color.WHITE);
+
+            LinearLayout textSection = new LinearLayout(context);
+            textSection.setId(View.generateViewId());
+            textSection.setOrientation(LinearLayout.VERTICAL);
+
+            RelativeLayout.LayoutParams textParams =
+                    new RelativeLayout.LayoutParams(
+                            RelativeLayout.LayoutParams.MATCH_PARENT,
+                            RelativeLayout.LayoutParams.WRAP_CONTENT
+                    );
+
+            textParams.addRule(RelativeLayout.START_OF, ivIcon.getId());
+            textParams.addRule(RelativeLayout.ALIGN_PARENT_START);
+
+            textSection.setLayoutParams(textParams);
+
+            textSection.setPadding(0, 0,
+                    (int) (12 * context.getResources().getDisplayMetrics().density), 0);
+
+            TextView tvClass = new TextView(context);
+            var classNumber = "#" + cls.classNumber;
+            var classCode = cls.course.code;
+
+            tvClass.setText(classNumber + " · " + classCode);
+            tvClass.setTextColor(Color.parseColor("#cccccc"));
+            tvClass.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+
+            TextView tvCourse = new TextView(context);
+
+            tvCourse.setText(cls.course.name);
+            tvCourse.setTextColor(Color.WHITE);
+            tvCourse.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            tvCourse.setTypeface(tvCourse.getTypeface(), Typeface.BOLD);
+
+            TextView tvScheduleInfo = new TextView(context);
+
+            String scheduleInfo =
+                    cls.offering.startTimeText + " - " +
+                            cls.offering.endTimeText + " | " +
+                            cls.offering.room;
+
+            tvScheduleInfo.setText(scheduleInfo);
+            tvScheduleInfo.setTextColor(Color.WHITE);
+            tvScheduleInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+
+            textSection.addView(tvClass);
+            textSection.addView(tvCourse);
+            textSection.addView(tvScheduleInfo);
+
+            rl.addView(textSection);
+            rl.addView(ivIcon);
+
+            cv.addView(rl);
+
+
+            cv.setOnClickListener(v -> openClassAttendance(cls));
+
+            classListContainer.addView(cv);
         }
     }
 
-    private void openClassAttendance(ClassModel classItem) {
+    private void openClassAttendance(ClassWithProfessor cls) {
         Fragment attendanceFragment = new ClassAttendanceFragment();
 
-        Bundle bundle = new Bundle();
-        bundle.putString("professor", classItem.professor);
-        bundle.putInt("classId", classItem.classId);
-        bundle.putString("className", classItem.className);
-        bundle.putString("classNumber", classItem.classNumber);
-        bundle.putString("classCode", classItem.classCode);
-        bundle.putString("weekDay", classItem.weekDay);
-        bundle.putString("startTime", classItem.startTime);
-        bundle.putString("endTime", classItem.endTime);
+        Bundle bundle = getBundle(cls);
 
         attendanceFragment.setArguments(bundle);
 
@@ -169,27 +250,21 @@ public class ClassFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
+    
+    @NonNull
+    private static Bundle getBundle(ClassWithProfessor cls) {
+        var professor = "Prof. " + cls.professor.surname;
 
-    static class ClassModel {
-        String professor;
-        public int classId;
-        String className;
-        String classNumber;
-        String classCode;
-
-        String weekDay;
-        String startTime;
-        String endTime;
-
-        ClassModel(String professor, String className, int classId, String classNumber, String classCode, String weekDay, String startTime, String endTime) {
-            this.professor = professor;
-            this.classId = classId;
-            this.className = className;
-            this.classNumber = classNumber;
-            this.classCode = classCode;
-            this.weekDay = weekDay;
-            this.startTime = startTime;
-            this.endTime = endTime;
-        }
+        Bundle bundle = new Bundle();
+        bundle.putString("professor", professor);
+        bundle.putInt("classId", cls.id);
+        bundle.putString("className", cls.course.name);
+        bundle.putString("classNumber", cls.classNumber);
+        bundle.putString("classCode", cls.course.code);
+        bundle.putString("weekDay", cls.offering.weekDay);
+        bundle.putString("startTime", cls.offering.startTimeText);
+        bundle.putString("endTime", cls.offering.endTimeText);
+        return bundle;
     }
+
 }

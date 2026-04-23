@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -65,26 +64,31 @@ public class HomePage extends AppCompatActivity {
 
         statsBtn.setOnClickListener(v -> {
             loadFragment(new StatusFragment());
+            hideHeader();
             setActiveTab(statsBtn);
         });
 
         classBtn.setOnClickListener(v -> {
             loadFragment(new ClassFragment());
+            hideHeader();
             setActiveTab(classBtn);
         });
 
         homeBtn.setOnClickListener(v -> {
             clearFragment();
+            showHeader();
             setActiveTab(homeBtn);
         });
 
         notifBtn.setOnClickListener(v -> {
             loadFragment(new NotificationFragment());
+            hideHeader();
             setActiveTab(notifBtn);
         });
 
         policyBtn.setOnClickListener(v -> {
             loadFragment(new PolicyFragment());
+            hideHeader();
             setActiveTab(policyBtn);
         });
 
@@ -109,6 +113,28 @@ public class HomePage extends AppCompatActivity {
             }
         };
         handler.postDelayed(autoSlide, 4000);
+    }
+
+    private void showHeader() {
+        View header = findViewById(R.id.headerContainer);
+        ImageView luLogo = findViewById(R.id.luLogo);
+        TextView luAxis = findViewById(R.id.luAxis);
+        TextView txtWelcome = findViewById(R.id.txtWelcome);
+
+        luLogo.setVisibility(View.VISIBLE);
+        luAxis.setVisibility(View.VISIBLE);
+        txtWelcome.setVisibility(View.VISIBLE);
+    }
+
+    private void hideHeader() {
+        View header = findViewById(R.id.headerContainer);
+        ImageView luLogo = findViewById(R.id.luLogo);
+        TextView luAxis = findViewById(R.id.luAxis);
+        TextView txtWelcome = findViewById(R.id.txtWelcome);
+
+        luLogo.setVisibility(View.GONE);
+        luAxis.setVisibility(View.GONE);
+        txtWelcome.setVisibility(View.GONE);
     }
 
     private void showPopupMenu(View view) {
