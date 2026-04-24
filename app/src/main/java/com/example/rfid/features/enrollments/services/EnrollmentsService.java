@@ -4,6 +4,7 @@ import static com.example.rfid.services.RvaucMsService.rvaucMsCallback;
 
 import com.example.rfid.dto.ApiResponse;
 import com.example.rfid.features.enrollments.schemas.classattendance.ClassAttendance;
+import com.example.rfid.features.enrollments.schemas.classlist.ClassList;
 import com.example.rfid.features.enrollments.schemas.scheduledclasseswithprofessor.ClassesWithProfessor;
 import com.example.rfid.interfaces.HttpCallback;
 import com.example.rfid.services.RvaucMsService;
@@ -20,7 +21,7 @@ public class EnrollmentsService {
         getClient().getAttendanceList(classId).enqueue(rvaucMsCallback(callback));
     }
 
-    public static void getClassList(HttpCallback<ClassesWithProfessorResponse> callback) {
+    public static void getClassList(HttpCallback<ClassListResponse> callback) {
         getClient().getClassList().enqueue(rvaucMsCallback(callback));
     }
     public static void getSchedule(HttpCallback<ClassesWithProfessorResponse> callback) {
@@ -37,7 +38,7 @@ public class EnrollmentsService {
         Call<ClassAttendanceResponse> getAttendanceList(@Path("classId") int classId);
         @Headers("X-Inject-Auth: true")
         @GET("/enrollments/schedule/get-class-list")
-        Call<ClassesWithProfessorResponse> getClassList();
+        Call<ClassListResponse> getClassList();
 
         @Headers("X-Inject-Auth: true")
         @GET("/enrollments/schedule/get-schedule")
@@ -46,6 +47,7 @@ public class EnrollmentsService {
 
     public static class ClassAttendanceResponse extends ApiResponse<ClassAttendance> {}
     public static class ClassesWithProfessorResponse extends ApiResponse<ClassesWithProfessor>{}
+    public static class ClassListResponse extends  ApiResponse<ClassList> {}
 
 
 }

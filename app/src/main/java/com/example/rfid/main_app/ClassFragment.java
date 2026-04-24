@@ -21,11 +21,16 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 
 import com.example.rfid.R;
+import com.example.rfid.features.enrollments.schemas.classlist.ClassList;
+import com.example.rfid.features.enrollments.schemas.classlist.ClassListElement;
 import com.example.rfid.features.enrollments.schemas.scheduledclasseswithprofessor.ClassWithProfessor;
 import com.example.rfid.features.enrollments.schemas.scheduledclasseswithprofessor.ClassesWithProfessor;
 import com.example.rfid.features.enrollments.services.EnrollmentsService;
 import com.example.rfid.interfaces.HttpCallback;
 import com.google.android.material.card.MaterialCardView;
+
+import java.util.Arrays;
+import java.util.Objects;
 
 public class ClassFragment extends Fragment {
 
@@ -48,9 +53,9 @@ public class ClassFragment extends Fragment {
 
         classListContainer = view.findViewById(R.id.class_list_container);
 
-        EnrollmentsService.getClassList(new HttpCallback<EnrollmentsService.ClassesWithProfessorResponse>() {
+        EnrollmentsService.getClassList(new HttpCallback<EnrollmentsService.ClassListResponse>() {
             @Override
-            public void onSuccess(EnrollmentsService.ClassesWithProfessorResponse response) {
+            public void onSuccess(EnrollmentsService.ClassListResponse response) {
                 Fragment fragment = ClassFragment.this;
                 Activity activity = fragment.getActivity();
 
@@ -125,12 +130,16 @@ public class ClassFragment extends Fragment {
         headerContainer.addView(backBtn);
     }
 
-    private void generateTableRows(ClassesWithProfessor classList) {
+    private void generateTableRows(ClassList classList) {
         classListContainer.removeAllViews();
 
         var context = getContext();
 
-        for (ClassWithProfessor cls : classList.classes) {
+        for (ClassListElement e : classList.classes) {
+            var cls = e.cls;
+            var course = e.course;
+            var offering = e.offering;
+            var prof = e.professor;
 
             MaterialCardView cv = new MaterialCardView(context);
 
@@ -196,7 +205,7 @@ public class ClassFragment extends Fragment {
 
             TextView tvClass = new TextView(context);
             var classNumber = "#" + cls.classNumber;
-            var classCode = cls.course.code;
+            var classCode = course.code;
 
             tvClass.setText(classNumber + " · " + classCode);
             tvClass.setTextColor(Color.parseColor("#cccccc"));
@@ -204,17 +213,39 @@ public class ClassFragment extends Fragment {
 
             TextView tvCourse = new TextView(context);
 
-            tvCourse.setText(cls.course.name);
+            tvCourse.setText(course.name);
             tvCourse.setTextColor(Color.WHITE);
             tvCourse.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             tvCourse.setTypeface(tvCourse.getTypeface(), Typeface.BOLD);
 
             TextView tvScheduleInfo = new TextView(context);
 
-            String scheduleInfo =
-                    cls.offering.startTimeText + " - " +
-                            cls.offering.endTimeText + " | " +
-                            cls.offering.room;
+            String scheduleInfo = "";
+
+            if (offering != null) {
+                scheduleInfo = offering.startTime + " - " + offering.endTime;
+
+                String roomDetails = "N/A";
+
+                var room = offering.room;
+                if (room != null) {
+                    roomDetails = room.name;
+                    String building = room.building;
+                    if (building != null) {
+                        StringBuilder sb = new StringBuilder();
+
+                        for (String word : building.trim().split("\\s+")) {
+                            if (!word.isEmpty()) {
+                                sb.append(word.charAt(0));
+                            }
+                        }
+
+                        roomDetails = sb.toString() + " " + roomDetails;
+                    }
+                }
+
+                scheduleInfo += " | " + roomDetails;
+            }
 
             tvScheduleInfo.setText(scheduleInfo);
             tvScheduleInfo.setTextColor(Color.WHITE);
@@ -230,16 +261,16 @@ public class ClassFragment extends Fragment {
             cv.addView(rl);
 
 
-            cv.setOnClickListener(v -> openClassAttendance(cls));
+            cv.setOnClickListener(v -> openClassAttendance(e));
 
             classListContainer.addView(cv);
         }
     }
 
-    private void openClassAttendance(ClassWithProfessor cls) {
+    private void openClassAttendance(ClassListElement e) {
         Fragment attendanceFragment = new ClassAttendanceFragment();
 
-        Bundle bundle = getBundle(cls);
+        Bundle bundle = getBundle(e);
 
         attendanceFragment.setArguments(bundle);
 
@@ -252,18 +283,23 @@ public class ClassFragment extends Fragment {
     }
     
     @NonNull
-    private static Bundle getBundle(ClassWithProfessor cls) {
-        var professor = "Prof. " + cls.professor.surname;
+    private static Bundle getBundle(ClassListElement e) {
+        var cls = e.cls;
+        var course = e.course;
+        var offering = e.offering;
+        var prof = e.professor;
+
+        var professor = "Prof. " + prof.surname;
 
         Bundle bundle = new Bundle();
         bundle.putString("professor", professor);
         bundle.putInt("classId", cls.id);
-        bundle.putString("className", cls.course.name);
+        bundle.putString("className", course.name);
         bundle.putString("classNumber", cls.classNumber);
-        bundle.putString("classCode", cls.course.code);
-        bundle.putString("weekDay", cls.offering.weekDay);
-        bundle.putString("startTime", cls.offering.startTimeText);
-        bundle.putString("endTime", cls.offering.endTimeText);
+        bundle.putString("classCode", course.code);
+        bundle.putString("weekDay", offering == null ? "N/A" : offering.weekDay);
+        bundle.putString("startTime", offering == null ? "N/A" : offering.startTime);
+        bundle.putString("endTime", offering == null ? "N/A" : offering.endTime);
         return bundle;
     }
 
