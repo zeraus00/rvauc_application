@@ -281,7 +281,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Attendance for this Month"
+            android:text="Attendance for this Semester"
             android:textColor="#30814B"
             android:textSize="20sp"
             android:textStyle="bold"
