@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClassAttendanceFragment extends Fragment {
+    private TextView classNumberCourseCode, courseName, instructor;
     private TextView presentCounter, absentCounter, excusedCounter, remainingCounter;
 
     public ClassAttendanceFragment() {
@@ -84,6 +85,9 @@ public class ClassAttendanceFragment extends Fragment {
     }
 
     private void loadViews(View view) {
+        classNumberCourseCode = view.findViewById(R.id.txtClassNumberCourseCode);
+        courseName = view.findViewById(R.id.txtCourseName);
+        instructor = view.findViewById(R.id.txtInstructor);
         presentCounter = view.findViewById(R.id.countPresent);
         absentCounter = view.findViewById(R.id.countAbsent);
         excusedCounter = view.findViewById(R.id.countExcused);
