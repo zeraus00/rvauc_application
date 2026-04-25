@@ -337,7 +337,7 @@ public class ClassFragment extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putInt("classId", cls.id);
         bundle.putInt("enrollmentId", enrollment.id);
-        bundle.putString("classNumberAndCourseCode", getClassNumberAndCourseCode(cls, course));
+        bundle.putString("classNumberCourseCode", getClassNumberAndCourseCode(cls, course));
         bundle.putString("courseName", course.name);
         bundle.putString("professor", getInstructorName(e.professor));
         return bundle;

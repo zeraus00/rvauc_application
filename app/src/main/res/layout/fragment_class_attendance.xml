@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,441 +7,448 @@
     android:background="#DBDCDF"
     tools:context=".main_app.ClassAttendanceFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_h_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_h_middle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_h_attendance_icons_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.78" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_h_bottom_nav_anchor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.90" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_v_margin_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_v_margin_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/headerContainer"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:background="@drawable/header_round"
-        android:padding="18dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="wrap_content"
+        android:background="#DBDCDF">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_h_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvClassAttendance"
-            android:layout_marginBottom="12dp">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/keyboard_arrow_left"
-                app:tint="@android:color/white"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Go Back"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/white"/>
-        </LinearLayout>
+            app:layout_constraintGuide_percent="0.10" />
 
-        <TextView
-            android:id="@+id/tvClassAttendance"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_h_middle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CLASS ATTENDANCE"
-            android:textColor="@android:color/white"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="80dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.6" />
 
-        <TextView
-            android:id="@+id/tvClassListDescription"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_h_attendance_icons_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lorem ipsum"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="3dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvClassAttendance" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.78" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="-100dp"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="8dp"
-        app:layout_constraintTop_toBottomOf="@id/headerContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_h_bottom_nav_anchor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.90" />
 
-        <LinearLayout
-            android:id="@+id/attendanceContainer"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_v_margin_start"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            app:layout_constraintGuide_percent="0.05" />
 
-            <TextView
-                android:id="@+id/txtClassNumberCourseCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="#606 · DS-3202"
-                android:textStyle="bold"
-                android:textColor="#757575"
-                android:textSize="12sp" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_v_margin_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
 
-            <TextView
-                android:id="@+id/txtCourseName"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:text="Machine Learning"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txtInstructor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="#Instructor Gerald Villaran"
-                android:textColor="#757575"
-                android:textSize="12sp" />
-            
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                app:dividerColor="#CAD3CA" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Weekly Logging Status"
-                android:textColor="#757575"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/headerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:background="@drawable/header_round"
+            android:padding="18dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <LinearLayout
-                android:id="@+id/scheduleContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvClassAttendance"
+                android:layout_marginBottom="12dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/keyboard_arrow_left"
+                    app:tint="@android:color/white"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Go Back"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvClassAttendance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CLASS ATTENDANCE"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="80dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvClassListDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="3dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvClassAttendance" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="-100dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="8dp"
+            app:layout_constraintTop_toBottomOf="@id/headerContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:id="@+id/attendanceContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/txtClassNumberCourseCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="#606 · DS-3202"
+                    android:textStyle="bold"
+                    android:textColor="#757575"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txtCourseName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Machine Learning"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtInstructor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#Instructor Gerald Villaran"
+                    android:textColor="#757575"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    app:dividerColor="#CAD3CA" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weekly Logging Status"
+                    android:textColor="#757575"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"/>
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:id="@+id/scheduleContainer"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_marginVertical="20dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="TUES"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="#424242"/>
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TUES"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="#424242"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="10:00 AM"
+                            android:textColor="#2E7D32"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:layout_marginTop="4dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Check in"
+                            android:textSize="11sp"
+                            android:textColor="#757575"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12:00 PM"
+                            android:textColor="#C62828"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:layout_marginTop="16dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Check out"
+                            android:textSize="11sp"
+                            android:textColor="#757575"/>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:background="#CAD3CA" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="10:00 AM"
-                        android:textColor="#2E7D32"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:layout_marginTop="4dp"/>
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="THURS" android:textSize="12sp" android:textStyle="bold" android:textColor="#424242"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="8:00 AM" android:textColor="#2E7D32" android:textStyle="bold" android:textSize="14sp" android:layout_marginTop="4dp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Check in" android:textSize="11sp" android:textColor="#757575"/>
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="8:00 AM" android:textColor="#C62828" android:textStyle="bold" android:textSize="14sp" android:layout_marginTop="16dp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Check out" android:textSize="11sp" android:textColor="#757575"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:background="#CAD3CA" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Check in"
-                        android:textSize="11sp"
-                        android:textColor="#757575"/>
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="12:00 PM"
-                        android:textColor="#C62828"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:layout_marginTop="16dp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FRI" android:textSize="12sp" android:textStyle="bold" android:textColor="#424242"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--" android:textColor="#2E7D32" android:textStyle="bold" android:textSize="14sp" android:layout_marginTop="4dp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Check in" android:textSize="11sp" android:textColor="#757575"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Check out"
-                        android:textSize="11sp"
-                        android:textColor="#757575"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--" android:textColor="#C62828" android:textStyle="bold" android:textSize="14sp" android:layout_marginTop="16dp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Check out" android:textSize="11sp" android:textColor="#757575"/>
+                    </LinearLayout>
 
-                </LinearLayout>
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:background="#CAD3CA" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="THURS" android:textSize="12sp" android:textStyle="bold" android:textColor="#424242"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="8:00 AM" android:textColor="#2E7D32" android:textStyle="bold" android:textSize="14sp" android:layout_marginTop="4dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Check in" android:textSize="11sp" android:textColor="#757575"/>
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="8:00 AM" android:textColor="#C62828" android:textStyle="bold" android:textSize="14sp" android:layout_marginTop="16dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Check out" android:textSize="11sp" android:textColor="#757575"/>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:background="#CAD3CA" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FRI" android:textSize="12sp" android:textStyle="bold" android:textColor="#424242"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--" android:textColor="#2E7D32" android:textStyle="bold" android:textSize="14sp" android:layout_marginTop="4dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Check in" android:textSize="11sp" android:textColor="#757575"/>
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--" android:textColor="#C62828" android:textStyle="bold" android:textSize="14sp" android:layout_marginTop="16dp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Check out" android:textSize="11sp" android:textColor="#757575"/>
                 </LinearLayout>
 
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/textSummary"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Attendance for this Month"
-        android:textColor="#30814B"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/guide_h_middle"
-        app:layout_constraintBottom_toTopOf="@+id/btnPresent"
-        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/btnPresent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="#BFDED4"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="4dp"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintBottom_toTopOf="@+id/guide_h_attendance_icons_top"
-        app:layout_constraintEnd_toStartOf="@+id/btnAbsent"
-        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
-        app:layout_constraintTop_toTopOf="@+id/guide_h_middle">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textSummary"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingVertical="14dp">
+            android:layout_marginBottom="16dp"
+            android:text="Attendance for this Month"
+            android:textColor="#30814B"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/guide_h_middle"
+            app:layout_constraintBottom_toTopOf="@+id/btnPresent"
+            app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Present"
-                android:textColor="#52514C"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/countPresent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="13"
-                android:textColor="#008F39"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/btnAbsent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        app:cardBackgroundColor="#E9D2D4"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnPresent"
-        app:layout_constraintEnd_toStartOf="@+id/btnExcused"
-        app:layout_constraintStart_toEndOf="@+id/btnPresent"
-        app:layout_constraintTop_toTopOf="@+id/btnPresent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnPresent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingVertical="14dp">
+            app:cardBackgroundColor="#BFDED4"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintBottom_toTopOf="@+id/guide_h_attendance_icons_top"
+            app:layout_constraintEnd_toStartOf="@+id/btnAbsent"
+            app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
+            app:layout_constraintTop_toTopOf="@+id/guide_h_middle">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Absent"
-                android:textColor="#52514C"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="14dp">
 
-            <TextView
-                android:id="@+id/countAbsent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="1"
-                android:textColor="#BA0D10"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Present"
+                    android:textColor="#52514C"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/btnExcused"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        app:cardBackgroundColor="#D5E0F0"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnPresent"
-        app:layout_constraintEnd_toStartOf="@+id/btnRemaining"
-        app:layout_constraintStart_toEndOf="@+id/btnAbsent"
-        app:layout_constraintTop_toTopOf="@+id/btnPresent">
+                <TextView
+                    android:id="@+id/countPresent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="13"
+                    android:textColor="#008F39"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnAbsent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingVertical="14dp">
+            android:layout_marginStart="12dp"
+            app:cardBackgroundColor="#E9D2D4"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnPresent"
+            app:layout_constraintEnd_toStartOf="@+id/btnExcused"
+            app:layout_constraintStart_toEndOf="@+id/btnPresent"
+            app:layout_constraintTop_toTopOf="@+id/btnPresent">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Excused"
-                android:textColor="#52514C"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="14dp">
 
-            <TextView
-                android:id="@+id/countExcused"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="1"
-                android:textColor="#475BB1"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Absent"
+                    android:textColor="#52514C"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/btnRemaining"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        app:cardBackgroundColor="#E5E1CB"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnPresent"
-        app:layout_constraintEnd_toEndOf="@+id/guide_v_margin_end"
-        app:layout_constraintStart_toEndOf="@+id/btnExcused"
-        app:layout_constraintTop_toTopOf="@+id/btnPresent">
+                <TextView
+                    android:id="@+id/countAbsent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="1"
+                    android:textColor="#BA0D10"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnExcused"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingVertical="14dp">
+            android:layout_marginStart="12dp"
+            app:cardBackgroundColor="#D5E0F0"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnPresent"
+            app:layout_constraintEnd_toStartOf="@+id/btnRemaining"
+            app:layout_constraintStart_toEndOf="@+id/btnAbsent"
+            app:layout_constraintTop_toTopOf="@+id/btnPresent">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Rem."
-                android:textColor="#52514C"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="14dp">
 
-            <TextView
-                android:id="@+id/countRemaining"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Excused"
+                    android:textColor="#52514C"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/countExcused"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="1"
+                    android:textColor="#475BB1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnRemaining"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            app:cardBackgroundColor="#E5E1CB"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnPresent"
+            app:layout_constraintEnd_toEndOf="@+id/guide_v_margin_end"
+            app:layout_constraintStart_toEndOf="@+id/btnExcused"
+            app:layout_constraintTop_toTopOf="@+id/btnPresent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="4"
-                android:textColor="#BD650C"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="14dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Late"
+                    android:textColor="#52514C"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/countLate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="4"
+                    android:textColor="#BD650C"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
