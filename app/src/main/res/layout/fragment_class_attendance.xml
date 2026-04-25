@@ -125,7 +125,7 @@
             android:padding="20dp">
 
             <TextView
-                android:id="@+id/txtClassCode"
+                android:id="@+id/txtClassNumberCourseCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -135,7 +135,7 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/txtClassName"
+                android:id="@+id/txtCourseName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Machine Learning"
