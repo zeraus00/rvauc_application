@@ -24,6 +24,7 @@ import com.example.rfid.R;
 import com.example.rfid.features.enrollments.schemas.classlist.ClassList;
 import com.example.rfid.features.enrollments.schemas.classlist.ClassListElement;
 import com.example.rfid.features.enrollments.schemas.classruntime.ClassRuntime;
+import com.example.rfid.features.enrollments.schemas.classruntime.SessionRuntime;
 import com.example.rfid.features.enrollments.schemas.shared.Cls;
 import com.example.rfid.features.enrollments.schemas.shared.Course;
 import com.example.rfid.features.enrollments.schemas.shared.Professor;
@@ -31,9 +32,6 @@ import com.example.rfid.features.enrollments.schemas.shared.Room;
 import com.example.rfid.features.enrollments.services.EnrollmentsService;
 import com.example.rfid.interfaces.HttpCallback;
 import com.google.android.material.card.MaterialCardView;
-
-import java.util.Arrays;
-import java.util.Objects;
 
 public class ClassFragment extends Fragment {
 
@@ -183,7 +181,7 @@ public class ClassFragment extends Fragment {
         var room = runtime.offering.room;
         var professor = runtime.professor;
 
-        tvRuntimeStatus.setText("Next Class...");
+        tvRuntimeStatus.setText(getRuntimeDisplayStatus(runtime.session));
 
         tvRuntimeClassNumberCourseCode.setText(getClassNumberAndCourseCode(cls, course));
         tvRuntimeCourseName.setText(course.name);
@@ -372,4 +370,11 @@ public class ClassFragment extends Fragment {
 
         return roomDetails;
     }
+    private static String getRuntimeDisplayStatus(SessionRuntime sessionRuntime) {
+        var runtimeStatus = sessionRuntime.runtimeStatus;
+        var finalStatus =  runtimeStatus != null ? runtimeStatus : sessionRuntime.status;
+
+        return finalStatus.toUpperCase();
+    }
+
 }
