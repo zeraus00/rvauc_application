@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import com.example.rfid.R;
 import com.example.rfid.features.enrollments.schemas.classlist.ClassList;
 import com.example.rfid.features.enrollments.schemas.classlist.ClassListElement;
+import com.example.rfid.features.enrollments.schemas.classruntime.ClassRuntime;
 import com.example.rfid.features.enrollments.services.EnrollmentsService;
 import com.example.rfid.interfaces.HttpCallback;
 import com.google.android.material.card.MaterialCardView;
@@ -33,6 +34,12 @@ import java.util.Objects;
 public class ClassFragment extends Fragment {
 
     LinearLayout classListContainer;
+    TextView tvRuntimeStatus;
+    TextView tvRuntimeClassNumberCourseCode;
+    TextView tvRuntimeCourseName;
+    TextView tvRuntimeProfessor;
+    TextView tvRuntimeStartTime;
+    TextView tvRuntimeRoom;
 
     public ClassFragment() { }
 
@@ -50,6 +57,12 @@ public class ClassFragment extends Fragment {
 
 
         classListContainer = view.findViewById(R.id.class_list_container);
+        tvRuntimeStatus = view.findViewById(R.id.runtimeStatus);
+        tvRuntimeClassNumberCourseCode = view.findViewById(R.id.runtimeClassNumberCourseCode);
+        tvRuntimeCourseName = view.findViewById(R.id.runtimeCourseName);
+        tvRuntimeProfessor = view.findViewById(R.id.runtimeProfessor);
+        tvRuntimeStartTime = view.findViewById(R.id.runtimeStartTime);
+        tvRuntimeRoom = view.findViewById(R.id.runtimeRoom);
 
         EnrollmentsService.getClassList(new HttpCallback<EnrollmentsService.ClassListResponse>() {
             @Override
@@ -63,7 +76,7 @@ public class ClassFragment extends Fragment {
                     if (!fragment.isAdded() || fragment.getContext() == null) return;
 
                     if (response.success) generateTableRows(response.result);
-                    else Toast.makeText(requireContext(), "Fail loading data: " + response.message, Toast.LENGTH_SHORT).show();
+                    else Toast.makeText(fragment.getContext(), "Fail loading data: " + response.message, Toast.LENGTH_SHORT).show();
                 });
             }
 
@@ -80,8 +93,37 @@ public class ClassFragment extends Fragment {
                 });
             }
         });
-        //loadSampleClasses();
-        //generateTableRows();
+
+        EnrollmentsService.getClassRuntime(new HttpCallback<EnrollmentsService.ClassRuntimeResponse>() {
+            @Override
+            public void onSuccess(EnrollmentsService.ClassRuntimeResponse response) {
+                Fragment fragment = ClassFragment.this;
+                Activity activity = fragment.getActivity();
+                if(activity == null) return;
+
+                activity.runOnUiThread(() -> {
+                    if (!fragment.isAdded() || fragment.getContext() == null) return;
+
+                    if(response.success) loadRuntime(response.result);
+                    else Toast.makeText(fragment.getContext(), "Fail loading data: " + response.message, Toast.LENGTH_SHORT).show();
+                });
+
+            }
+
+            @Override
+            public void onError(String message) {
+                Fragment fragment = ClassFragment.this;
+                Activity activity = fragment.getActivity();
+                if (activity == null) return;
+
+                activity.runOnUiThread(() -> {
+                    if (!fragment.isAdded() || fragment.getContext() == null) return;
+
+                    Toast.makeText(fragment.getContext(), "Fail loading data: " + message, Toast.LENGTH_SHORT).show();
+                });
+            }
+        });
+
     }
 
     private void showHeader(View view) {
@@ -126,6 +168,26 @@ public class ClassFragment extends Fragment {
         headerContainer.addView(tvClassList);
         headerContainer.addView(tvClassListDesc);
         headerContainer.addView(backBtn);
+    }
+
+    private void loadRuntime(ClassRuntime runtime) {
+        var cls = runtime.cls;
+        var course = runtime.course;
+        var room = runtime.offering.room;
+        var professor = runtime.professor;
+
+        tvRuntimeStatus.setText("Next Class...");
+
+        var classNumber = "#" + cls.classNumber;
+        tvRuntimeClassNumberCourseCode.setText(classNumber + " · " + course.code);
+        tvRuntimeCourseName.setText(course.name);
+
+        var instructor = "#Instructor " + professor.firstName + " " + professor.surname;
+        tvRuntimeProfessor.setText(instructor);
+
+        tvRuntimeStartTime.setText(runtime.offering.startTime);
+
+        tvRuntimeRoom.setText(room != null ? room.name : "N/A");
     }
 
     private void generateTableRows(ClassList classList) {
