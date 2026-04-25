@@ -5,6 +5,7 @@ public class AttendanceSummary {
     public int absent;
     public int late;
     public int excused;
+    public int totalSessions;
     public int totalRecords;
     public int missingRecords;
 
