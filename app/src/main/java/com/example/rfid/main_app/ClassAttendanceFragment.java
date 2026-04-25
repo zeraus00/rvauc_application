@@ -146,7 +146,9 @@ public class ClassAttendanceFragment extends Fragment {
 
         var context = getContext();
 
-        for(WeeklyScheduleItem item: cls.schedule) {
+        for (int i = 0; i < cls.schedule.size(); i++) {
+            WeeklyScheduleItem item = cls.schedule.get(i);
+
             // ===== Left Column =====
             LinearLayout leftColumn = new LinearLayout(context);
             LinearLayout.LayoutParams leftParams = new LinearLayout.LayoutParams(
@@ -222,23 +224,25 @@ public class ClassAttendanceFragment extends Fragment {
             leftColumn.addView(checkOutTime);
             leftColumn.addView(checkOutLabel);
 
-            // ===== Divider =====
-            View divider = new View(context);
-            LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(
-                    (int) TypedValue.applyDimension(
-                            TypedValue.COMPLEX_UNIT_DIP, 1, context.getResources().getDisplayMetrics()
-                    ),
-                    (int) TypedValue.applyDimension(
-                            TypedValue.COMPLEX_UNIT_DIP, 80, context.getResources().getDisplayMetrics()
-                    )
-            );
-            dividerParams.gravity = Gravity.CENTER;
-            divider.setLayoutParams(dividerParams);
-            divider.setBackgroundColor(Color.parseColor("#CAD3CA"));
-
             // ===== Assemble =====
             scheduleContainer.addView(leftColumn);
-            scheduleContainer.addView(divider);
+
+            // ===== Divider =====
+            if (i < cls.schedule.size() - 1) {
+                View divider = new View(context);
+                LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(
+                        (int) TypedValue.applyDimension(
+                                TypedValue.COMPLEX_UNIT_DIP, 1, context.getResources().getDisplayMetrics()
+                        ),
+                        (int) TypedValue.applyDimension(
+                                TypedValue.COMPLEX_UNIT_DIP, 80, context.getResources().getDisplayMetrics()
+                        )
+                );
+                dividerParams.gravity = Gravity.CENTER;
+                divider.setLayoutParams(dividerParams);
+                divider.setBackgroundColor(Color.parseColor("#CAD3CA"));
+                scheduleContainer.addView(divider);
+            }
         }
     }
 
