@@ -1,9 +1,11 @@
 package com.example.rfid.features.enrollments.schemas.classattendance;
 
+import androidx.annotation.Nullable;
+
 public class AttendanceRecord {
-    public int id;
+    @Nullable
+    public Integer id;
     public String status;
-    public String date;
     public String time;
 
     public AttendanceRecord() {}

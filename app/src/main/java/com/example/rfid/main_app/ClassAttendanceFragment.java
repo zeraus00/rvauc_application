@@ -18,6 +18,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.rfid.R;
+import com.example.rfid.features.enrollments.schemas.classattendance.HistoryElement;
 import com.example.rfid.features.enrollments.services.EnrollmentsService;
 import com.example.rfid.interfaces.HttpCallback;
 
@@ -94,9 +95,10 @@ public class ClassAttendanceFragment extends Fragment {
                         var result = response.result;
                         Log.i("class_attendance", result.toString());
 
-                        for (com.example.rfid.features.enrollments.schemas.classattendance.AttendanceRecord record : result.attendanceRecords) {
+                        for (HistoryElement historyElement : result.history) {
+                            var record = historyElement.record;
                             Log.i("class_attendance", record.toString());
-                            records.add(new AttendanceRecord(record.date, weekDay, record.time, record.status));
+                            records.add(new AttendanceRecord("record.date", weekDay, record.time, record.status));
                         }
 
                         updateCounters();
