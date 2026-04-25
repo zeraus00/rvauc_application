@@ -33,7 +33,7 @@ public class EnrollmentsService {
         @GET("/enrollments/attendance/records/class/{classId}")
         Call<ClassAttendanceResponse> getAttendanceList(@Path("classId") int classId);
         @Headers("X-Inject-Auth: true")
-        @GET("/enrollments/schedule/get-class-list")
+        @GET("/enrollments/schedule/class-list")
         Call<ClassListResponse> getClassList();
     }
 
