@@ -1,4 +1,4 @@
-package com.example.rfid.features.enrollments.schemas.classlist;
+package com.example.rfid.features.enrollments.schemas.shared;
 
 public class Professor {
     public int id;

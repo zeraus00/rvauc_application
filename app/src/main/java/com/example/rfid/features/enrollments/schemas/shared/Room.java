@@ -1,4 +1,4 @@
-package com.example.rfid.features.enrollments.schemas.classlist;
+package com.example.rfid.features.enrollments.schemas.shared;
 
 import androidx.annotation.Nullable;
 

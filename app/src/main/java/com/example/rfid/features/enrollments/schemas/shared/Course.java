@@ -1,7 +1,6 @@
-package com.example.rfid.features.enrollments.schemas.classlist;
+package com.example.rfid.features.enrollments.schemas.shared;
 
 public class Course {
-    public int id;
     public String name;
     public String code;
     public Course() {}
