@@ -6,6 +6,7 @@ import com.example.rfid.dto.ApiResponse;
 import com.example.rfid.features.enrollments.schemas.classattendance.ClassAttendance;
 import com.example.rfid.features.enrollments.schemas.classlist.ClassList;
 import com.example.rfid.features.enrollments.schemas.classruntime.ClassRuntime;
+import com.example.rfid.features.enrollments.schemas.classweeklyschedule.ClassWeeklySchedule;
 import com.example.rfid.interfaces.HttpCallback;
 import com.example.rfid.services.RvaucMsService;
 
@@ -28,6 +29,9 @@ public class EnrollmentsService {
     public static void getClassRuntime(HttpCallback<ClassRuntimeResponse> callback) {
         getClient().getClassRuntime().enqueue(rvaucMsCallback(callback));
     }
+    public static void getClassWeeklySchedule(int classId, HttpCallback<ClassWeeklyScheduleResponse> callback) {
+        getClient().getClassWeeklySchedule(classId).enqueue(rvaucMsCallback(callback));
+    }
     private static Client getClient() {
         if (client == null) client = RvaucMsService.createService(Client.class);
         return client;
@@ -44,11 +48,16 @@ public class EnrollmentsService {
         @Headers("X-Inject-Auth: true")
         @GET("/enrollments/schedule/current-or-next")
         Call<ClassRuntimeResponse> getClassRuntime();
+
+        @Headers("X-Inject-Auth: true")
+        @GET("/enrollments/schedule/weekly/class/{classId}")
+        Call<ClassWeeklyScheduleResponse> getClassWeeklySchedule(@Path("classId") int classId);
     }
 
     public static class ClassAttendanceResponse extends ApiResponse<ClassAttendance> {}
     public static class ClassListResponse extends  ApiResponse<ClassList> {}
     public static class ClassRuntimeResponse extends ApiResponse<ClassRuntime> {}
+    public static class ClassWeeklyScheduleResponse extends  ApiResponse<ClassWeeklySchedule> {}
 
 
 }
