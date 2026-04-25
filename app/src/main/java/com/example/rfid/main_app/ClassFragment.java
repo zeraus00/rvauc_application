@@ -55,14 +55,7 @@ public class ClassFragment extends Fragment {
                               @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-        classListContainer = view.findViewById(R.id.class_list_container);
-        tvRuntimeStatus = view.findViewById(R.id.runtimeStatus);
-        tvRuntimeClassNumberCourseCode = view.findViewById(R.id.runtimeClassNumberCourseCode);
-        tvRuntimeCourseName = view.findViewById(R.id.runtimeCourseName);
-        tvRuntimeProfessor = view.findViewById(R.id.runtimeProfessor);
-        tvRuntimeStartTime = view.findViewById(R.id.runtimeStartTime);
-        tvRuntimeRoom = view.findViewById(R.id.runtimeRoom);
+        setupViews(view);
 
         EnrollmentsService.getClassList(new HttpCallback<EnrollmentsService.ClassListResponse>() {
             @Override
@@ -168,6 +161,16 @@ public class ClassFragment extends Fragment {
         headerContainer.addView(tvClassList);
         headerContainer.addView(tvClassListDesc);
         headerContainer.addView(backBtn);
+    }
+
+    private void setupViews(View view) {
+        classListContainer = view.findViewById(R.id.class_list_container);
+        tvRuntimeStatus = view.findViewById(R.id.runtimeStatus);
+        tvRuntimeClassNumberCourseCode = view.findViewById(R.id.runtimeClassNumberCourseCode);
+        tvRuntimeCourseName = view.findViewById(R.id.runtimeCourseName);
+        tvRuntimeProfessor = view.findViewById(R.id.runtimeProfessor);
+        tvRuntimeStartTime = view.findViewById(R.id.runtimeStartTime);
+        tvRuntimeRoom = view.findViewById(R.id.runtimeRoom);
     }
 
     private void loadRuntime(ClassRuntime runtime) {
