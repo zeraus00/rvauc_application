@@ -190,7 +190,25 @@ public class ClassFragment extends Fragment {
 
         tvRuntimeStartTime.setText(runtime.offering.startTime);
 
-        tvRuntimeRoom.setText(room != null ? room.name : "N/A");
+        String roomDetails = "N/A";
+
+        if (room != null) {
+            roomDetails = room.name;
+            String building = room.building;
+            if (building != null) {
+                StringBuilder sb = new StringBuilder();
+
+                for (String word : building.trim().split("\\s+")) {
+                    if (!word.isEmpty()) {
+                        sb.append(word.charAt(0));
+                    }
+                }
+
+                roomDetails = sb.toString() + " " + roomDetails;
+            }
+        }
+
+        tvRuntimeRoom.setText(roomDetails);
     }
 
     private void generateTableRows(ClassList classList) {
