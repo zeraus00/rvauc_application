@@ -23,8 +23,6 @@ import androidx.fragment.app.Fragment;
 import com.example.rfid.R;
 import com.example.rfid.features.enrollments.schemas.classlist.ClassList;
 import com.example.rfid.features.enrollments.schemas.classlist.ClassListElement;
-import com.example.rfid.features.enrollments.schemas.scheduledclasseswithprofessor.ClassWithProfessor;
-import com.example.rfid.features.enrollments.schemas.scheduledclasseswithprofessor.ClassesWithProfessor;
 import com.example.rfid.features.enrollments.services.EnrollmentsService;
 import com.example.rfid.interfaces.HttpCallback;
 import com.google.android.material.card.MaterialCardView;
