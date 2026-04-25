@@ -24,6 +24,10 @@ import com.example.rfid.R;
 import com.example.rfid.features.enrollments.schemas.classlist.ClassList;
 import com.example.rfid.features.enrollments.schemas.classlist.ClassListElement;
 import com.example.rfid.features.enrollments.schemas.classruntime.ClassRuntime;
+import com.example.rfid.features.enrollments.schemas.shared.Cls;
+import com.example.rfid.features.enrollments.schemas.shared.Course;
+import com.example.rfid.features.enrollments.schemas.shared.Professor;
+import com.example.rfid.features.enrollments.schemas.shared.Room;
 import com.example.rfid.features.enrollments.services.EnrollmentsService;
 import com.example.rfid.interfaces.HttpCallback;
 import com.google.android.material.card.MaterialCardView;
@@ -181,34 +185,13 @@ public class ClassFragment extends Fragment {
 
         tvRuntimeStatus.setText("Next Class...");
 
-        var classNumber = "#" + cls.classNumber;
-        tvRuntimeClassNumberCourseCode.setText(classNumber + " · " + course.code);
+        tvRuntimeClassNumberCourseCode.setText(getClassNumberAndCourseCode(cls, course));
         tvRuntimeCourseName.setText(course.name);
 
-        var instructor = "#Instructor " + professor.firstName + " " + professor.surname;
-        tvRuntimeProfessor.setText(instructor);
+        tvRuntimeProfessor.setText(getInstructorName(professor));
 
         tvRuntimeStartTime.setText(runtime.offering.startTime);
-
-        String roomDetails = "N/A";
-
-        if (room != null) {
-            roomDetails = room.name;
-            String building = room.building;
-            if (building != null) {
-                StringBuilder sb = new StringBuilder();
-
-                for (String word : building.trim().split("\\s+")) {
-                    if (!word.isEmpty()) {
-                        sb.append(word.charAt(0));
-                    }
-                }
-
-                roomDetails = sb.toString() + " " + roomDetails;
-            }
-        }
-
-        tvRuntimeRoom.setText(roomDetails);
+        tvRuntimeRoom.setText(getBuildingAndRoom(room));
     }
 
     private void generateTableRows(ClassList classList) {
@@ -284,14 +267,14 @@ public class ClassFragment extends Fragment {
             textSection.setPadding(0, 0,
                     (int) (12 * context.getResources().getDisplayMetrics().density), 0);
 
+            //  class number and course code
             TextView tvClass = new TextView(context);
-            var classNumber = "#" + cls.classNumber;
-            var classCode = course.code;
 
-            tvClass.setText(classNumber + " · " + classCode);
+            tvClass.setText(getClassNumberAndCourseCode(cls, course));
             tvClass.setTextColor(Color.parseColor("#cccccc"));
             tvClass.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
+            //  course name
             TextView tvCourse = new TextView(context);
 
             tvCourse.setText(course.name);
@@ -301,31 +284,14 @@ public class ClassFragment extends Fragment {
 
             TextView tvScheduleInfo = new TextView(context);
 
+            //  offering info
             String scheduleInfo = "";
 
             if (offering != null) {
                 scheduleInfo = offering.startTime + " - " + offering.endTime;
 
-                String roomDetails = "N/A";
 
-                var room = offering.room;
-                if (room != null) {
-                    roomDetails = room.name;
-                    String building = room.building;
-                    if (building != null) {
-                        StringBuilder sb = new StringBuilder();
-
-                        for (String word : building.trim().split("\\s+")) {
-                            if (!word.isEmpty()) {
-                                sb.append(word.charAt(0));
-                            }
-                        }
-
-                        roomDetails = sb.toString() + " " + roomDetails;
-                    }
-                }
-
-                scheduleInfo += " | " + roomDetails;
+                scheduleInfo += " | " + getBuildingAndRoom(offering.room);
             }
 
             tvScheduleInfo.setText(scheduleInfo);
@@ -367,21 +333,43 @@ public class ClassFragment extends Fragment {
     private static Bundle getBundle(ClassListElement e) {
         var cls = e.cls;
         var course = e.course;
-        var offering = e.offering;
-        var prof = e.professor;
+        var enrollment = e.enrollment;
 
-        var professor = "Prof. " + prof.surname;
 
         Bundle bundle = new Bundle();
-        bundle.putString("professor", professor);
         bundle.putInt("classId", cls.id);
-        bundle.putString("className", course.name);
-        bundle.putString("classNumber", cls.classNumber);
-        bundle.putString("classCode", course.code);
-        bundle.putString("weekDay", offering == null ? "N/A" : offering.weekDay);
-        bundle.putString("startTime", offering == null ? "N/A" : offering.startTime);
-        bundle.putString("endTime", offering == null ? "N/A" : offering.endTime);
+        bundle.putInt("enrollmentId", enrollment.id);
+        bundle.putString("classNumberAndCourseCode", getClassNumberAndCourseCode(cls, course));
+        bundle.putString("courseName", course.name);
+        bundle.putString("professor", getInstructorName(e.professor));
         return bundle;
     }
 
+    private static String getInstructorName(Professor professor) {
+        return "Instructor " + professor.firstName + " " + professor.surname;
+    }
+    private static String getClassNumberAndCourseCode(Cls cls, Course course) {
+        return  "#" + cls.classNumber + " · " + course.code;
+    }
+    private static String getBuildingAndRoom(Room room) {
+        String roomDetails = "N/A";
+
+        if (room != null) {
+            roomDetails = room.name;
+            String building = room.building;
+            if (building != null) {
+                StringBuilder sb = new StringBuilder();
+
+                for (String word : building.trim().split("\\s+")) {
+                    if (!word.isEmpty()) {
+                        sb.append(word.charAt(0));
+                    }
+                }
+
+                roomDetails = sb + " " + roomDetails;
+            }
+        }
+
+        return roomDetails;
+    }
 }
