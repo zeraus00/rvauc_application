@@ -94,7 +94,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_container"
         android:layout_width="404dp"
-        android:layout_height="477dp"
+        android:layout_height="0dp"
         app:cardBackgroundColor="#DBDCDF"
         app:cardCornerRadius="34dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
