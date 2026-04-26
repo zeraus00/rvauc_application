@@ -32,7 +32,7 @@ android {
             buildConfigField(
                 "boolean",
                 "USE_MOCK_AUTH",
-                (env["USE_MOCK_AUTH"] ?: "false").toString())
+                (env["USE_MOCK_AUTH"] ?: "true").toString())
             buildConfigField(
                 "String",
                 "BASE_URL",
