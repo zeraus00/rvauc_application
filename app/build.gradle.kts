@@ -36,7 +36,7 @@ android {
             buildConfigField(
                 "String",
                 "BASE_URL",
-                "\"${env["API_BASE_URL"] ?: "http://10.0.2.2:8080/api"}\""
+                "\"${env["API_BASE_URL"] ?: "http://10.0.2.2:8080/api/"}\""
             )
         }
         release {
@@ -44,7 +44,7 @@ android {
             buildConfigField(
                 "String",
                 "BASE_URL",
-                "\"${env["API_BASE_URL"] ?: "http://10.0.2.2:8080/api"}\""
+                "\"${env["API_BASE_URL"] ?: "http://10.0.2.2:8080/api/"}\""
             )
             isMinifyEnabled = false
             proguardFiles(
