@@ -32,8 +32,7 @@ public class RvaucApplication extends Application {
         Log.d("DEV_SESSION_ENABLED", "Developer session enabled. Authentication is mocked.");
         SessionManager session = SessionManager.getInstance();
 
-        session.setEmail("dev@local");
-        session.setAccessToken("dev-token");
+        session.setAccessToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJsZWUuYWdhdG9uQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiTGVlQTciLCJyb2xlIjoic3R1ZGVudCIsInN1cm5hbWUiOiJBZ2F0b24iLCJmaXJzdE5hbWUiOiJMZWUgQXJjaGVsYXVzIiwibWlkZGxlTmFtZSI6IiIsImdlbmRlciI6Im1hbGUiLCJjb250YWN0TnVtYmVyIjoiMDkxNzEyMzQ1MDciLCJkZXBhcnRtZW50IjoiRGVwYXJ0bWVudCBPZiBDb21wdXRlciBTY2llbmNlIiwic3R1ZGVudE51bWJlciI6IjEwMS0wMDAxIiwieWVhckxldmVsIjozLCJibG9jayI6IkEiLCJpYXQiOjE3NzcyMDIzNzcsImV4cCI6MjA5Mjc3ODM3N30.mPEquFTY03eQS205YhcLvKSvmRXO9_rTwYvpUXQU19k");
         session.setRememberMe(true);
 
         //  optional mock payload
