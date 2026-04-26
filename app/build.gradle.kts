@@ -1,9 +1,19 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
 }
 
 android {
+    val envFile = rootProject.file("env.properties")
+    val env = Properties()
+
+    if (envFile.exists()) {
+        env.load(FileInputStream(envFile))
+    }
+
     namespace = "com.example.rfid"
     compileSdk = 36
 
@@ -19,14 +29,23 @@ android {
 
     buildTypes {
         debug{
-            buildConfigField("boolean", "USE_MOCK_AUTH", "false")
-        }
-        create("mock") {
-            initWith(getByName("debug"))
-            buildConfigField("boolean", "USE_MOCK_AUTH", "true")
+            buildConfigField(
+                "boolean",
+                "USE_MOCK_AUTH",
+                (env["USE_MOCK_AUTH"] ?: "false").toString())
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"${env["API_BASE_URL"] ?: "http://10.0.2.2:8080/api"}\""
+            )
         }
         release {
             buildConfigField("boolean", "USE_MOCK_AUTH", "false")
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"${env["API_BASE_URL"] ?: "http://10.0.2.2:8080/api"}\""
+            )
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -37,6 +56,10 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
     }
 }
 

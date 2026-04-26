@@ -1,6 +1,7 @@
 package com.example.rfid;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.example.rfid.features.auth.services.SessionManager;
 import com.example.rfid.services.AuthInterceptor;
@@ -24,5 +25,17 @@ public class RvaucApplication extends Application {
                 },
                 new TokenAuthenticator()
         );
+
+        if (BuildConfig.DEBUG && BuildConfig.USE_MOCK_AUTH) enableDevSession();
+    }
+    private void enableDevSession() {
+        Log.d("DEV_SESSION_ENABLED", "Developer session enabled. Authentication is mocked.");
+        SessionManager session = SessionManager.getInstance();
+
+        session.setEmail("dev@local");
+        session.setAccessToken("dev-token");
+        session.setRememberMe(true);
+
+        //  optional mock payload
     }
 }
