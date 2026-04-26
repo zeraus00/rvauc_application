@@ -18,7 +18,15 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField("boolean", "USE_MOCK_AUTH", "false")
+        }
+        create("mock") {
+            initWith(getByName("debug"))
+            buildConfigField("boolean", "USE_MOCK_AUTH", "true")
+        }
         release {
+            buildConfigField("boolean", "USE_MOCK_AUTH", "false")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
