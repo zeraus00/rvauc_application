@@ -44,13 +44,6 @@ public class HomePage extends AppCompatActivity {
         });
 
 
-        SessionManager sessionManager = SessionManager.getInstance();
-        TextView welcomeView = findViewById(R.id.txtWelcome);
-        var payload = sessionManager.getPayload();
-        String username = payload == null ? "pogi" : payload.getSurname() + ".";
-        welcomeView.setText("Welcome, " + username);
-
-
 
         ImageView profileImg = findViewById(R.id.imgProfile);
         profileImg.setOnClickListener(this::showPopupMenu);
@@ -75,7 +68,7 @@ public class HomePage extends AppCompatActivity {
         });
 
         homeBtn.setOnClickListener(v -> {
-            clearFragment();
+            loadFragment(new HomeFragment());
             showHeader();
             setActiveTab(homeBtn);
         });
@@ -92,49 +85,14 @@ public class HomePage extends AppCompatActivity {
             setActiveTab(policyBtn);
         });
 
-        ViewPager2 viewPager = findViewById(R.id.carouselSwitcher);
-        int[] images = {
-                R.drawable.type_a,
-                R.drawable.buffalo,
-                R.drawable.department_shirt,
-                R.drawable.pe_uniform
-        };
-        CarouselAdapter adapter = new CarouselAdapter(images);
-        viewPager.setAdapter(adapter);
-
-        Handler handler = new Handler();
-        Runnable autoSlide = new Runnable() {
-            @Override
-            public void run() {
-                int next = viewPager.getCurrentItem() + 1;
-                if (next >= images.length) next = 0;
-                viewPager.setCurrentItem(next, true);
-                handler.postDelayed(this, 4000);
-            }
-        };
-        handler.postDelayed(autoSlide, 4000);
+        loadFragment(new HomeFragment());
+        setActiveTab(homeBtn);
     }
 
     private void showHeader() {
-        View header = findViewById(R.id.headerContainer);
-        ImageView luLogo = findViewById(R.id.luLogo);
-        TextView luAxis = findViewById(R.id.luAxis);
-        TextView txtWelcome = findViewById(R.id.txtWelcome);
-
-        luLogo.setVisibility(View.VISIBLE);
-        luAxis.setVisibility(View.VISIBLE);
-        txtWelcome.setVisibility(View.VISIBLE);
     }
 
     private void hideHeader() {
-        View header = findViewById(R.id.headerContainer);
-        ImageView luLogo = findViewById(R.id.luLogo);
-        TextView luAxis = findViewById(R.id.luAxis);
-        TextView txtWelcome = findViewById(R.id.txtWelcome);
-
-        luLogo.setVisibility(View.GONE);
-        luAxis.setVisibility(View.GONE);
-        txtWelcome.setVisibility(View.GONE);
     }
 
     private void showPopupMenu(View view) {
@@ -196,7 +154,6 @@ public class HomePage extends AppCompatActivity {
         }
     }
 
-    // safe highlight
     private void highlightNavItem(LinearLayout item) {
         if (item == null) return;
         try {
