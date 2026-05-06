@@ -30,12 +30,18 @@ import com.example.rfid.interfaces.HttpCallback;
 public class HomePage extends AppCompatActivity {
 
     private LinearLayout statsBtn, classBtn, homeBtn, notifBtn, policyBtn;
-
+    private final Runnable logoutListener = () -> {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home_page);
+
+        SessionManager.getInstance().addLogoutListener(logoutListener);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -87,6 +93,12 @@ public class HomePage extends AppCompatActivity {
 
         loadFragment(new HomeFragment());
         setActiveTab(homeBtn);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SessionManager.getInstance().removeLogoutListener(logoutListener);
     }
 
     private void showHeader() {

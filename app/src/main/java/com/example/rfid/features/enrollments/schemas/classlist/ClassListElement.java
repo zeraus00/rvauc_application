@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import com.example.rfid.features.enrollments.schemas.shared.Cls;
 import com.example.rfid.features.enrollments.schemas.shared.Course;
 import com.example.rfid.features.enrollments.schemas.shared.Enrollment;
-import com.example.rfid.features.enrollments.schemas.shared.Offering;
 import com.example.rfid.features.enrollments.schemas.shared.Professor;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

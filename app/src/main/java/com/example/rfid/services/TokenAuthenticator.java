@@ -40,12 +40,12 @@ public class TokenAuthenticator implements Authenticator {
             var refreshRequest = new AuthenticationService.RefreshTokensRequest();
             refreshRequest.refreshToken = refreshToken;
             var refreshResponse = AuthenticationService.refreshTokens(refreshRequest);
-            if (!refreshResponse.isSuccessful()) return null;
+            if (!refreshResponse.isSuccessful()) return clearSession();
 
             var resBody = refreshResponse.body();
 
-            if(resBody == null) return null;
-            if(!resBody.success) return null;
+            if(resBody == null) return clearSession();
+            if(!resBody.success) return clearSession();
 
             sessionManager.setRefreshToken(resBody.result.refreshToken);
             sessionManager.setAccessToken(resBody.result.accessToken);
@@ -56,6 +56,10 @@ public class TokenAuthenticator implements Authenticator {
     }
     private boolean isMarkedForInjection(Request request) {
         return request.header("X-Inject-Auth") != null;
+    }
+    private Request clearSession() {
+        sessionManager.clear();
+        return null;
     }
     private Request buildNewRequest(Response response, String token) {
         return response.request().newBuilder()
