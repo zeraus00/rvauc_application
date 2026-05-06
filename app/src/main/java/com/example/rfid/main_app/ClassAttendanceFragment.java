@@ -46,6 +46,18 @@ public class ClassAttendanceFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         loadViews(view);
 
+        View backBtn = view.findViewById(R.id.backBtn);
+
+        backBtn.setOnClickListener(v -> {
+            Fragment classFragment = new ClassFragment();
+
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, classFragment)
+                    .commit();
+        });
+
         Bundle bundle = getArguments();
 
         if (bundle == null) return;

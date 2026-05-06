@@ -42,6 +42,18 @@ public class ViolationStatusFragment extends Fragment {
         RecyclerView recycler = view.findViewById(R.id.violationRecycler);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        View backToHomeBtn = view.findViewById(R.id.backToHomeBtn);
+
+        backToHomeBtn.setOnClickListener(v -> {
+            Fragment homeFragment = new HomeFragment();
+
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, homeFragment)
+                    .commit();
+        });
+
         ViolationService.getViolationList(new HttpCallback<ViolationService.ViolationListResponse>() {
             @Override
             public void onSuccess(ViolationService.ViolationListResponse response) {

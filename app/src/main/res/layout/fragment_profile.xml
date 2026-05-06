@@ -81,7 +81,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/guide_h_bottom_nav_anchor"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
             app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
             app:layout_constraintTop_toBottomOf="@+id/profileFragmentHeader">

@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <LinearLayout
-        android:id="@+id/backBtn"
+        android:id="@+id/backToHomeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -62,7 +62,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Go Back"
+            android:text="Back to Home"
             android:layout_gravity="center_vertical"
             android:textColor="@color/white"/>
     </LinearLayout>
