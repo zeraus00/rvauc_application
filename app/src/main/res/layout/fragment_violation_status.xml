@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="#DBDCDF"
     tools:context=".main_app.ViolationStatusFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -35,18 +35,49 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
+    <View
+        android:id="@+id/violationStatusFragmentHeader"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/header_round"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/txtViolationStatus"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/keyboard_arrow_left"
+            app:tint="@android:color/white"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go Back"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txtViolationStatus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="12dp"
         android:text="Violation Status"
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/guideTop"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/guide_v_margin_start"
         app:layout_constraintEnd_toEndOf="@id/guide_v_margin_end" />
 
@@ -54,8 +85,8 @@
         android:id="@+id/txtViolationStatusDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="42dp"
         android:text="You have 2 violation(s)"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -67,21 +98,11 @@
         android:id="@+id/txtViolationRecord"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginStart="42dp"
         android:layout_marginTop="8dp"
         android:text="Settle your violations in Division of Discipline."
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/txtViolationStatusDesc"
-        app:layout_constraintStart_toStartOf="@id/guide_v_margin_start"
-        app:layout_constraintEnd_toEndOf="@id/guide_v_margin_end" />
-
-    <View
-        android:id="@+id/dividerTop"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/txtViolationRecord"
         app:layout_constraintStart_toStartOf="@id/guide_v_margin_start"
         app:layout_constraintEnd_toEndOf="@id/guide_v_margin_end" />
 
@@ -92,7 +113,7 @@
         android:background="@drawable/rounded_white_bg"
         android:layout_marginTop="16dp"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/dividerTop"
+        app:layout_constraintTop_toBottomOf="@id/violationStatusFragmentHeader"
         app:layout_constraintBottom_toTopOf="@id/guideBottom"
         app:layout_constraintStart_toStartOf="@id/guide_v_margin_start"
         app:layout_constraintEnd_toEndOf="@id/guide_v_margin_end" />

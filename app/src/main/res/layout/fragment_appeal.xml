@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="#DBDCDF"
     tools:context=".main_app.AppealFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -49,6 +49,38 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
+    <View
+        android:id="@+id/classAttendanceFragmentHeader"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/header_round"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textView8"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/keyboard_arrow_left"
+            app:tint="@android:color/white"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go Back"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
@@ -57,9 +89,10 @@
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guide_h_title"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="42dp"
+        app:layout_constraintStart_toStartOf="@id/guide_v_margin_start"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/classCode"/>
 
     <TextView
@@ -71,6 +104,7 @@
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
+        android:layout_marginStart="42dp"
         app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -83,6 +117,7 @@
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
+        android:layout_marginStart="42dp"
         app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
         app:layout_constraintTop_toBottomOf="@+id/classCode" />
 
@@ -103,10 +138,10 @@
         android:background="@drawable/rounded_white_bg"
         android:orientation="vertical"
         android:padding="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/guide_h_bottom_nav_anchor"
+        app:layout_constraintBottom_toBottomOf="@id/guide_h_bottom_nav_anchor"
         app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
         app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
-        app:layout_constraintTop_toTopOf="@+id/guide_h_info_bottom">
+        app:layout_constraintTop_toBottomOf="@id/classAttendanceFragmentHeader">
 
         <LinearLayout
             android:layout_width="match_parent"

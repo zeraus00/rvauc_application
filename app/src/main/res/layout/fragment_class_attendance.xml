@@ -42,52 +42,52 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-            <LinearLayout
-                android:id="@+id/backBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/tvClassAttendance"
-                android:layout_marginBottom="12dp">
+        <LinearLayout
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvClassAttendance"
+            android:layout_marginBottom="12dp">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/keyboard_arrow_left"
-                    app:tint="@android:color/white"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Go Back"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/white"/>
-            </LinearLayout>
-
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/keyboard_arrow_left"
+                app:tint="@android:color/white"/>
             <TextView
-                android:id="@+id/tvClassAttendance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CLASS ATTENDANCE"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginStart="42dp"
-                android:layout_marginTop="40dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="Go Back"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"/>
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvClassListDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lorem ipsum"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                android:layout_marginStart="42dp"
-                android:layout_marginTop="3dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvClassAttendance" />
+        <TextView
+            android:id="@+id/tvClassAttendance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CLASS ATTENDANCE"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvClassListDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="3dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvClassAttendance" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/fragment_container"
@@ -276,7 +276,6 @@
             app:cardCornerRadius="15dp"
             app:cardElevation="4dp"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintBottom_toTopOf="@+id/guide_h_attendance_icons_top"
             app:layout_constraintEnd_toStartOf="@+id/btnAbsent"
             app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
             app:layout_constraintTop_toTopOf="@+id/guide_h_middle">
