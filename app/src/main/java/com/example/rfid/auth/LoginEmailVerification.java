@@ -3,7 +3,10 @@ package com.example.rfid.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View; // Import View for the listener
 import android.widget.Button; // Changed var to Button
 import android.widget.EditText;
@@ -67,7 +70,32 @@ public class LoginEmailVerification extends AppCompatActivity {
                 findViewById(R.id.etInputBox6)
         };
 
+        for (int i = 0; i < inputs.length; i++) {
+            final int index = i;
 
+            inputs[i].addTextChangedListener(new TextWatcher() {
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (s.length() == 1 && index < inputs.length - 1){
+                        inputs[index + 1].requestFocus();
+                    }
+                    else if (s.length() == 0 && index > 0){
+                        inputs[index - 1].requestFocus();
+                        inputs[index - 1].setSelection(inputs[index - 1].getText().length());
+                    }
+                }
+            });
+        }
 
         backBtn.setOnClickListener(v -> {
 
