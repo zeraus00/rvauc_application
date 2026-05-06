@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="#DBDCDF"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".main_app.StatusFragment">
 
@@ -49,6 +49,37 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
+    <View
+        android:id="@+id/statusStatusFragmentHeader"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@drawable/header_round"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textView30"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/keyboard_arrow_left"
+            app:tint="@android:color/white"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go Back"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView30"
@@ -58,9 +89,10 @@
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/guideTop"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/textView32"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
@@ -68,13 +100,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:text="You have no violations recorded"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
-        app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
-        app:layout_constraintTop_toBottomOf="@+id/textView30"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout10" />
+        android:layout_marginStart="42dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
     <LinearLayout
         android:id="@+id/linearLayout10"
@@ -86,8 +117,8 @@
         android:padding="12dp"
         app:layout_constraintEnd_toStartOf="@+id/guide_v_margin_end"
         app:layout_constraintStart_toStartOf="@+id/guide_v_margin_start"
-        app:layout_constraintTop_toBottomOf="@+id/textView32"
-        app:layout_constraintBottom_toTopOf="@id/guideLinkTop"
+        app:layout_constraintTop_toBottomOf="@+id/statusStatusFragmentHeader"
+        app:layout_constraintBottom_toTopOf="@id/guide_h_bottom_nav_anchor"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
@@ -157,14 +188,14 @@
     <TextView
         android:id="@+id/hplViolationStatus"
         android:text="See Violation Status"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:clickable="true"
         android:focusable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/guideLinkTop"
-        app:layout_constraintBottom_toTopOf="@id/guide_h_bottom_nav_anchor"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
