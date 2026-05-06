@@ -59,6 +59,12 @@ public class ClassFragment extends Fragment {
 
         setupViews(view);
 
+        MaterialCardView violationButton = view.findViewById(R.id.violationButton);
+        violationButton.setOnClickListener( v -> {
+            Fragment violationStatusFragment = new ViolationStatusFragment();
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, violationStatusFragment).commit();
+        });
+
         EnrollmentsService.getClassList(new HttpCallback<EnrollmentsService.ClassListResponse>() {
             @Override
             public void onSuccess(EnrollmentsService.ClassListResponse response) {

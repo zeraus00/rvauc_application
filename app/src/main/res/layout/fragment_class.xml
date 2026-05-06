@@ -187,6 +187,7 @@
                 android:layout_marginHorizontal="20dp">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/scheduleButton"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:cardBackgroundColor="#bcc5db"
@@ -216,6 +217,7 @@
                 android:layout_marginHorizontal="20dp">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/violationButton"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:cardBackgroundColor="#dcc2bf"
@@ -245,6 +247,7 @@
                 android:layout_marginHorizontal="20dp">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/attendanceButton"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:cardBackgroundColor="#dacfc4"
