@@ -79,9 +79,9 @@ public class StatusFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        UniformComplianceService.viewRecords(new HttpCallback<UniformComplianceService.RecordResponse>() {
+        UniformComplianceService.viewRecords(new HttpCallback<UniformComplianceService.HistoryResponse>() {
             @Override
-            public void onSuccess(UniformComplianceService.RecordResponse response) {
+            public void onSuccess(UniformComplianceService.HistoryResponse response) {
                 Fragment fragment = StatusFragment.this;
                 Activity activity = fragment.getActivity();
 
@@ -97,20 +97,20 @@ public class StatusFragment extends Fragment {
                     if (tableContainer == null) return;
 
                     if (response.success) {
-                        var recordList = response.result;
+                        var result = response.result;
 
-                        for (UniformComplianceService.Record record : recordList) {
+                        for (UniformComplianceService.HistoryItem historyItem : result.history) {
                             LinearLayout linearLayout = getLinearLayout(tableContainer.getContext());
 
                             var context = linearLayout.getContext();
-                            var dateView = getTextView(context, record.date, Color.BLACK);
-                            var day = record.day.substring(0, 3).toUpperCase();
+                            var dateView = getTextView(context, historyItem.record.datePh, Color.BLACK);
+                            var day = historyItem.record.weekDay.substring(0, 3).toUpperCase();
                             var dayView = getTextView(context, day, Color.BLACK);
-                            var timeView = getTextView(context, record.time, Color.BLACK);
+                            var timeView = getTextView(context, historyItem.record.time, Color.BLACK);
 
-                            var isCompliant = record.status.equals("compliant");
+                            var isCompliant = historyItem.record.isCompliant;
                             var statusColor = isCompliant ? Color.GREEN : Color.RED;
-                            var statusView = getTextView(context, record.status, statusColor);
+                            var statusView = getTextView(context, historyItem.record.status, statusColor);
 
                             linearLayout.addView(dateView);
                             linearLayout.addView(dayView);
